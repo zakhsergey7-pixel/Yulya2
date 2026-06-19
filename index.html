@@ -830,6 +830,25 @@
   }
   .pt-card.featured .pt-cta{color:var(--champagne-soft);}
   .pt-card:hover .pt-cta{opacity:.7;}
+  .services-more{
+    margin-top:36px;
+    display:flex;
+    justify-content:center;
+  }
+  .services-more a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    border-bottom:1px solid var(--champagne);
+    padding-bottom:5px;
+    transition:opacity .3s var(--ease), gap .3s var(--ease);
+  }
+  .services-more a:hover{opacity:.7; gap:16px;}
+  .services-more a svg{width:13px;height:13px;flex-shrink:0;}
   /* ============ GUARANTEE STRIP ============ */
   .guarantee{
     background:var(--indigo);
@@ -1081,6 +1100,7 @@
       <a href="#why">Почему я</a>
       <a href="#portfolio">Портфолио</a>
       <a href="#services">Услуги</a>
+      <a href="price.html">Цены</a>
       <a href="#contact">Заявка</a>
     </nav>
     <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
@@ -1094,6 +1114,7 @@
   <a href="#why">Почему я</a>
   <a href="#portfolio">Портфолио</a>
   <a href="#services">Услуги</a>
+  <a href="price.html">Цены</a>
   <a href="#contact">Заявка</a>
 </nav>
 <!-- ============ HERO ============ -->
@@ -1266,6 +1287,11 @@
           <div class="pt-price">от 300&nbsp;000&nbsp;₽<small>за полный проект</small></div>
           <a href="#contact" class="pt-cta">Заказать услугу</a>
         </div>
+      </div>
+      <div class="services-more">
+        <a href="price.html">Все форматы услуг и подробные цены
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
   </div>
