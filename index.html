@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юлия Фёдорова — дизайнер интерьера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --paper:#F8F5EF;
+    --paper-2:#F1ECE2;
+    --ink:#1B1916;
+    --ink-soft:#3B3833;
+    --stone:#8E897F;
+    --line:rgba(27,25,22,0.14);
+    --champagne:#C9A96B;
+    --champagne-soft:#E4D2AC;
+    --indigo:#1A2142;
+    --indigo-soft:#2C3766;
+    --white:#FDFCFA;
+
+    --display:'Cormorant', serif;
+    --hand:'Cormorant Garamond', serif;
+    --body:'Jost', sans-serif;
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* subtle paper/concrete grain texture, applied globally */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.5;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  ::selection{background:var(--champagne-soft);color:var(--ink);}
+
+  .container{
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  .eyebrow{
+    font-family:var(--body);
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--stone);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;height:1px;
+    background:var(--champagne);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:400;
+    letter-spacing:.01em;
+    color:var(--ink);
+  }
+
+  /* ============ FOCUS / A11Y ============ */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--indigo);
+    outline-offset:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ============ NAV ============ */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding:28px 0;
+    transition:padding .4s var(--ease), background .4s var(--ease);
+  }
+  header.scrolled{
+    padding:16px 0;
+    background:rgba(248,245,239,.88);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--display);
+    font-size:26px;
+    letter-spacing:.18em;
+    font-weight:500;
+  }
+  .logo span{color:var(--champagne);}
+
+  .nav-links{
+    display:flex;
+    gap:40px;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .nav-links a{
+    position:relative;
+    padding-bottom:4px;
+    color:var(--ink-soft);
+    transition:color .3s var(--ease);
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--champagne);
+    transition:width .35s var(--ease);
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
+    z-index:200;
+    background:none;
+    border:none;
+  }
+  .burger span{
+    width:26px;height:1px;
+    background:var(--ink);
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+  }
+
+  .mobile-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(10,9,8,0);
+    backdrop-filter:blur(0px);
+    z-index:150;
+    pointer-events:none;
+    transition:background .45s var(--ease), backdrop-filter .45s var(--ease);
+  }
+  .mobile-overlay.open{
+    background:rgba(10,9,8,.55);
+    backdrop-filter:blur(6px);
+    pointer-events:auto;
+  }
+  .mobile-menu{
+    position:fixed;
+    top:0;right:0;
+    height:100vh;
+    width:min(380px,86vw);
+    background:var(--indigo);
+    z-index:160;
+    transform:translateX(100%);
+    transition:transform .5s var(--ease);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
+    gap:30px;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--paper);
+    opacity:.85;
+  }
+  .mobile-menu a:hover{opacity:1; color:var(--champagne-soft);}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+    padding-top:150px; /* guaranteed clearance under the fixed header so hero text never overlaps the logo/nav on short viewports */
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-4% -4% 0 -4%;
+    height:108%;
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 18%, rgba(201,169,107,.30), transparent 60%),
+      linear-gradient(165deg, rgba(70,63,52,.55) 0%, rgba(45,41,36,.62) 32%, rgba(20,18,15,.86) 100%),
+      url("https://images.unsplash.com/photo-1757023177496-131ded651c01?auto=format&fit=crop&w=2000&q=80");
+    background-size:cover;
+    background-position:center 38%;
+    background-blend-mode:overlay, multiply, normal;
+    filter:grayscale(.5) contrast(1.12) brightness(.86);
+    will-change:transform;
+  }
+  .hero-bg .hbg-rays{
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(100deg, rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 1px, transparent 1px, transparent 140px);
+    mix-blend-mode:overlay;
+  }
+  .hero-bg .hbg-floor{
+    position:absolute; left:0; right:0; bottom:0; height:46%;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,.35));
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,18,15,.32) 0%, rgba(20,18,15,.18) 40%, rgba(15,13,11,.82) 100%);
+  }
+
+  /* ---- signature element: minimal glossy / glowing volumetric accent ---- */
+  .hero-orb-wrap{
+    position:absolute;
+    top:20%; right:9%;
+    width:clamp(140px,16vw,230px);
+    height:clamp(140px,16vw,230px);
+    z-index:4;
+    pointer-events:none;
+    will-change:transform;
+  }
+  .hero-orb{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 26%, rgba(253,252,250,.95) 0%, rgba(228,210,172,.55) 16%, rgba(201,169,107,.22) 38%, rgba(26,33,66,.45) 64%, rgba(10,9,8,.05) 100%);
+    box-shadow:
+      0 0 60px 6px rgba(201,169,107,.28),
+      0 0 140px 50px rgba(26,33,66,.30),
+      inset -18px -18px 46px rgba(0,0,0,.4),
+      inset 12px 12px 30px rgba(255,255,255,.22);
+    animation:orbFloat 8s var(--ease) infinite;
+    will-change:transform;
+  }
+  .hero-orb::after{
+    content:"";
+    position:absolute;
+    inset:14%;
+    border-radius:50%;
+    border:1px solid rgba(253,252,250,.14);
+  }
+  @keyframes orbFloat{
+    0%,100%{transform:translateY(0) translateX(0) scale(1);}
+    50%{transform:translateY(-16px) translateX(-6px) scale(1.025);}
+  }
+  @media (max-width:980px){
+    .hero-orb-wrap{display:none;}
+  }
+  .hero-inner{
+    position:relative;
+    z-index:5;
+    width:100%;
+    padding:0 48px 90px;
+    color:var(--white);
+  }
+  .hero-eyebrow{
+    font-size:12px;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--champagne-soft);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(54px,9vw,128px);
+    line-height:.96;
+    font-weight:300;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--champagne-soft);
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:480px;
+    font-size:16px;
+    line-height:1.7;
+    color:rgba(253,252,250,.78);
+    font-weight:300;
+  }
+  .hero-foot{
+    margin-top:48px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .hero-sign{
+    font-family:var(--hand);
+    font-style:italic;
+    font-size:34px;
+    color:var(--paper);
+    opacity:.92;
+  }
+  .scroll-cue{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:rgba(253,252,250,.65);
+  }
+  .scroll-cue .line{
+    width:1px;height:46px;
+    background:rgba(253,252,250,.4);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:"";
+    position:absolute;
+    top:-100%;left:0;
+    width:100%;height:100%;
+    background:var(--champagne-soft);
+    animation:scrollDown 2.2s var(--ease) infinite;
+  }
+  @keyframes scrollDown{
+    0%{top:-100%;}
+    60%{top:100%;}
+    100%{top:100%;}
+  }
+
+  /* ============ MARQUEE STRIP ============ */
+  .strip{
+    position:relative;
+    background:var(--indigo);
+    color:var(--paper);
+    padding:22px 0;
+    overflow:hidden;
+    z-index:2;
+  }
+  .strip-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 32s linear infinite;
+  }
+  .strip:hover .strip-track{animation-play-state:paused;}
+  .strip-item{
+    display:flex;
+    align-items:center;
+    font-family:var(--display);
+    font-size:22px;
+    letter-spacing:.04em;
+    font-weight:400;
+    padding:0 36px;
+    white-space:nowrap;
+  }
+  .strip-item .dot{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--champagne);
+    margin-left:36px;
+  }
+  @keyframes marquee{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ============ MISSION ============ */
+  .mission{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .mission-bg{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+  }
+  .mission-bg .scene{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity 1.8s ease-in-out;
+  }
+  .mission-bg .scene.active{opacity:1;}
+  .mission-bg .scene::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0px, rgba(255,255,255,.045) 1px, transparent 1px, transparent 90px);
+    mix-blend-mode:overlay;
+  }
+  .mission-bg .scene::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 220px rgba(0,0,0,.6);
+  }
+  .scene-1{background:radial-gradient(ellipse 65% 50% at 28% 22%, #a89478, transparent 60%), radial-gradient(ellipse 50% 60% at 80% 75%, #2c2722, transparent 55%), linear-gradient(160deg,#766b5a,#3a342c 55%,#19170f);}
+  .scene-2{background:radial-gradient(ellipse 60% 45% at 78% 20%, #3d4d8f, transparent 60%), radial-gradient(ellipse 55% 55% at 15% 80%, #0c1023, transparent 55%), linear-gradient(160deg,#1a2142,#10141f 60%,#0a0c11);}
+  .scene-3{background:radial-gradient(ellipse 60% 50% at 50% 78%, #d8b876, transparent 60%), radial-gradient(ellipse 50% 50% at 85% 15%, #2a221a, transparent 55%), linear-gradient(160deg,#473c2e,#221b14 60%,#120f0a);}
+  .scene-4{background:radial-gradient(ellipse 60% 50% at 22% 70%, #8d6a48, transparent 60%), radial-gradient(ellipse 50% 50% at 80% 25%, #2c2117, transparent 55%), linear-gradient(160deg,#574730,#261f16 60%,#130f0a);}
+  .mission-bg::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(12,11,10,.62), rgba(12,11,10,.74));
+    z-index:1;
+  }
+  .mission-content{
+    position:relative;
+    z-index:3;
+    max-width:880px;
+    text-align:center;
+    padding:0 48px;
+    color:var(--white);
+  }
+  .mission-content .eyebrow{
+    justify-content:center;
+    color:var(--champagne-soft);
+  }
+  .mission-content .eyebrow::before{display:none;}
+  .mission-content h2{
+    color:var(--white);
+    font-size:clamp(28px,4.4vw,46px);
+    line-height:1.32;
+    font-weight:300;
+    margin-top:24px;
+  }
+  .mission-content h2 b{
+    font-weight:500;
+    color:var(--champagne-soft);
+  }
+
+  /* ============ TICKER (second running line) ============ */
+  .ticker{
+    background:var(--paper-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+    overflow:hidden;
+  }
+  .ticker-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 26s linear infinite reverse;
+  }
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:0 30px;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+  }
+  .ticker-item::after{
+    content:"—";
+    margin-left:30px;
+    color:var(--champagne);
+  }
+
+  /* ============ SECTION GENERIC ============ */
+  section{position:relative;}
+  .section-pad{padding:160px 0;}
+  .section-head{
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(34px,5vw,56px);
+    margin-top:18px;
+    font-weight:300;
+  }
+  .section-head h2 i{
+    font-style:italic;
+    color:var(--champagne);
+  }
+
+  /* ============ ABOUT ============ */
+  .about{background:var(--paper);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:80px;
+    align-items:center;
+  }
+  .about-photo{
+    position:relative;
+  }
+  .about-photo-frame{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:4/5.1;
+  }
+  .about-photo-frame .ap-scene{
+    position:absolute; inset:0;
+    opacity:0;
+    transition:opacity 1.8s ease-in-out;
+  }
+  .about-photo-frame .ap-scene.active{opacity:1;}
+  .about-photo-frame .ap-scene img{
+    width:100%;height:100%;
+    object-fit:cover;
+    filter:grayscale(.08) contrast(1.03);
+    transition:transform 1.2s var(--ease);
+  }
+  .about-photo:hover .about-photo-frame .ap-scene.active img{transform:scale(1.04);}
+  .about-photo-frame::after{
+    content:"";
+    position:absolute; inset:0;
+    border:1px solid rgba(253,252,250,.0);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+  }
+  .about-photo-tag{
+    position:absolute;
+    bottom:-28px; left:-28px;
+    background:var(--indigo);
+    color:var(--paper);
+    padding:22px 26px;
+    max-width:230px;
+  }
+  .about-photo-tag .num{
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--champagne-soft);
+    line-height:1;
+  }
+  .about-photo-tag .lbl{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    margin-top:8px;
+    color:rgba(253,252,250,.72);
+    line-height:1.5;
+  }
+
+  .about-text p{
+    font-size:17px;
+    line-height:1.85;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+    max-width:560px;
+  }
+  .about-text p:first-of-type{
+    font-family:var(--display);
+    font-size:24px;
+    line-height:1.5;
+    color:var(--ink);
+    font-style:italic;
+  }
+  .about-sign{
+    margin-top:36px;
+    font-family:var(--hand);
+    font-style:italic;
+    font-size:30px;
+    color:var(--indigo);
+  }
+
+  /* ============ WHY CHOOSE ============ */
+  .why{
+    background:var(--paper-2);
+  }
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .why-card{
+    position:relative;
+    background:var(--paper-2);
+    padding:54px 40px;
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+    transition:background .45s var(--ease), box-shadow .45s var(--ease);
+  }
+  .why-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:url("https://images.unsplash.com/photo-1758914223883-90e57f81a6fa?auto=format&fit=crop&w=900&q=60");
+    background-size:cover;
+    background-position:center;
+    filter:grayscale(1) contrast(1.05);
+    opacity:0;
+    transition:opacity .6s var(--ease);
+  }
+  .why-card:hover::before{opacity:.07;}
+  .why-card:hover{background:var(--paper); box-shadow:inset 0 1px 0 rgba(201,169,107,.4);}
+  .why-card .why-num{
+    position:relative;
+    z-index:2;
+    font-family:var(--display);
+    font-size:15px;
+    color:var(--champagne);
+    letter-spacing:.1em;
+  }
+  .why-card .why-title{
+    position:relative;
+    z-index:2;
+    font-family:var(--display);
+    font-size:24px;
+    font-weight:400;
+    color:var(--ink);
+    margin-top:26px;
+  }
+  .why-card .why-desc{
+    position:relative;
+    z-index:2;
+    margin-top:14px;
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--ink-soft);
+    max-width:300px;
+  }
+
+  /* ============ PORTFOLIO ============ */
+  .portfolio{background:var(--ink);}
+  .portfolio .section-head h2,
+  .portfolio .eyebrow{color:var(--paper);}
+  .portfolio .eyebrow{color:var(--champagne-soft);}
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(2,360px);
+    gap:18px;
+  }
+  .pf-item{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .pf-item:nth-child(1){grid-column:1/2; grid-row:1/3;}
+  .pf-item:nth-child(2){grid-column:2/4; grid-row:1/2;}
+  .pf-item:nth-child(3){grid-column:2/4; grid-row:2/3;}
+  .pf-item img{
+    position:absolute; inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:transform 1.1s var(--ease), filter .6s ease;
+    filter:grayscale(.35) brightness(.86);
+  }
+  .pf-item:hover img{
+    transform:scale(1.07);
+    filter:grayscale(0) brightness(1);
+  }
+  .pf-overlay{
+    position:absolute; inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:28px;
+    background:linear-gradient(180deg, transparent 50%, rgba(10,9,8,.82) 100%);
+  }
+  .pf-overlay .pf-tag{
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--champagne-soft);
+    margin-bottom:8px;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .pf-overlay .pf-title{
+    font-family:var(--display);
+    font-size:24px;
+    color:var(--paper);
+    font-style:italic;
+  }
+  .pf-item:hover .pf-tag{opacity:1; transform:translateY(0);}
+
+  /* ============ SERVICES ============ */
+  .services{background:var(--paper);}
+  .services-list{
+    border-top:1px solid var(--line);
+  }
+  .service-row{
+    display:grid;
+    grid-template-columns:2fr 3fr 1fr;
+    gap:40px;
+    align-items:center;
+    padding:38px 0;
+    border-bottom:1px solid var(--line);
+    transition:padding-left .4s var(--ease), background .4s var(--ease);
+  }
+  .service-row:hover{
+    padding-left:18px;
+    background:rgba(201,169,107,.06);
+  }
+  .service-row h3{
+    font-size:25px;
+    font-weight:400;
+  }
+  .service-row .desc{
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--stone);
+    max-width:480px;
+  }
+  .service-row .price{
+    text-align:right;
+    font-family:var(--display);
+    font-size:24px;
+    color:var(--indigo);
+    white-space:nowrap;
+  }
+  .service-row .price small{
+    display:block;
+    font-family:var(--body);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:6px;
+  }
+
+  /* ============ GUARANTEE STRIP ============ */
+  .guarantee{
+    background:var(--indigo);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  .guarantee::before{
+    content:"";
+    position:absolute;
+    width:560px;height:560px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(201,169,107,.18), transparent 70%);
+    top:-220px; right:-160px;
+  }
+  .guarantee-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .guarantee h2{
+    color:var(--paper);
+    font-size:clamp(32px,4.5vw,50px);
+    font-weight:300;
+    line-height:1.25;
+  }
+  .guarantee h2 i{color:var(--champagne-soft); font-style:italic;}
+  .guarantee p{
+    margin-top:22px;
+    font-size:16px;
+    line-height:1.8;
+    color:rgba(253,252,250,.75);
+    max-width:460px;
+  }
+  .guarantee-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+  }
+  .gstat{
+    border-left:1px solid rgba(253,252,250,.22);
+    padding-left:22px;
+  }
+  .gstat .gnum{
+    font-family:var(--display);
+    font-size:48px;
+    color:var(--champagne-soft);
+    line-height:1;
+  }
+  .gstat .glabel{
+    margin-top:10px;
+    font-size:12.5px;
+    line-height:1.6;
+    color:rgba(253,252,250,.68);
+    letter-spacing:.02em;
+  }
+
+  /* ============ CTA / FORM ============ */
+  .cta{
+    background:var(--paper);
+    position:relative;
+  }
+  .cta-card{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:2px;
+    padding:90px 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 80% 70% at 80% 10%, rgba(201,169,107,.14), transparent 60%), radial-gradient(ellipse 60% 50% at 10% 90%, rgba(44,55,102,.25), transparent 60%);
+    opacity:1;
+  }
+  .cta-inner{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+  }
+  .cta-left .eyebrow{color:var(--champagne-soft);}
+  .cta-left h2{
+    color:var(--paper);
+    font-size:clamp(32px,4.6vw,52px);
+    font-weight:300;
+    margin-top:20px;
+    line-height:1.22;
+  }
+  .cta-left h2 i{color:var(--champagne-soft); font-style:italic;}
+  .cta-left p{
+    margin-top:24px;
+    color:rgba(253,252,250,.7);
+    font-size:15.5px;
+    line-height:1.8;
+    max-width:420px;
+  }
+  .cta-contact{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-size:14px;
+    color:rgba(253,252,250,.65);
+  }
+  .cta-contact a:hover{color:var(--champagne-soft);}
+
+  .form-field{margin-bottom:22px;}
+  .form-field label{
+    display:block;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:rgba(253,252,250,.55);
+    margin-bottom:10px;
+  }
+  .form-field input{
+    width:100%;
+    background:none;
+    border:none;
+    border-bottom:1px solid rgba(253,252,250,.3);
+    color:var(--paper);
+    font-family:var(--body);
+    font-size:16px;
+    padding:8px 0;
+    transition:border-color .3s var(--ease);
+  }
+  .form-field input::placeholder{color:rgba(253,252,250,.32);}
+  .form-field input:focus{
+    outline:none;
+    border-color:var(--champagne-soft);
+  }
+  .submit-btn{
+    margin-top:18px;
+    width:100%;
+    background:none;
+    border:1px solid var(--champagne-soft);
+    color:var(--paper);
+    padding:18px 30px;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:color .4s var(--ease);
+    z-index:1;
+  }
+  .submit-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--champagne-soft);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .45s var(--ease);
+    z-index:-1;
+  }
+  .submit-btn:hover{color:var(--ink);}
+  .submit-btn:hover::before{transform:scaleX(1);}
+  .form-note{
+    margin-top:16px;
+    font-size:12px;
+    color:rgba(253,252,250,.4);
+    line-height:1.6;
+  }
+  .form-success{
+    display:none;
+    margin-top:18px;
+    font-size:14px;
+    color:var(--champagne-soft);
+    letter-spacing:.04em;
+  }
+  .form-success.show{display:block;}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--paper);
+    padding:60px 0 36px;
+    border-top:1px solid var(--line);
+  }
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-logo{
+    font-family:var(--display);
+    font-size:20px;
+    letter-spacing:.16em;
+  }
+  .footer-meta{
+    font-size:12px;
+    color:var(--stone);
+    letter-spacing:.04em;
+  }
+
+  /* ============ REVEAL ANIM ============ */
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+  /* safety: if JS fails to run, content must still be visible */
+  .no-js .reveal{opacity:1; transform:none;}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px){
+    .container{padding:0 28px;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .about-grid{grid-template-columns:1fr; gap:60px;}
+    .about-photo{max-width:380px; margin:0 auto;}
+    .why-grid{grid-template-columns:1fr;}
+    .portfolio-grid{grid-template-columns:1fr; grid-template-rows:280px 280px 280px;}
+    .pf-item:nth-child(1){grid-column:1/2; grid-row:1/2;}
+    .pf-item:nth-child(2){grid-column:1/2; grid-row:2/3;}
+    .pf-item:nth-child(3){grid-column:1/2; grid-row:3/4;}
+    .pf-overlay .pf-title{font-size:18px; line-height:1.25;}
+    .pf-overlay{padding:18px;}
+    .service-row{grid-template-columns:1fr; gap:10px;}
+    .service-row .price{text-align:left;}
+    .guarantee-grid{grid-template-columns:1fr;}
+    .cta-card{padding:56px 32px;}
+    .cta-inner{grid-template-columns:1fr; gap:50px;}
+    .section-pad{padding:100px 0;}
+    .hero h1{font-size:clamp(42px,12vw,80px);}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <div class="container nav-row">
+    <a href="#top" class="logo">Ю<span>Ф</span></a>
+    <nav class="nav-links">
+      <a href="#about">Обо мне</a>
+      <a href="#why">Почему я</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="#services">Услуги</a>
+      <a href="#contact">Заявка</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#about">Обо мне</a>
+  <a href="#why">Почему я</a>
+  <a href="#portfolio">Портфолио</a>
+  <a href="#services">Услуги</a>
+  <a href="#contact">Заявка</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bg" id="heroBg"><div class="hbg-rays"></div><div class="hbg-floor"></div></div>
+  <div class="hero-orb-wrap" id="heroOrb" aria-hidden="true"><div class="hero-orb"></div></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Дизайн интерьера · Юлия Фёдорова</div>
+    <h1>Дом,&nbsp;который<br><em>чувствует</em> вас</h1>
+    <p class="hero-sub">Индивидуальные пространства на стыке эргономики, архитектуры и заботы о том, как вам в них живётся.</p>
+    <div class="hero-foot">
+      <div class="hero-sign">Юлия Фёдорова</div>
+      <div class="scroll-cue"><span>Листайте</span><span class="line"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE: эргономика / уют / эстетика ============ -->
+<div class="strip" aria-hidden="false">
+  <div class="strip-track" id="stripTrack"></div>
+</div>
+
+<!-- ============ MISSION ============ -->
+<section class="mission" id="mission">
+  <div class="mission-bg" id="missionBg">
+    <div class="scene scene-1 active"></div>
+    <div class="scene scene-2"></div>
+    <div class="scene scene-3"></div>
+    <div class="scene scene-4"></div>
+  </div>
+  <div class="mission-content reveal">
+    <div class="eyebrow">Миссия</div>
+    <h2>Помогать людям повышать ресурсное состояние для самореализации и счастья — через создание <b>домашнего индивидуального пространства</b>, отвечающего запросам, используя эффективно каждый рубль и каждый метр.</h2>
+  </div>
+</section>
+
+<!-- ============ TICKER: забота / архитектура / преображение ============ -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="about section-pad" id="about">
+  <div class="container about-grid">
+    <div class="about-photo reveal">
+      <div class="about-photo-frame" id="aboutPhotoFrame">
+        <div class="ap-scene active"><img src="https://sun9-32.userapi.com/s/v1/ig2/VnOiHKsVPzN0XDsWTAtArMR4RhXdHeJ7nUoKt13uBSTQeXjO0vWlR3fkR4GslDdd4yt6Azdq9vRnupen6r8NRzqW.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="https://sun9-28.userapi.com/s/v1/ig2/zbyKDDBuY4e5q4r4wtG9Z99cyjq1el0HEmpvX2h8MOAnyv4Zny9uv3Z21xBzeRtJP2ndUopVuhMIy41oFiGMXn4q.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="https://sun9-75.userapi.com/s/v1/ig2/ercn3--W-4gAZ8WysIfoK7wRhm7yK_TQEw1jgJQr7jEh4pi522oT7yazWQ-5QwMq2Z28ibLpuAh2pAcybq4oAc6o.jpg?quality=95&as=32x46,48x70,72x105,108x157,160x232,240x349,360x523,480x697,540x785,640x930,720x1046,881x1280&from=bu&cs=881x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="https://sun9-31.userapi.com/s/v1/ig2/qy7h2B85z7rZ4zmAh1-INw_5NiJXwmb-2FrejYbRwQ27VLZHcB4d3VAzOIf1K-KahuU52e00iGT2g-lz_7v4YXZ3.jpg?quality=95&as=32x48,48x73,72x109,108x163,160x242,240x363,360x544,480x725,540x816,640x967,720x1088,847x1280&from=bu&cs=847x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+      </div>
+      <div class="about-photo-tag">
+        <div class="num">07</div>
+        <div class="lbl">лет в&nbsp;проектировании жилых пространств</div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">Обо мне</div>
+      <p style="margin-top:24px;">Я не рисую красивые картинки — я выстраиваю логику пространства, в котором вам будет легко дышать.</p>
+      <p>Меня зовут Юлия Фёдорова. Я проектирую интерьеры так, чтобы дом работал на человека, а не наоборот: правильные маршруты движения, верный свет, продуманное хранение — всё то, что обычно замечают только тогда, когда этого <em>нет</em>.</p>
+      <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее и роднее.</p>
+      <div class="about-sign">— с заботой, Юлия</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE ME (placeholder, empty by request) ============ -->
+<section class="why section-pad" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Доверие</div>
+      <h2>Почему меня <i>выбирают</i></h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div>
+          <div class="why-title">Эргономика, а&nbsp;не&nbsp;догадки</div>
+          <p class="why-desc">Высота столешницы, ширина проходов, направление света из окна — каждое решение выверено расчётом, а не «на глаз». Так дом перестаёт мешать и начинает помогать.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div>
+          <div class="why-title">Инженерный взгляд, человеческая забота</div>
+          <p class="why-desc">За схемой электрики и узлом примыкания пола я вижу, как вы возвращаетесь домой вечером и хотите выдохнуть. Архитектура здесь служит чувству, а не наоборот.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div>
+          <div class="why-title">Договор, а&nbsp;не&nbsp;обещания</div>
+          <p class="why-desc">Сроки, этапы и стоимость зафиксированы письменно до начала работ. Спокойствие в проекте должно начинаться раньше, чем первый рабочий на объекте.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="portfolio section-pad" id="portfolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Работы</div>
+      <h2>Портфолио</h2>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="pf-item">
+        <img src="https://images.unsplash.com/photo-1750764515068-80d222d974bb?auto=format&fit=crop&w=1400&q=80" alt="Интерьер однокомнатной квартиры">
+        <div class="pf-overlay"><div class="pf-tag">Однокомнатная квартира · 36 м²</div><div class="pf-title">Воздух и&nbsp;свет</div></div>
+      </div>
+      <div class="pf-item">
+        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1400&q=80" alt="Интерьер двухкомнатной квартиры">
+        <div class="pf-overlay"><div class="pf-tag">Двухкомнатная квартира · 58 м²</div><div class="pf-title">Баланс и&nbsp;тепло</div></div>
+      </div>
+      <div class="pf-item">
+        <img src="https://images.unsplash.com/photo-1633330977020-2bdfb8530cc2?auto=format&fit=crop&w=1400&q=80" alt="Интерьер трёхкомнатной квартиры">
+        <div class="pf-overlay"><div class="pf-tag">Трёхкомнатная квартира · 89 м²</div><div class="pf-title">Простор для&nbsp;семьи</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services section-pad" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Сотрудничество</div>
+      <h2>Услуги и&nbsp;цены</h2>
+    </div>
+    <div class="services-list reveal">
+      <div class="service-row">
+        <h3>Дизайн-концепция</h3>
+        <div class="desc">Планировочное решение, стилевое направление, 3D-визуализация ключевых зон. Точка опоры для всего проекта.</div>
+        <div class="price">от 1&nbsp;800&nbsp;₽<small>за м²</small></div>
+      </div>
+      <div class="service-row">
+        <h3>Рабочая документация</h3>
+        <div class="desc">Чертежи для строителей: электрика, водоснабжение, развёртки стен, ведомость отделочных материалов.</div>
+        <div class="price">от 1&nbsp;200&nbsp;₽<small>за м²</small></div>
+      </div>
+      <div class="service-row">
+        <h3>Авторский надзор</h3>
+        <div class="desc">Контроль реализации на объекте: соответствие проекту, качество работ, своевременные решения по месту.</div>
+        <div class="price">от 60&nbsp;000&nbsp;₽<small>в месяц</small></div>
+      </div>
+      <div class="service-row">
+        <h3>Подбор мебели и&nbsp;декора</h3>
+        <div class="desc">Комплектация проекта: мебель, свет, текстиль, аксессуары — с учётом бюджета и сроков поставки.</div>
+        <div class="price">от 8%<small>от суммы закупки</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section class="guarantee section-pad">
+  <div class="container guarantee-grid">
+    <div class="reveal">
+      <div class="eyebrow" style="color:var(--champagne-soft);">Гарантии</div>
+      <h2 style="margin-top:20px;">Гарантированный <i>опыт</i></h2>
+      <p>Каждый проект — это договор, понятные этапы и фиксированные сроки. Вы всегда знаете, на каком шаге находится ваш дом и что будет дальше.</p>
+    </div>
+    <div class="guarantee-stats reveal">
+      <div class="gstat"><div class="gnum">7</div><div class="glabel">лет практики в&nbsp;проектировании жилых интерьеров</div></div>
+      <div class="gstat"><div class="gnum">40+</div><div class="glabel">реализованных проектов по&nbsp;всей России</div></div>
+      <div class="gstat"><div class="gnum">100%</div><div class="glabel">проектов — по договору с&nbsp;фиксацией этапов</div></div>
+      <div class="gstat"><div class="gnum">3</div><div class="glabel">бесплатные правки на&nbsp;этапе концепции</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA / FORM ============ -->
+<section class="cta section-pad" id="contact">
+  <div class="container">
+    <div class="cta-card reveal">
+      <div class="cta-inner">
+        <div class="cta-left">
+          <div class="eyebrow">Начало</div>
+          <h2>Оставить <i>заявку</i></h2>
+          <p>Расскажите немного о вашем пространстве — отвечу лично в течение дня и предложу, с чего начать.</p>
+          <div class="cta-contact">
+            <a href="tel:+79990000000">+7 999 000-00-00</a>
+            <a href="mailto:hello@yuliafedorova.studio">hello@yuliafedorova.studio</a>
+            <span>Москва · работаю по всей России</span>
+          </div>
+        </div>
+        <div class="cta-right">
+          <form id="leadForm" onsubmit="return handleSubmit(event)">
+            <div class="form-field">
+              <label for="name">Имя</label>
+              <input id="name" name="name" type="text" placeholder="Как вас зовут" required>
+            </div>
+            <div class="form-field">
+              <label for="contact">Телефон или почта</label>
+              <input id="contact" name="contact" type="text" placeholder="Удобный способ связи" required>
+            </div>
+            <div class="form-field">
+              <label for="msg">О проекте</label>
+              <input id="msg" name="msg" type="text" placeholder="Площадь, город, что хотите изменить">
+            </div>
+            <button type="submit" class="submit-btn">Отправить заявку</button>
+            <div class="form-success" id="formSuccess">Спасибо! Заявка получена — отвечу вам лично в течение дня.</div>
+            <div class="form-note">Отправляя форму, вы соглашаетесь с обработкой персональных данных.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container footer-row">
+    <div class="footer-logo">Юлия Фёдорова</div>
+    <div class="footer-meta">Дизайн интерьера · © 2026</div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.remove('no-js');
+
+  // ---- marquee content generation ----
+  function fillMarquee(id, words){
+    const el = document.getElementById(id);
+    const block = words.map(w => `<span class="strip-item">${w}<span class="dot"></span></span>`).join('');
+    el.innerHTML = block + block; // duplicate for seamless loop
+  }
+  fillMarquee('stripTrack', ['Эргономика','Уют','Эстетика']);
+
+  function fillTicker(id, words){
+    const el = document.getElementById(id);
+    const block = words.map(w => `<span class="ticker-item">${w}</span>`).join('');
+    el.innerHTML = block + block;
+  }
+  fillTicker('tickerTrack', ['Забота','Знание архитектуры','Преображение']);
+
+  // ---- header scroll state ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  // ---- mobile menu ----
+  const burger = document.getElementById('burgerBtn');
+  const overlay = document.getElementById('mobileOverlay');
+  const menu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+  function toggleMenu(){
+    menuOpen = !menuOpen;
+    overlay.classList.toggle('open', menuOpen);
+    menu.classList.toggle('open', menuOpen);
+    burger.setAttribute('aria-expanded', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+  burger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+  // ---- hero parallax ----
+  const heroBg = document.getElementById('heroBg');
+  const heroOrb = document.getElementById('heroOrb');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if(y < window.innerHeight * 1.2){
+      heroBg.style.transform = `translateY(${y * 0.32}px) scale(${1 + y*0.0002})`;
+      if(heroOrb){ heroOrb.style.transform = `translateY(${y * -0.18}px)`; }
+    }
+  }, {passive:true});
+
+  // ---- mission background crossfade ----
+  const missionImgs = document.querySelectorAll('#missionBg .scene');
+  let missionIdx = 0;
+  if(missionImgs.length){
+    setInterval(() => {
+      missionImgs[missionIdx].classList.remove('active');
+      missionIdx = (missionIdx + 1) % missionImgs.length;
+      missionImgs[missionIdx].classList.add('active');
+    }, 4500);
+  }
+
+  // ---- about-me photo crossfade (same technique as mission background) ----
+  const aboutImgs = document.querySelectorAll('#aboutPhotoFrame .ap-scene');
+  let aboutIdx = 0;
+  if(aboutImgs.length){
+    setInterval(() => {
+      aboutImgs[aboutIdx].classList.remove('active');
+      aboutIdx = (aboutIdx + 1) % aboutImgs.length;
+      aboutImgs[aboutIdx].classList.add('active');
+    }, 3800);
+  }
+
+  // ---- reveal on scroll ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+  // safety net: ensure nothing stays invisible if observer misses it
+  setTimeout(() => {
+    revealEls.forEach(el => el.classList.add('in'));
+  }, 4000);
+
+  // ---- form submit (no backend — visual confirmation only) ----
+  function handleSubmit(e){
+    e.preventDefault();
+    const success = document.getElementById('formSuccess');
+    success.classList.add('show');
+    document.getElementById('leadForm').reset();
+    return false;
+  }
+</script>
+
+</body>
+</html>
