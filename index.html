@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
-
   /* ============ TOKENS ============ */
   :root{
     --paper:#F8F5EF;
@@ -22,14 +21,11 @@
     --indigo:#1A2142;
     --indigo-soft:#2C3766;
     --white:#FDFCFA;
-
     --display:'Cormorant', serif;
     --hand:'Cormorant Garamond', serif;
     --body:'Jost', sans-serif;
-
     --ease:cubic-bezier(.22,.61,.36,1);
   }
-
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -40,7 +36,6 @@
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
-
   /* subtle paper/concrete grain texture, applied globally */
   body::before{
     content:"";
@@ -52,18 +47,14 @@
     mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-
   a{color:inherit;text-decoration:none;}
   img{display:block;max-width:100%;}
-
   ::selection{background:var(--champagne-soft);color:var(--ink);}
-
   .container{
     max-width:1280px;
     margin:0 auto;
     padding:0 48px;
   }
-
   .eyebrow{
     font-family:var(--body);
     font-size:12px;
@@ -80,24 +71,20 @@
     background:var(--champagne);
     display:inline-block;
   }
-
   h1,h2,h3{
     font-family:var(--display);
     font-weight:400;
     letter-spacing:.01em;
     color:var(--ink);
   }
-
   /* ============ FOCUS / A11Y ============ */
   a:focus-visible, button:focus-visible{
     outline:2px solid var(--indigo);
     outline-offset:4px;
   }
-
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
   }
-
   /* ============ NAV ============ */
   header{
     position:fixed;
@@ -122,9 +109,16 @@
     font-size:26px;
     letter-spacing:.18em;
     font-weight:500;
+    color:var(--white);
+    text-shadow:0 1px 10px rgba(0,0,0,.35);
+    transition:color .4s var(--ease), text-shadow .4s var(--ease);
   }
-  .logo span{color:var(--champagne);}
-
+  .logo span{color:var(--champagne-soft);}
+  header.scrolled .logo{
+    color:var(--ink);
+    text-shadow:none;
+  }
+  header.scrolled .logo span{color:var(--champagne);}
   .nav-links{
     display:flex;
     gap:40px;
@@ -135,8 +129,9 @@
   .nav-links a{
     position:relative;
     padding-bottom:4px;
-    color:var(--ink-soft);
-    transition:color .3s var(--ease);
+    color:rgba(253,252,250,.88);
+    text-shadow:0 1px 8px rgba(0,0,0,.3);
+    transition:color .3s var(--ease), text-shadow .3s var(--ease);
   }
   .nav-links a::after{
     content:"";
@@ -146,9 +141,13 @@
     background:var(--champagne);
     transition:width .35s var(--ease);
   }
-  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover{color:var(--white);}
   .nav-links a:hover::after{width:100%;}
-
+  header.scrolled .nav-links a{
+    color:var(--ink-soft);
+    text-shadow:none;
+  }
+  header.scrolled .nav-links a:hover{color:var(--ink);}
   .burger{
     display:none;
     flex-direction:column;
@@ -160,10 +159,14 @@
   }
   .burger span{
     width:26px;height:1px;
-    background:var(--ink);
-    transition:transform .3s var(--ease), opacity .3s var(--ease);
+    background:var(--white);
+    box-shadow:0 1px 6px rgba(0,0,0,.3);
+    transition:transform .3s var(--ease), opacity .3s var(--ease), background .3s var(--ease);
   }
-
+  header.scrolled .burger span{
+    background:var(--ink);
+    box-shadow:none;
+  }
   .mobile-overlay{
     position:fixed;
     inset:0;
@@ -201,7 +204,6 @@
     opacity:.85;
   }
   .mobile-menu a:hover{opacity:1; color:var(--champagne-soft);}
-
   /* ============ HERO ============ */
   .hero{
     position:relative;
@@ -215,15 +217,41 @@
     position:absolute;
     inset:-4% -4% 0 -4%;
     height:108%;
+    overflow:hidden;
+    will-change:transform;
+    transform:translateY(var(--scroll-shift,0px)) scale(var(--scroll-scale,1));
+  }
+  .hero-bg-img{
+    position:absolute;
+    inset:-12%;
     background:
-      radial-gradient(ellipse 70% 60% at 70% 18%, rgba(201,169,107,.30), transparent 60%),
-      linear-gradient(165deg, rgba(70,63,52,.55) 0%, rgba(45,41,36,.62) 32%, rgba(20,18,15,.86) 100%),
+      radial-gradient(ellipse 70% 60% at 70% 18%, rgba(201,169,107,.32), transparent 60%),
+      linear-gradient(165deg, rgba(80,73,60,.40) 0%, rgba(55,50,44,.45) 32%, rgba(28,25,21,.68) 100%),
       url("https://images.unsplash.com/photo-1757023177496-131ded651c01?auto=format&fit=crop&w=2000&q=80");
     background-size:cover;
     background-position:center 38%;
     background-blend-mode:overlay, multiply, normal;
-    filter:grayscale(.5) contrast(1.12) brightness(.86);
+    filter:grayscale(.4) contrast(1.08) brightness(1.04);
+    animation:cameraDrift 48s ease-in-out infinite;
     will-change:transform;
+  }
+  @keyframes cameraDrift{
+    /* long, irregular virtual-camera tour across the whole scene — no two consecutive legs use the same direction or scale, so the loop doesn't read as a back-and-forth repeat */
+    0%{    transform:scale(1.05) translate(-4.5%, -3%)   rotate(-0.5deg); }
+    9%{    transform:scale(1.12) translate(2%, -4%)       rotate(0.2deg); }
+    18%{   transform:scale(1.20) translate(5%, 1%)        rotate(0.45deg); }
+    27%{   transform:scale(1.15) translate(3.5%, 4.5%)    rotate(0.1deg); }
+    36%{   transform:scale(1.22) translate(-1.5%, 3.8%)   rotate(-0.3deg); }
+    45%{   transform:scale(1.28) translate(-4.8%, 0.5%)   rotate(-0.55deg); }
+    55%{   transform:scale(1.18) translate(-3.5%, -3.5%)  rotate(-0.2deg); }
+    64%{   transform:scale(1.10) translate(0.5%, -4.8%)   rotate(0.35deg); }
+    73%{   transform:scale(1.24) translate(4.2%, -1%)     rotate(0.5deg); }
+    82%{   transform:scale(1.16) translate(2.8%, 3.2%)    rotate(0.05deg); }
+    91%{   transform:scale(1.08) translate(-2.5%, 2.6%)   rotate(-0.4deg); }
+    100%{  transform:scale(1.05) translate(-4.5%, -3%)    rotate(-0.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-bg-img{animation:none;}
   }
   .hero-bg .hbg-rays{
     position:absolute; inset:0;
@@ -237,47 +265,20 @@
   .hero-bg::after{
     content:"";
     position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(20,18,15,.32) 0%, rgba(20,18,15,.18) 40%, rgba(15,13,11,.82) 100%);
+    background:linear-gradient(180deg, rgba(20,18,15,.20) 0%, rgba(20,18,15,.10) 40%, rgba(15,13,11,.70) 100%);
   }
-
-  /* ---- signature element: minimal glossy / glowing volumetric accent ---- */
-  .hero-orb-wrap{
+  .hero-center{
     position:absolute;
-    top:20%; right:9%;
-    width:clamp(140px,16vw,230px);
-    height:clamp(140px,16vw,230px);
-    z-index:4;
-    pointer-events:none;
-    will-change:transform;
+    top:50%; left:50%;
+    transform:translate(-50%,-52%);
+    z-index:5;
+    width:100%;
+    max-width:880px;
+    padding:0 36px;
+    text-align:center;
+    color:var(--white);
   }
-  .hero-orb{
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 30% 26%, rgba(253,252,250,.95) 0%, rgba(228,210,172,.55) 16%, rgba(201,169,107,.22) 38%, rgba(26,33,66,.45) 64%, rgba(10,9,8,.05) 100%);
-    box-shadow:
-      0 0 60px 6px rgba(201,169,107,.28),
-      0 0 140px 50px rgba(26,33,66,.30),
-      inset -18px -18px 46px rgba(0,0,0,.4),
-      inset 12px 12px 30px rgba(255,255,255,.22);
-    animation:orbFloat 8s var(--ease) infinite;
-    will-change:transform;
-  }
-  .hero-orb::after{
-    content:"";
-    position:absolute;
-    inset:14%;
-    border-radius:50%;
-    border:1px solid rgba(253,252,250,.14);
-  }
-  @keyframes orbFloat{
-    0%,100%{transform:translateY(0) translateX(0) scale(1);}
-    50%{transform:translateY(-16px) translateX(-6px) scale(1.025);}
-  }
-  @media (max-width:980px){
-    .hero-orb-wrap{display:none;}
-  }
+  .hero-center .hero-eyebrow{justify-content:center;}
   .hero-inner{
     position:relative;
     z-index:5;
@@ -294,23 +295,41 @@
   }
   .hero h1{
     color:var(--white);
-    font-size:clamp(54px,9vw,128px);
-    line-height:.96;
+    font-size:clamp(46px,7.2vw,108px);
+    line-height:1.05;
     font-weight:300;
   }
-  .hero h1 em{
-    font-style:italic;
+  .hero h1 em,
+  .hero h1 .accent{
     font-weight:400;
+    font-style:normal;
     color:var(--champagne-soft);
   }
+  .tw-line{display:inline-block;}
+  .tw-cursor{
+    display:inline-block;
+    width:2px;
+    height:.74em;
+    margin-left:7px;
+    background:var(--champagne-soft);
+    vertical-align:-0.06em;
+  }
+  .tw-cursor.blink{animation:cursorBlink 1.05s steps(1) infinite;}
+  .tw-cursor.fade-cursor{animation:none; opacity:0; transition:opacity 1s ease;}
+  @keyframes cursorBlink{50%{opacity:0;}}
   .hero-sub{
-    margin-top:26px;
-    max-width:480px;
+    margin:26px auto 0;
+    max-width:540px;
     font-size:16px;
     line-height:1.7;
     color:rgba(253,252,250,.78);
     font-weight:300;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity 1s var(--ease), transform 1s var(--ease);
   }
+  .hero-sub.show{opacity:1; transform:translateY(0);}
+  .no-js .hero-sub{opacity:1; transform:none;}
   .hero-foot{
     margin-top:48px;
     display:flex;
@@ -321,7 +340,6 @@
   }
   .hero-sign{
     font-family:var(--hand);
-    font-style:italic;
     font-size:34px;
     color:var(--paper);
     opacity:.92;
@@ -355,7 +373,6 @@
     60%{top:100%;}
     100%{top:100%;}
   }
-
   /* ============ MARQUEE STRIP ============ */
   .strip{
     position:relative;
@@ -391,7 +408,6 @@
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
   }
-
   /* ============ MISSION ============ */
   .mission{
     position:relative;
@@ -459,7 +475,24 @@
     font-weight:500;
     color:var(--champagne-soft);
   }
-
+  /* ---- mission headline: minimal word-by-word reveal ---- */
+  .mission-headline .mw{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(.35em);
+    filter:blur(2px);
+    transition:opacity .7s var(--ease), transform .7s var(--ease), filter .7s var(--ease);
+    transition-delay:var(--d,0ms);
+  }
+  .mission-headline.mw-in .mw{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+  .no-js .mission-headline .mw{opacity:1; transform:none; filter:none;}
+  @media (prefers-reduced-motion: reduce){
+    .mission-headline .mw{opacity:1; transform:none; filter:none; transition:none;}
+  }
   /* ============ TICKER (second running line) ============ */
   .ticker{
     background:var(--paper-2);
@@ -490,7 +523,6 @@
     margin-left:30px;
     color:var(--champagne);
   }
-
   /* ============ SECTION GENERIC ============ */
   section{position:relative;}
   .section-pad{padding:160px 0;}
@@ -502,11 +534,9 @@
     margin-top:18px;
     font-weight:300;
   }
-  .section-head h2 i{
-    font-style:italic;
+  .section-head h2 i{font-style:normal;
     color:var(--champagne);
   }
-
   /* ============ ABOUT ============ */
   .about{background:var(--paper);}
   .about-grid{
@@ -564,7 +594,6 @@
     color:rgba(253,252,250,.72);
     line-height:1.5;
   }
-
   .about-text p{
     font-size:17px;
     line-height:1.85;
@@ -577,16 +606,13 @@
     font-size:24px;
     line-height:1.5;
     color:var(--ink);
-    font-style:italic;
   }
   .about-sign{
     margin-top:36px;
     font-family:var(--hand);
-    font-style:italic;
     font-size:30px;
     color:var(--indigo);
   }
-
   /* ============ WHY CHOOSE ============ */
   .why{
     background:var(--paper-2);
@@ -648,7 +674,6 @@
     color:var(--ink-soft);
     max-width:300px;
   }
-
   /* ============ PORTFOLIO ============ */
   .portfolio{background:var(--ink);}
   .portfolio .section-head h2,
@@ -701,55 +726,110 @@
     font-family:var(--display);
     font-size:24px;
     color:var(--paper);
-    font-style:italic;
   }
   .pf-item:hover .pf-tag{opacity:1; transform:translateY(0);}
-
   /* ============ SERVICES ============ */
   .services{background:var(--paper);}
-  .services-list{
-    border-top:1px solid var(--line);
+  /* ---- full-project pricing table ---- */
+  .price-table-wrap{
+    margin-top:64px;
   }
-  .service-row{
-    display:grid;
-    grid-template-columns:2fr 3fr 1fr;
-    gap:40px;
-    align-items:center;
-    padding:38px 0;
-    border-bottom:1px solid var(--line);
-    transition:padding-left .4s var(--ease), background .4s var(--ease);
+  .price-table-head{
+    margin-bottom:48px;
   }
-  .service-row:hover{
-    padding-left:18px;
-    background:rgba(201,169,107,.06);
-  }
-  .service-row h3{
-    font-size:25px;
-    font-weight:400;
-  }
-  .service-row .desc{
-    font-size:14.5px;
-    line-height:1.75;
-    color:var(--stone);
-    max-width:480px;
-  }
-  .service-row .price{
-    text-align:right;
+  .price-table-head .eyebrow{margin-bottom:0;}
+  .price-table-head h3{
     font-family:var(--display);
-    font-size:24px;
-    color:var(--indigo);
-    white-space:nowrap;
+    font-weight:300;
+    font-size:clamp(28px,4vw,40px);
+    margin-top:16px;
+    color:var(--ink);
   }
-  .service-row .price small{
-    display:block;
-    font-family:var(--body);
-    font-size:11px;
-    letter-spacing:.12em;
+  .price-table-head h3 i{font-style:normal;color:var(--champagne);}
+  .price-table-head .pt-note{
+    margin-top:14px;
+    font-size:13.5px;
+    color:var(--stone);
+    max-width:560px;
+    line-height:1.7;
+  }
+  .price-table{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .pt-card{
+    background:var(--paper);
+    padding:38px 26px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    transition:background .4s var(--ease), transform .4s var(--ease);
+  }
+  .pt-card:hover{
+    background:var(--white);
+    transform:translateY(-4px);
+  }
+  .pt-card.featured{
+    background:var(--indigo);
+  }
+  .pt-card.featured:hover{background:var(--indigo-soft);}
+  .pt-type{
+    font-family:var(--display);
+    font-size:21px;
+    font-weight:400;
+    color:var(--ink);
+    line-height:1.25;
+  }
+  .pt-card.featured .pt-type{color:var(--paper);}
+  .pt-area{
+    font-size:12px;
+    letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--stone);
-    margin-top:6px;
   }
-
+  .pt-card.featured .pt-area{color:var(--champagne-soft);}
+  .pt-divider{
+    width:24px;height:1px;
+    background:var(--champagne);
+  }
+  .pt-from{
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .pt-card.featured .pt-from{color:rgba(253,252,250,.6);}
+  .pt-price{
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--indigo);
+    line-height:1.1;
+  }
+  .pt-card.featured .pt-price{color:var(--champagne-soft);}
+  .pt-price small{
+    font-family:var(--body);
+    font-size:13px;
+    color:var(--stone);
+    font-weight:300;
+  }
+  .pt-card.featured .pt-price small{color:rgba(253,252,250,.55);}
+  .pt-cta{
+    margin-top:auto;
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    border-bottom:1px solid var(--champagne);
+    padding-bottom:3px;
+    align-self:flex-start;
+    transition:opacity .3s var(--ease);
+  }
+  .pt-card.featured .pt-cta{color:var(--champagne-soft);}
+  .pt-card:hover .pt-cta{opacity:.7;}
   /* ============ GUARANTEE STRIP ============ */
   .guarantee{
     background:var(--indigo);
@@ -779,7 +859,7 @@
     font-weight:300;
     line-height:1.25;
   }
-  .guarantee h2 i{color:var(--champagne-soft); font-style:italic;}
+  .guarantee h2 i{color:var(--champagne-soft);font-style:normal;}
   .guarantee p{
     margin-top:22px;
     font-size:16px;
@@ -809,7 +889,6 @@
     color:rgba(253,252,250,.68);
     letter-spacing:.02em;
   }
-
   /* ============ CTA / FORM ============ */
   .cta{
     background:var(--paper);
@@ -845,7 +924,7 @@
     margin-top:20px;
     line-height:1.22;
   }
-  .cta-left h2 i{color:var(--champagne-soft); font-style:italic;}
+  .cta-left h2 i{color:var(--champagne-soft);font-style:normal;}
   .cta-left p{
     margin-top:24px;
     color:rgba(253,252,250,.7);
@@ -862,7 +941,6 @@
     color:rgba(253,252,250,.65);
   }
   .cta-contact a:hover{color:var(--champagne-soft);}
-
   .form-field{margin-bottom:22px;}
   .form-field label{
     display:block;
@@ -931,7 +1009,6 @@
     letter-spacing:.04em;
   }
   .form-success.show{display:block;}
-
   /* ============ FOOTER ============ */
   footer{
     background:var(--paper);
@@ -955,7 +1032,6 @@
     color:var(--stone);
     letter-spacing:.04em;
   }
-
   /* ============ REVEAL ANIM ============ */
   .reveal{
     opacity:0;
@@ -968,7 +1044,6 @@
   }
   /* safety: if JS fails to run, content must still be visible */
   .no-js .reveal{opacity:1; transform:none;}
-
   /* ============ RESPONSIVE ============ */
   @media (max-width:980px){
     .container{padding:0 28px;}
@@ -983,18 +1058,20 @@
     .pf-item:nth-child(3){grid-column:1/2; grid-row:3/4;}
     .pf-overlay .pf-title{font-size:18px; line-height:1.25;}
     .pf-overlay{padding:18px;}
-    .service-row{grid-template-columns:1fr; gap:10px;}
-    .service-row .price{text-align:left;}
+    .price-table-wrap{margin-top:50px;}
+    .price-table{grid-template-columns:1fr 1fr;}
     .guarantee-grid{grid-template-columns:1fr;}
     .cta-card{padding:56px 32px;}
     .cta-inner{grid-template-columns:1fr; gap:50px;}
     .section-pad{padding:100px 0;}
     .hero h1{font-size:clamp(42px,12vw,80px);}
   }
+  @media (max-width:560px){
+    .price-table{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
-
 <!-- ============ NAV ============ -->
 <header id="siteHeader">
   <div class="container nav-row">
@@ -1011,7 +1088,6 @@
     </button>
   </div>
 </header>
-
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <nav class="mobile-menu" id="mobileMenu">
   <a href="#about">Обо мне</a>
@@ -1020,27 +1096,25 @@
   <a href="#services">Услуги</a>
   <a href="#contact">Заявка</a>
 </nav>
-
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <div class="hero-bg" id="heroBg"><div class="hbg-rays"></div><div class="hbg-floor"></div></div>
-  <div class="hero-orb-wrap" id="heroOrb" aria-hidden="true"><div class="hero-orb"></div></div>
-  <div class="hero-inner">
+  <div class="hero-bg" id="heroBg"><div class="hero-bg-img"></div><div class="hbg-rays"></div><div class="hbg-floor"></div></div>
+  <div class="hero-center">
     <div class="hero-eyebrow">Дизайн интерьера · Юлия Фёдорова</div>
-    <h1>Дом,&nbsp;который<br><em>чувствует</em> вас</h1>
-    <p class="hero-sub">Индивидуальные пространства на стыке эргономики, архитектуры и заботы о том, как вам в них живётся.</p>
+    <h1 id="heroTitle">Дом,&nbsp;который<br><span class="accent">чувствует</span> вас</h1>
+    <p class="hero-sub" id="heroSub">Индивидуальные пространства на стыке эргономики, архитектуры и заботы о том, как вам в них живётся.</p>
+  </div>
+  <div class="hero-inner">
     <div class="hero-foot">
       <div class="hero-sign">Юлия Фёдорова</div>
       <div class="scroll-cue"><span>Листайте</span><span class="line"></span></div>
     </div>
   </div>
 </section>
-
 <!-- ============ MARQUEE: эргономика / уют / эстетика ============ -->
 <div class="strip" aria-hidden="false">
   <div class="strip-track" id="stripTrack"></div>
 </div>
-
 <!-- ============ MISSION ============ -->
 <section class="mission" id="mission">
   <div class="mission-bg" id="missionBg">
@@ -1051,15 +1125,13 @@
   </div>
   <div class="mission-content reveal">
     <div class="eyebrow">Миссия</div>
-    <h2>Помогать людям повышать ресурсное состояние для самореализации и счастья — через создание <b>домашнего индивидуального пространства</b>, отвечающего запросам, используя эффективно каждый рубль и каждый метр.</h2>
+    <h2 id="missionHeadline" class="mission-headline">Помогать людям повышать ресурсное состояние для самореализации и счастья — через создание <b>домашнего индивидуального пространства</b>, отвечающего запросам, используя эффективно каждый рубль и каждый метр.</h2>
   </div>
 </section>
-
 <!-- ============ TICKER: забота / архитектура / преображение ============ -->
 <div class="ticker">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
-
 <!-- ============ ABOUT ============ -->
 <section class="about section-pad" id="about">
   <div class="container about-grid">
@@ -1078,13 +1150,12 @@
     <div class="about-text reveal">
       <div class="eyebrow">Обо мне</div>
       <p style="margin-top:24px;">Я не рисую красивые картинки — я выстраиваю логику пространства, в котором вам будет легко дышать.</p>
-      <p>Меня зовут Юлия Фёдорова. Я проектирую интерьеры так, чтобы дом работал на человека, а не наоборот: правильные маршруты движения, верный свет, продуманное хранение — всё то, что обычно замечают только тогда, когда этого <em>нет</em>.</p>
+      <p>Меня зовут Юлия Фёдорова. Я проектирую интерьеры так, чтобы дом работал на человека, а не наоборот: правильные маршруты движения, верный свет, продуманное хранение — всё то, что обычно замечают только тогда, когда этого нет.</p>
       <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее и роднее.</p>
       <div class="about-sign">— с заботой, Юлия</div>
     </div>
   </div>
 </section>
-
 <!-- ============ WHY CHOOSE ME (placeholder, empty by request) ============ -->
 <section class="why section-pad" id="why">
   <div class="container">
@@ -1117,7 +1188,6 @@
     </div>
   </div>
 </section>
-
 <!-- ============ PORTFOLIO ============ -->
 <section class="portfolio section-pad" id="portfolio">
   <div class="container">
@@ -1141,7 +1211,6 @@
     </div>
   </div>
 </section>
-
 <!-- ============ SERVICES ============ -->
 <section class="services section-pad" id="services">
   <div class="container">
@@ -1149,31 +1218,58 @@
       <div class="eyebrow">Сотрудничество</div>
       <h2>Услуги и&nbsp;цены</h2>
     </div>
-    <div class="services-list reveal">
-      <div class="service-row">
-        <h3>Дизайн-концепция</h3>
-        <div class="desc">Планировочное решение, стилевое направление, 3D-визуализация ключевых зон. Точка опоры для всего проекта.</div>
-        <div class="price">от 1&nbsp;800&nbsp;₽<small>за м²</small></div>
+    <!-- ---- full project price, by apartment type ---- -->
+    <div class="price-table-wrap reveal">
+      <div class="price-table-head">
+        <div class="eyebrow">Стоимость проекта</div>
+        <h3>Полный проект <i>под ключ</i></h3>
+        <p class="pt-note">Итоговая стоимость считается от площади и сложности — ниже стартовые цены по типу квартиры, рассчитанные по базовой ставке за&nbsp;м².</p>
       </div>
-      <div class="service-row">
-        <h3>Рабочая документация</h3>
-        <div class="desc">Чертежи для строителей: электрика, водоснабжение, развёртки стен, ведомость отделочных материалов.</div>
-        <div class="price">от 1&nbsp;200&nbsp;₽<small>за м²</small></div>
-      </div>
-      <div class="service-row">
-        <h3>Авторский надзор</h3>
-        <div class="desc">Контроль реализации на объекте: соответствие проекту, качество работ, своевременные решения по месту.</div>
-        <div class="price">от 60&nbsp;000&nbsp;₽<small>в месяц</small></div>
-      </div>
-      <div class="service-row">
-        <h3>Подбор мебели и&nbsp;декора</h3>
-        <div class="desc">Комплектация проекта: мебель, свет, текстиль, аксессуары — с учётом бюджета и сроков поставки.</div>
-        <div class="price">от 8%<small>от суммы закупки</small></div>
+      <div class="price-table">
+        <div class="pt-card">
+          <div class="pt-type">Студия</div>
+          <div class="pt-area">25–30 м²</div>
+          <div class="pt-divider"></div>
+          <div class="pt-from">Стоимость</div>
+          <div class="pt-price">от 87&nbsp;500&nbsp;₽<small>за полный проект</small></div>
+          <a href="#contact" class="pt-cta">Заказать услугу</a>
+        </div>
+        <div class="pt-card">
+          <div class="pt-type">1-комнатная квартира</div>
+          <div class="pt-area">35–45 м²</div>
+          <div class="pt-divider"></div>
+          <div class="pt-from">Стоимость</div>
+          <div class="pt-price">от 122&nbsp;500&nbsp;₽<small>за полный проект</small></div>
+          <a href="#contact" class="pt-cta">Заказать услугу</a>
+        </div>
+        <div class="pt-card">
+          <div class="pt-type">2-комнатная квартира</div>
+          <div class="pt-area">60–75 м²</div>
+          <div class="pt-divider"></div>
+          <div class="pt-from">Стоимость</div>
+          <div class="pt-price">от 175&nbsp;000&nbsp;₽<small>за полный проект</small></div>
+          <a href="#contact" class="pt-cta">Заказать услугу</a>
+        </div>
+        <div class="pt-card">
+          <div class="pt-type">3-комнатная квартира</div>
+          <div class="pt-area">95–120 м²</div>
+          <div class="pt-divider"></div>
+          <div class="pt-from">Стоимость</div>
+          <div class="pt-price">от 210&nbsp;000&nbsp;₽<small>за полный проект</small></div>
+          <a href="#contact" class="pt-cta">Заказать услугу</a>
+        </div>
+        <div class="pt-card featured">
+          <div class="pt-type">Премиум сегмент</div>
+          <div class="pt-area">95–120 м²</div>
+          <div class="pt-divider"></div>
+          <div class="pt-from">Стоимость</div>
+          <div class="pt-price">от 300&nbsp;000&nbsp;₽<small>за полный проект</small></div>
+          <a href="#contact" class="pt-cta">Заказать услугу</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- ============ GUARANTEE ============ -->
 <section class="guarantee section-pad">
   <div class="container guarantee-grid">
@@ -1190,7 +1286,6 @@
     </div>
   </div>
 </section>
-
 <!-- ============ CTA / FORM ============ -->
 <section class="cta section-pad" id="contact">
   <div class="container">
@@ -1229,7 +1324,6 @@
     </div>
   </div>
 </section>
-
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="container footer-row">
@@ -1237,10 +1331,57 @@
     <div class="footer-meta">Дизайн интерьера · © 2026</div>
   </div>
 </footer>
-
 <script>
   document.documentElement.classList.remove('no-js');
-
+  // ---- hero headline: typewriter effect ----
+  function typeHeadline(){
+    const el = document.getElementById('heroTitle');
+    if(!el) return;
+    el.innerHTML = '';
+    const sequence = [
+      {text:'Дом, который'},
+      {br:true},
+      {text:'чувствует', cls:'accent'},
+      {text:'\u00A0вас'}
+    ];
+    const queue = [];
+    sequence.forEach(part=>{
+      if(part.br){ queue.push({br:true}); return; }
+      [...part.text].forEach(ch => queue.push({ch, cls:part.cls}));
+    });
+    const cursor = document.createElement('span');
+    cursor.className = 'tw-cursor';
+    let currentLine = document.createElement('span');
+    currentLine.className = 'tw-line';
+    el.appendChild(currentLine);
+    currentLine.appendChild(cursor);
+    let i = 0;
+    function tick(){
+      if(i >= queue.length){
+        cursor.classList.add('blink');
+        setTimeout(() => cursor.classList.add('fade-cursor'), 1500);
+        const sub = document.getElementById('heroSub');
+        if(sub) sub.classList.add('show');
+        return;
+      }
+      const item = queue[i++];
+      if(item.br){
+        el.appendChild(document.createElement('br'));
+        currentLine = document.createElement('span');
+        currentLine.className = 'tw-line';
+        el.appendChild(currentLine);
+        currentLine.appendChild(cursor);
+      } else {
+        const span = document.createElement('span');
+        if(item.cls) span.className = item.cls;
+        span.textContent = item.ch;
+        currentLine.insertBefore(span, cursor);
+      }
+      setTimeout(tick, item.ch === ' ' ? 80 : 32 + Math.random() * 46);
+    }
+    setTimeout(tick, 420);
+  }
+  typeHeadline();
   // ---- marquee content generation ----
   function fillMarquee(id, words){
     const el = document.getElementById(id);
@@ -1248,20 +1389,17 @@
     el.innerHTML = block + block; // duplicate for seamless loop
   }
   fillMarquee('stripTrack', ['Эргономика','Уют','Эстетика']);
-
   function fillTicker(id, words){
     const el = document.getElementById(id);
     const block = words.map(w => `<span class="ticker-item">${w}</span>`).join('');
     el.innerHTML = block + block;
   }
   fillTicker('tickerTrack', ['Забота','Знание архитектуры','Преображение']);
-
   // ---- header scroll state ----
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
   }, {passive:true});
-
   // ---- mobile menu ----
   const burger = document.getElementById('burgerBtn');
   const overlay = document.getElementById('mobileOverlay');
@@ -1277,18 +1415,15 @@
   burger.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', toggleMenu);
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
-
-  // ---- hero parallax ----
+  // ---- hero parallax / cinematic camera drift ----
   const heroBg = document.getElementById('heroBg');
-  const heroOrb = document.getElementById('heroOrb');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     if(y < window.innerHeight * 1.2){
-      heroBg.style.transform = `translateY(${y * 0.32}px) scale(${1 + y*0.0002})`;
-      if(heroOrb){ heroOrb.style.transform = `translateY(${y * -0.18}px)`; }
+      heroBg.style.setProperty('--scroll-shift', `${y * 0.32}px`);
+      heroBg.style.setProperty('--scroll-scale', 1 + y*0.0002);
     }
   }, {passive:true});
-
   // ---- mission background crossfade ----
   const missionImgs = document.querySelectorAll('#missionBg .scene');
   let missionIdx = 0;
@@ -1299,7 +1434,6 @@
       missionImgs[missionIdx].classList.add('active');
     }, 4500);
   }
-
   // ---- about-me photo crossfade (same technique as mission background) ----
   const aboutImgs = document.querySelectorAll('#aboutPhotoFrame .ap-scene');
   let aboutIdx = 0;
@@ -1310,7 +1444,68 @@
       aboutImgs[aboutIdx].classList.add('active');
     }, 3800);
   }
+  // ---- mission headline: split into words for minimal staggered reveal ----
+  (function setupMissionHeadline(){
+    const headline = document.getElementById('missionHeadline');
+    if(!headline) return;
+    const STEP = 45; // ms between each word
 
+    function wrapWords(node){
+      let delay = 0;
+      node.childNodes.forEach(child => {
+        if(child.nodeType === Node.TEXT_NODE){
+          const parts = child.textContent.split(/(\s+)/).filter(p => p.length);
+          const frag = document.createDocumentFragment();
+          parts.forEach(part => {
+            if(/^\s+$/.test(part)){
+              frag.appendChild(document.createTextNode(part));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'mw';
+              span.style.setProperty('--d', delay + 'ms');
+              span.textContent = part;
+              delay += STEP;
+              frag.appendChild(span);
+            }
+          });
+          child.replaceWith(frag);
+        } else if(child.nodeType === Node.ELEMENT_NODE){
+          let innerDelay = 0;
+          child.childNodes.forEach(grandchild => {
+            if(grandchild.nodeType === Node.TEXT_NODE){
+              const parts = grandchild.textContent.split(/(\s+)/).filter(p => p.length);
+              const frag = document.createDocumentFragment();
+              parts.forEach(part => {
+                if(/^\s+$/.test(part)){
+                  frag.appendChild(document.createTextNode(part));
+                } else {
+                  const span = document.createElement('span');
+                  span.className = 'mw';
+                  span.style.setProperty('--d', (delay + innerDelay) + 'ms');
+                  span.textContent = part;
+                  innerDelay += STEP;
+                  frag.appendChild(span);
+                }
+              });
+              grandchild.replaceWith(frag);
+            }
+          });
+          delay += innerDelay;
+        }
+      });
+    }
+    wrapWords(headline);
+
+    const headlineIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('mw-in');
+          headlineIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.35});
+    headlineIo.observe(headline);
+  })();
   // ---- reveal on scroll ----
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -1326,7 +1521,6 @@
   setTimeout(() => {
     revealEls.forEach(el => el.classList.add('in'));
   }, 4000);
-
   // ---- form submit (no backend — visual confirmation only) ----
   function handleSubmit(e){
     e.preventDefault();
@@ -1336,6 +1530,5 @@
     return false;
   }
 </script>
-
 </body>
 </html>
