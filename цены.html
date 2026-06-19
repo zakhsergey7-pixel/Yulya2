@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Услуги и цены — Юлия Фёдорова, дизайнер интерьера</title>
+<meta name="description" content="Стоимость дизайн-проекта интерьера по типам квартир: студия, 1-, 2-, 3-комнатная, премиум сегмент.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --paper:#F8F5EF;
+    --paper-2:#F1ECE2;
+    --ink:#1B1916;
+    --ink-soft:#3B3833;
+    --stone:#8E897F;
+    --line:rgba(27,25,22,0.14);
+    --line-strong:rgba(27,25,22,0.28);
+    --champagne:#C9A96B;
+    --champagne-soft:#E4D2AC;
+    --indigo:#1A2142;
+    --indigo-soft:#2C3766;
+    --white:#FDFCFA;
+    --terracotta:#B3552F;
+
+    --display:'Cormorant', serif;
+    --hand:'Cormorant Garamond', serif;
+    --body:'Jost', sans-serif;
+    --mono:'Jost', sans-serif;
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.5;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--champagne-soft);color:var(--ink);}
+
+  .container{
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  .eyebrow{
+    font-family:var(--body);
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--stone);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;height:1px;
+    background:var(--champagne);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:400;
+    letter-spacing:.01em;
+    color:var(--ink);
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--indigo);
+    outline-offset:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ============ NAV (solid variant — no hero underneath) ============ */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding:20px 0;
+    background:rgba(248,245,239,.92);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:padding .4s var(--ease);
+  }
+  header.scrolled{padding:14px 0;}
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--display);
+    font-size:24px;
+    letter-spacing:.18em;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .logo span{color:var(--champagne);}
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:36px;
+    font-size:12.5px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+  .nav-links a{
+    position:relative;
+    padding-bottom:4px;
+    color:var(--ink-soft);
+    transition:color .3s var(--ease);
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--champagne);
+    transition:width .35s var(--ease);
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-links a.back{
+    display:flex;align-items:center;gap:8px;
+    color:var(--stone);
+  }
+  .nav-links a.back svg{width:13px;height:13px;}
+
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
+    z-index:200;
+    background:none;
+    border:none;
+  }
+  .burger span{
+    width:24px;height:1px;
+    background:var(--ink);
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+  }
+
+  .mobile-overlay{
+    position:fixed; inset:0;
+    background:rgba(10,9,8,0);
+    backdrop-filter:blur(0px);
+    z-index:150; pointer-events:none;
+    transition:background .45s var(--ease), backdrop-filter .45s var(--ease);
+  }
+  .mobile-overlay.open{background:rgba(10,9,8,.55);backdrop-filter:blur(6px);pointer-events:auto;}
+  .mobile-menu{
+    position:fixed; top:0;right:0; height:100vh;
+    width:min(360px,86vw);
+    background:var(--indigo);
+    z-index:160;
+    transform:translateX(100%);
+    transition:transform .5s var(--ease);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:60px; gap:26px;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{
+    font-family:var(--display);
+    font-size:26px;
+    color:var(--paper);
+    opacity:.85;
+  }
+  .mobile-menu a:hover{opacity:1;color:var(--champagne-soft);}
+
+  @media (max-width:880px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+
+  /* ============ REVEAL ============ */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in{opacity:1; transform:none;}
+  .no-js .reveal{opacity:1; transform:none;}
+
+  /* ============ PAGE HEAD ============ */
+  .page-head{
+    padding:168px 0 86px;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .page-head .container{position:relative;}
+  .page-head h1{
+    font-size:clamp(40px,6.4vw,76px);
+    font-weight:300;
+    line-height:1.04;
+    max-width:900px;
+  }
+  .page-head h1 i{font-style:italic;color:var(--champagne);}
+  .page-head .lede{
+    margin-top:26px;
+    max-width:520px;
+    font-size:15.5px;
+    line-height:1.8;
+    color:var(--stone);
+  }
+  /* drifting blueprint scan-line, ambient motion in the header */
+  .scan-rail{
+    position:absolute;
+    top:0; right:48px;
+    width:1px; height:100%;
+    background:var(--line);
+    overflow:hidden;
+  }
+  .scan-dot{
+    position:absolute;
+    left:50%; top:-40px;
+    width:7px;height:7px;
+    margin-left:-3.5px;
+    border-radius:50%;
+    background:var(--champagne);
+    box-shadow:0 0 0 5px rgba(201,169,107,.14);
+    animation:scanDrift 7s ease-in-out infinite;
+  }
+  @keyframes scanDrift{
+    0%{top:-3%;opacity:0;}
+    8%{opacity:1;}
+    50%{top:97%;opacity:1;}
+    58%{opacity:0;}
+    100%{top:97%;opacity:0;}
+  }
+  @media (max-width:880px){.scan-rail{display:none;}}
+
+  /* ============ SERVICES — blueprint cards ============ */
+  .services-sec{padding:96px 0 40px;}
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .bp-card{
+    position:relative;
+    background:var(--paper);
+    padding:46px 36px 38px;
+    min-height:380px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    cursor:default;
+  }
+  .bp-card .bp-index{
+    font-family:var(--body);
+    font-size:11px;
+    letter-spacing:.16em;
+    color:var(--stone);
+    text-transform:uppercase;
+  }
+  .bp-card h3{
+    margin-top:18px;
+    font-size:27px;
+    font-weight:400;
+    line-height:1.2;
+    max-width:230px;
+  }
+  .bp-card .bp-desc{
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.75;
+    color:var(--stone);
+    max-width:260px;
+  }
+  .bp-card .bp-foot{
+    margin-top:auto;
+    padding-top:28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .bp-card .bp-link{
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    border-bottom:1px solid var(--champagne);
+    padding-bottom:3px;
+  }
+  /* the blueprint room-outline drawing, drawn on scroll-reveal */
+  .bp-plan{
+    position:absolute;
+    right:-6px; bottom:-6px;
+    width:170px; height:170px;
+    opacity:.9;
+    pointer-events:none;
+  }
+  .bp-plan path, .bp-plan line, .bp-plan circle{
+    stroke:var(--champagne);
+    stroke-width:1.1;
+    fill:none;
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    transition:stroke-dashoffset 1.6s var(--ease);
+  }
+  .bp-plan .fill-zone{
+    fill:rgba(201,169,107,.06);
+    stroke:none;
+    opacity:0;
+    transition:opacity 1s var(--ease) .6s;
+  }
+  .bp-card.in .bp-plan path,
+  .bp-card.in .bp-plan line,
+  .bp-card.in .bp-plan circle{stroke-dashoffset:0;}
+  .bp-card.in .bp-plan .fill-zone{opacity:1;}
+  .bp-card:hover{background:var(--white);}
+  .bp-card:hover .bp-plan{opacity:1;}
+  .bp-card:nth-child(1) .bp-plan path,
+  .bp-card:nth-child(1) .bp-plan line{transition-delay:.05s;}
+  .bp-card:nth-child(2) .bp-plan path,
+  .bp-card:nth-child(2) .bp-plan line{transition-delay:.18s;}
+  .bp-card:nth-child(3) .bp-plan path,
+  .bp-card:nth-child(3) .bp-plan line{transition-delay:.3s;}
+
+  @media (max-width:880px){
+    .services-grid{grid-template-columns:1fr;}
+    .bp-card{min-height:300px;padding:36px 28px 32px;}
+  }
+
+  /* ============ DIVIDER NOTE ============ */
+  .spec-intro{
+    padding:120px 0 0;
+  }
+  .spec-intro .container{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:60px;
+    align-items:end;
+  }
+  .spec-intro h2{
+    font-size:clamp(32px,4.6vw,52px);
+    font-weight:300;
+    line-height:1.08;
+  }
+  .spec-intro h2 i{font-style:italic;color:var(--champagne);}
+  .spec-intro p{
+    font-size:14px;
+    line-height:1.85;
+    color:var(--stone);
+    max-width:440px;
+  }
+  @media (max-width:880px){
+    .spec-intro .container{grid-template-columns:1fr;gap:24px;}
+  }
+
+  /* ============ PRICE SCHEDULE (blueprint legend table) ============ */
+  .schedule{padding:56px 0 150px;}
+  .sched-table{
+    border-top:1px solid var(--line-strong);
+  }
+  .sched-row{
+    display:grid;
+    grid-template-columns:64px 1.6fr 1fr 1.1fr auto;
+    align-items:center;
+    gap:24px;
+    padding:0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .sched-row .sr-mark{
+    font-family:var(--body);
+    font-size:11px;
+    color:var(--stone);
+    letter-spacing:.08em;
+    padding:30px 0;
+    position:relative;
+  }
+  .sched-row .sr-mark::after{
+    content:"";
+    position:absolute;
+    left:0; top:50%;
+    width:0; height:1px;
+    background:var(--champagne);
+    transition:width 1.1s var(--ease);
+  }
+  .sched-row.in .sr-mark::after{width:34px;}
+  .sched-row .sr-name{
+    font-family:var(--display);
+    font-size:25px;
+    font-weight:400;
+    color:var(--ink);
+  }
+  .sched-row .sr-name small{
+    display:block;
+    font-family:var(--body);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:5px;
+  }
+  .sched-row .sr-rate{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  .sched-row .sr-rate b{color:var(--indigo);font-weight:500;}
+  .sched-row .sr-rate span{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:3px;
+  }
+  .sched-row .sr-price{
+    text-align:right;
+  }
+  .sched-row .sr-price .sr-from{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .sched-row .sr-price .sr-num{
+    display:block;
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--indigo);
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  .sched-row .sr-cta{
+    justify-self:end;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    border:1px solid var(--line-strong);
+    padding:13px 22px;
+    white-space:nowrap;
+    transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+  }
+  .sched-row .sr-cta:hover{
+    background:var(--indigo);
+    color:var(--paper);
+    border-color:var(--indigo);
+  }
+  /* hover sweep — a thin champagne line draws under the active row, like a ruler measuring it */
+  .sched-row::before{
+    content:"";
+    position:absolute;
+    left:0; bottom:-1px;
+    width:0; height:2px;
+    background:var(--champagne);
+    transition:width .5s var(--ease);
+  }
+  .sched-row:hover::before{width:100%;}
+  .sched-row:hover{background:rgba(201,169,107,.05);}
+
+  .sched-row.featured{background:var(--indigo);border-bottom-color:rgba(253,252,250,.14);}
+  .sched-row.featured .sr-mark{color:rgba(253,252,250,.55);}
+  .sched-row.featured .sr-mark::after{background:var(--champagne-soft);}
+  .sched-row.featured .sr-name{color:var(--paper);}
+  .sched-row.featured .sr-name small{color:var(--champagne-soft);}
+  .sched-row.featured .sr-rate{color:rgba(253,252,250,.78);}
+  .sched-row.featured .sr-rate b{color:var(--champagne-soft);}
+  .sched-row.featured .sr-rate span{color:rgba(253,252,250,.5);}
+  .sched-row.featured .sr-price .sr-from{color:rgba(253,252,250,.55);}
+  .sched-row.featured .sr-price .sr-num{color:var(--champagne-soft);}
+  .sched-row.featured .sr-cta{color:var(--champagne-soft);border-color:rgba(253,252,250,.3);}
+  .sched-row.featured .sr-cta:hover{background:var(--champagne-soft);color:var(--indigo);border-color:var(--champagne-soft);}
+  .sched-row.featured:hover{background:var(--indigo-soft);}
+
+  .sched-foot{
+    margin-top:28px;
+    font-size:12px;
+    color:var(--stone);
+    line-height:1.7;
+    max-width:640px;
+  }
+
+  @media (max-width:880px){
+    .sched-row{
+      grid-template-columns:1fr;
+      gap:10px;
+      padding:24px 0;
+    }
+    .sched-row .sr-mark{padding:0;}
+    .sched-row .sr-price{text-align:left;}
+    .sched-row .sr-cta{justify-self:start;margin-top:4px;}
+  }
+
+  /* ============ CTA STRIP ============ */
+  .cta-strip{
+    padding:80px 0 140px;
+  }
+  .cta-strip .cs-card{
+    border:1px solid var(--line-strong);
+    padding:64px 56px;
+    text-align:center;
+    position:relative;
+  }
+  .cta-strip h2{
+    font-size:clamp(28px,4vw,42px);
+    font-weight:300;
+  }
+  .cta-strip h2 i{font-style:italic;color:var(--champagne);}
+  .cta-strip p{
+    margin-top:16px;
+    color:var(--stone);
+    font-size:14px;
+  }
+  .cta-strip .cs-btn{
+    display:inline-block;
+    margin-top:32px;
+    background:var(--indigo);
+    color:var(--paper);
+    padding:17px 38px;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    transition:background .35s var(--ease);
+  }
+  .cta-strip .cs-btn:hover{background:var(--ink);}
+
+  /* ============ FOOTER ============ */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0;
+  }
+  .footer-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .footer-logo{font-family:var(--display);font-size:18px;letter-spacing:.1em;}
+  .footer-meta{font-size:11.5px;letter-spacing:.06em;color:var(--stone);}
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <div class="container nav-row">
+    <a href="index.html#top" class="logo">Ю<span>Ф</span></a>
+    <nav class="nav-links">
+      <a href="index.html#about">Обо мне</a>
+      <a href="index.html#portfolio">Портфолио</a>
+      <a href="price.html">Услуги и цены</a>
+      <a href="index.html#contact">Заявка</a>
+      <a href="index.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>На главную</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about">Обо мне</a>
+  <a href="index.html#portfolio">Портфолио</a>
+  <a href="price.html">Услуги и цены</a>
+  <a href="index.html#contact">Заявка</a>
+  <a href="index.html">← На главную</a>
+</nav>
+
+<!-- ============ PAGE HEAD ============ -->
+<section class="page-head">
+  <div class="scan-rail"><div class="scan-dot"></div></div>
+  <div class="container">
+    <div class="eyebrow reveal in">Сотрудничество</div>
+    <h1 class="reveal in">Услуги <i>и цены</i></h1>
+    <p class="lede reveal in">Дизайн-проект разрабатывается индивидуально для каждой квартиры. Ниже — формат услуг и стартовая стоимость по&nbsp;типу жилья, рассчитанная от базовой ставки за&nbsp;м².</p>
+  </div>
+</section>
+
+<!-- ============ SERVICES — blueprint cards ============ -->
+<section class="services-sec">
+  <div class="container">
+    <div class="services-grid">
+
+      <div class="bp-card reveal">
+        <div class="bp-index">01 — Формат</div>
+        <h3>Комплектация для аренды/перепродажи</h3>
+        <p class="bp-desc">Для квартир с чистовой отделкой от застройщика. Минимум строительных работ, быстрая меблировка под сдачу или продажу.</p>
+        <div class="bp-foot">
+          <span class="bp-link">Смотреть цены</span>
+        </div>
+        <svg class="bp-plan" viewBox="0 0 170 170">
+          <rect class="fill-zone" x="22" y="20" width="120" height="90" rx="2"/>
+          <path d="M22 20 H142 V110 H22 Z"/>
+          <line x1="86" y1="20" x2="86" y2="64"/>
+          <line x1="142" y1="64" x2="86" y2="64"/>
+          <circle cx="60" cy="86" r="3"/>
+        </svg>
+      </div>
+
+      <div class="bp-card reveal">
+        <div class="bp-index">02 — Формат</div>
+        <h3>Комплектация для себя</h3>
+        <p class="bp-desc">Для квартир, где собственники будут жить долго. Проект разрабатывается под ваши задачи, привычки и образ жизни.</p>
+        <div class="bp-foot">
+          <span class="bp-link">Смотреть цены</span>
+        </div>
+        <svg class="bp-plan" viewBox="0 0 170 170">
+          <rect class="fill-zone" x="18" y="24" width="130" height="86" rx="2"/>
+          <path d="M18 24 H148 V110 H18 Z"/>
+          <line x1="18" y1="68" x2="70" y2="68"/>
+          <line x1="70" y1="68" x2="70" y2="110"/>
+          <circle cx="112" cy="46" r="3"/>
+        </svg>
+      </div>
+
+      <div class="bp-card reveal">
+        <div class="bp-index">03 — Формат</div>
+        <h3>Онлайн проект</h3>
+        <p class="bp-desc">Полное ведение проекта дистанционно: концепция, чертежи и подбор материалов — без личных встреч, по видеосвязи.</p>
+        <div class="bp-foot">
+          <span class="bp-link">Смотреть цены</span>
+        </div>
+        <svg class="bp-plan" viewBox="0 0 170 170">
+          <rect class="fill-zone" x="30" y="30" width="92" height="92" rx="2"/>
+          <path d="M30 30 H122 V122 H30 Z"/>
+          <path d="M30 76 H122"/>
+          <path d="M76 30 V122"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO TO SCHEDULE ============ -->
+<section class="spec-intro">
+  <div class="container">
+    <h2 class="reveal">Стоимость <i>полного проекта</i></h2>
+    <p class="reveal">Итоговая сумма зависит от площади и сложности планировки. Цены ниже — стартовые, по базовой ставке за&nbsp;м² для каждого типа квартиры.</p>
+  </div>
+</section>
+
+<!-- ============ PRICE SCHEDULE ============ -->
+<section class="schedule">
+  <div class="container">
+    <div class="sched-table" id="schedTable">
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">01</div>
+        <div class="sr-name">Студия<small>25–30 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="87500">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">02</div>
+        <div class="sr-name">1-комнатная квартира<small>35–45 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="122500">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">03</div>
+        <div class="sr-name">2-комнатная квартира<small>60–75 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="175000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">04</div>
+        <div class="sr-name">3-комнатная квартира<small>95–120 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="210000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row featured reveal">
+        <div class="sr-mark">05</div>
+        <div class="sr-name">Премиум сегмент<small>95–120 м²</small></div>
+        <div class="sr-rate"><b>6&nbsp;000&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="300000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+    </div>
+    <p class="sched-foot">* Стоимость — за разработку дизайн-проекта, без учёта ремонтных и строительных работ. Точная сумма рассчитывается после замера и обсуждения задач.</p>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-strip">
+  <div class="container">
+    <div class="cs-card reveal">
+      <h2>Обсудим <i>ваш проект?</i></h2>
+      <p>Оставьте заявку — отвечу в течение дня и подскажу, с чего начать именно вашей квартире.</p>
+      <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <div class="footer-logo">Юлия Фёдорова</div>
+    <div class="footer-meta">Дизайн интерьера · © 2026</div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.remove('no-js');
+
+  // ---- header scroll state ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  // ---- mobile menu ----
+  const burger = document.getElementById('burgerBtn');
+  const overlay = document.getElementById('mobileOverlay');
+  const menu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+  function toggleMenu(){
+    menuOpen = !menuOpen;
+    overlay.classList.toggle('open', menuOpen);
+    menu.classList.toggle('open', menuOpen);
+    burger.setAttribute('aria-expanded', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+  burger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+  // ---- reveal on scroll (cards + rows) ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.18});
+  revealEls.forEach(el => io.observe(el));
+  setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 4000);
+
+  // ---- price count-up, triggered per row as it scrolls in ----
+  const fmt = new Intl.NumberFormat('ru-RU');
+  function animateCount(el){
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const dur = 1100;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.innerHTML = fmt.format(val) + '&nbsp;₽';
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const numEl = entry.target.querySelector('.sr-num');
+        if(numEl) animateCount(numEl);
+        countIo.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  document.querySelectorAll('.sched-row').forEach(row => countIo.observe(row));
+</script>
+
+</body>
+</html>
