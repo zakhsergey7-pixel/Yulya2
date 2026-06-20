@@ -254,100 +254,71 @@
   }
   @media (max-width:880px){.scan-rail{display:none;}}
 
-  /* ============ SERVICES — blueprint cards ============ */
+  /* ============ SERVICES — photo cards ============ */
   .services-sec{padding:96px 0 40px;}
   .services-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
+    gap:26px;
   }
-  .bp-card{
+  .svc-card{
     position:relative;
-    background:var(--paper);
-    padding:46px 36px 38px;
-    min-height:380px;
-    display:flex;
-    flex-direction:column;
+    display:block;
+    height:460px;
     overflow:hidden;
-    cursor:default;
+    background:var(--ink);
+    isolation:isolate;
   }
-  .bp-card .bp-index{
-    font-family:var(--body);
-    font-size:11px;
-    letter-spacing:.16em;
-    color:var(--stone);
-    text-transform:uppercase;
+  .svc-card img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    transition:transform 1.3s var(--ease);
   }
-  .bp-card h3{
-    margin-top:18px;
-    font-size:27px;
-    font-weight:400;
-    line-height:1.2;
-    max-width:230px;
+  .svc-card::after{
+    content:"";
+    position:absolute; inset:0;
+    z-index:1;
+    background:linear-gradient(180deg, rgba(15,13,11,0) 38%, rgba(15,13,11,.8) 100%);
   }
-  .bp-card .bp-desc{
-    margin-top:14px;
-    font-size:13.5px;
-    line-height:1.75;
-    color:var(--stone);
-    max-width:260px;
-  }
-  .bp-card .bp-foot{
-    margin-top:auto;
-    padding-top:28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .bp-card .bp-link{
-    font-size:11px;
+  .svc-card:hover img{transform:scale(1.07);}
+  .svc-card .svc-tag{
+    position:relative; z-index:2;
+    margin:24px 0 0 24px;
+    display:inline-block;
+    font-size:10.5px;
     letter-spacing:.14em;
     text-transform:uppercase;
-    color:var(--indigo);
-    border-bottom:1px solid var(--champagne);
-    padding-bottom:3px;
+    color:rgba(253,252,250,.78);
   }
-  /* the blueprint room-outline drawing, drawn on scroll-reveal */
-  .bp-plan{
-    position:absolute;
-    right:-6px; bottom:-6px;
-    width:170px; height:170px;
-    opacity:.9;
-    pointer-events:none;
+  .svc-card .svc-label{
+    position:absolute; left:26px; right:26px; bottom:30px;
+    z-index:2;
+    font-family:var(--display);
+    font-size:24px;
+    font-weight:500;
+    color:var(--white);
+    line-height:1.28;
   }
-  .bp-plan path, .bp-plan line, .bp-plan circle{
-    stroke:var(--champagne);
-    stroke-width:1.1;
-    fill:none;
-    stroke-dasharray:600;
-    stroke-dashoffset:600;
-    transition:stroke-dashoffset 1.6s var(--ease);
-  }
-  .bp-plan .fill-zone{
-    fill:rgba(201,169,107,.06);
-    stroke:none;
+  .svc-card .svc-arrow{
+    position:absolute; top:24px; right:24px;
+    z-index:2;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:rgba(253,252,250,.16);
+    backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
     opacity:0;
-    transition:opacity 1s var(--ease) .6s;
+    transform:translate(-6px,6px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
   }
-  .bp-card.in .bp-plan path,
-  .bp-card.in .bp-plan line,
-  .bp-card.in .bp-plan circle{stroke-dashoffset:0;}
-  .bp-card.in .bp-plan .fill-zone{opacity:1;}
-  .bp-card:hover{background:var(--white);}
-  .bp-card:hover .bp-plan{opacity:1;}
-  .bp-card:nth-child(1) .bp-plan path,
-  .bp-card:nth-child(1) .bp-plan line{transition-delay:.05s;}
-  .bp-card:nth-child(2) .bp-plan path,
-  .bp-card:nth-child(2) .bp-plan line{transition-delay:.18s;}
-  .bp-card:nth-child(3) .bp-plan path,
-  .bp-card:nth-child(3) .bp-plan line{transition-delay:.3s;}
-
+  .svc-card:hover .svc-arrow{opacity:1;transform:none;}
+  .svc-card .svc-arrow svg{width:15px;height:15px;stroke:var(--white);}
   @media (max-width:880px){
-    .services-grid{grid-template-columns:1fr;}
-    .bp-card{min-height:300px;padding:36px 28px 32px;}
+    .services-grid{grid-template-columns:1fr; gap:14px;}
+    .svc-card{height:340px;}
   }
+
 
   /* ============ DIVIDER NOTE ============ */
   .spec-intro{
@@ -597,9 +568,9 @@
 <section class="page-head">
   <div class="scan-rail"><div class="scan-dot"></div></div>
   <div class="container">
-    <div class="eyebrow reveal in">Сотрудничество</div>
-    <h1 class="reveal in">Услуги <i>и цены</i></h1>
-    <p class="lede reveal in">Дизайн-проект разрабатывается индивидуально для каждой квартиры. Ниже — формат услуг и стартовая стоимость по&nbsp;типу жилья, рассчитанная от базовой ставки за&nbsp;м².</p>
+    <div class="eyebrow reveal in">Услуги</div>
+    <h1 class="reveal in">Наши <i>услуги</i></h1>
+    <p class="lede reveal in">Три формата работы — выберите тот, что подходит вашей задаче, и посмотрите подробные цены.</p>
   </div>
 </section>
 
@@ -608,52 +579,32 @@
   <div class="container">
     <div class="services-grid">
 
-      <div class="bp-card reveal">
-        <div class="bp-index">01 — Формат</div>
-        <h3>Комплектация для аренды/перепродажи</h3>
-        <p class="bp-desc">Для квартир с чистовой отделкой от застройщика. Минимум строительных работ, быстрая меблировка под сдачу или продажу.</p>
-        <div class="bp-foot">
-          <span class="bp-link">Смотреть цены</span>
+      <a class="svc-card reveal" href="price-commerce.html">
+        <img src="https://images.unsplash.com/photo-1750764515068-80d222d974bb?auto=format&fit=crop&w=900&q=70" alt="Комплектация для аренды/перепродажи">
+        <div class="svc-tag">Формат 01</div>
+        <div class="svc-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </div>
-        <svg class="bp-plan" viewBox="0 0 170 170">
-          <rect class="fill-zone" x="22" y="20" width="120" height="90" rx="2"/>
-          <path d="M22 20 H142 V110 H22 Z"/>
-          <line x1="86" y1="20" x2="86" y2="64"/>
-          <line x1="142" y1="64" x2="86" y2="64"/>
-          <circle cx="60" cy="86" r="3"/>
-        </svg>
-      </div>
+        <div class="svc-label">Комплектация для аренды/перепродажи</div>
+      </a>
 
-      <div class="bp-card reveal">
-        <div class="bp-index">02 — Формат</div>
-        <h3>Комплектация для себя</h3>
-        <p class="bp-desc">Для квартир, где собственники будут жить долго. Проект разрабатывается под ваши задачи, привычки и образ жизни.</p>
-        <div class="bp-foot">
-          <span class="bp-link">Смотреть цены</span>
+      <a class="svc-card reveal" href="price-self.html">
+        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=900&q=70" alt="Комплектация для себя">
+        <div class="svc-tag">Формат 02</div>
+        <div class="svc-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </div>
-        <svg class="bp-plan" viewBox="0 0 170 170">
-          <rect class="fill-zone" x="18" y="24" width="130" height="86" rx="2"/>
-          <path d="M18 24 H148 V110 H18 Z"/>
-          <line x1="18" y1="68" x2="70" y2="68"/>
-          <line x1="70" y1="68" x2="70" y2="110"/>
-          <circle cx="112" cy="46" r="3"/>
-        </svg>
-      </div>
+        <div class="svc-label">Комплектация для себя</div>
+      </a>
 
-      <div class="bp-card reveal">
-        <div class="bp-index">03 — Формат</div>
-        <h3>Онлайн проект</h3>
-        <p class="bp-desc">Полное ведение проекта дистанционно: концепция, чертежи и подбор материалов — без личных встреч, по видеосвязи.</p>
-        <div class="bp-foot">
-          <span class="bp-link">Смотреть цены</span>
+      <a class="svc-card reveal" href="price-online.html">
+        <img src="https://images.unsplash.com/photo-1735200896762-740a563715e0?auto=format&fit=crop&w=900&q=70" alt="Онлайн проект">
+        <div class="svc-tag">Формат 03</div>
+        <div class="svc-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </div>
-        <svg class="bp-plan" viewBox="0 0 170 170">
-          <rect class="fill-zone" x="30" y="30" width="92" height="92" rx="2"/>
-          <path d="M30 30 H122 V122 H30 Z"/>
-          <path d="M30 76 H122"/>
-          <path d="M76 30 V122"/>
-        </svg>
-      </div>
+        <div class="svc-label">Онлайн проект</div>
+      </a>
 
     </div>
   </div>
