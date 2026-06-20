@@ -641,18 +641,37 @@
     color:var(--stone);
     font-size:14px;
   }
-  .cta-strip .cs-btn{
-    display:inline-block;
+  .cta-strip .cs-buttons{
     margin-top:32px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+  }
+  .cta-strip .cs-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
     background:var(--indigo);
     color:var(--paper);
-    padding:17px 38px;
+    padding:17px 32px;
     font-size:12px;
     letter-spacing:.14em;
     text-transform:uppercase;
     transition:background .35s var(--ease);
   }
   .cta-strip .cs-btn:hover{background:var(--ink);}
+  .cta-strip .cs-btn.outline{
+    background:none;
+    color:var(--ink-soft);
+    border:1px solid var(--line-strong);
+  }
+  .cta-strip .cs-btn.outline:hover{background:var(--paper-2); color:var(--ink); border-color:var(--ink-soft);}
+  .cta-strip .cs-btn svg{width:14px;height:14px;flex-shrink:0;}
+  @media (max-width:600px){
+    .cta-strip .cs-buttons{flex-direction:column;}
+    .cta-strip .cs-btn{justify-content:center;width:100%;}
+  }
 
   /* ============ FOOTER ============ */
   footer{
@@ -769,7 +788,17 @@
     <div class="cs-card reveal">
       <h2>Обсудим <i>ваш проект?</i></h2>
       <p>Оставьте заявку — отвечу в течение дня и подскажу, с чего начать именно вашей квартире.</p>
-      <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
+      <div class="cs-buttons">
+        <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
+        <a href="Анкета.docx" download class="cs-btn outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 21h16"/></svg>
+          Скачать анкету
+        </a>
+        <a href="Договор.docx" download class="cs-btn outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 21h16"/></svg>
+          Скачать договор
+        </a>
+      </div>
     </div>
   </div>
 </section>
