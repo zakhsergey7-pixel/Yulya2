@@ -848,7 +848,6 @@
     margin-top:6px;
   }
   .services-more{
-    margin-top:48px;
     display:flex;
     justify-content:center;
   }
@@ -856,25 +855,37 @@
     position:relative;
     display:inline-flex;
     align-items:center;
-    gap:12px;
+    gap:16px;
     font-family:var(--display);
-    font-size:18px;
+    font-size:19px;
     color:var(--indigo);
-    padding-bottom:6px;
-    border-bottom:1px solid var(--line);
-    transition:color .35s var(--ease), border-color .35s var(--ease), gap .35s var(--ease);
+    padding:24px 56px;
+    border:1px solid var(--champagne);
+    overflow:hidden;
+    z-index:1;
+    transition:color .4s var(--ease);
   }
-  .services-more a:hover{
-    color:var(--champagne);
-    border-color:var(--champagne);
-    gap:18px;
+  .services-more a::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--champagne);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .45s var(--ease);
+    z-index:-1;
   }
+  .services-more a:hover{color:var(--ink);}
+  .services-more a:hover::before{transform:scaleX(1);}
   .services-more a svg{
-    width:16px;height:16px;
+    width:17px;height:17px;
     stroke:currentColor;
     transition:transform .35s var(--ease);
   }
   .services-more a:hover svg{transform:translateX(4px);}
+  @media (max-width:600px){
+    .services-more a{padding:20px 34px; font-size:17px; width:100%; justify-content:center;}
+  }
 
   /* ============ GUARANTEE STRIP ============ */
   .guarantee{
@@ -1280,33 +1291,7 @@
 <!-- ============ SERVICES ============ -->
 <section class="services section-pad" id="services">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Сотрудничество</div>
-      <h2>Услуги и&nbsp;цены</h2>
-    </div>
-    <div class="services-list reveal">
-      <div class="service-row">
-        <h3>Дизайн-концепция</h3>
-        <div class="desc">Планировочное решение, стилевое направление, 3D-визуализация ключевых зон. Точка опоры для всего проекта.</div>
-        <div class="price">от 1&nbsp;800&nbsp;₽<small>за м²</small></div>
-      </div>
-      <div class="service-row">
-        <h3>Рабочая документация</h3>
-        <div class="desc">Чертежи для строителей: электрика, водоснабжение, развёртки стен, ведомость отделочных материалов.</div>
-        <div class="price">от 1&nbsp;200&nbsp;₽<small>за м²</small></div>
-      </div>
-      <div class="service-row">
-        <h3>Авторский надзор</h3>
-        <div class="desc">Контроль реализации на объекте: соответствие проекту, качество работ, своевременные решения по месту.</div>
-        <div class="price">от 60&nbsp;000&nbsp;₽<small>в месяц</small></div>
-      </div>
-      <div class="service-row">
-        <h3>Подбор мебели и&nbsp;декора</h3>
-        <div class="desc">Комплектация проекта: мебель, свет, текстиль, аксессуары — с учётом бюджета и сроков поставки.</div>
-        <div class="price">от 8%<small>от суммы закупки</small></div>
-      </div>
-    </div>
-    <div class="services-more">
+    <div class="services-more reveal">
       <a href="https://zakhsergey7-pixel.github.io/Yulya2/price.html" target="_blank" rel="noopener">
         Все форматы услуг и подробные цены
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
