@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Комплектация для себя — Юлия Фёдорова</title>
-<meta name="description" content="Меблировка квартиры для собственного проживания, с учётом ваших требований и задач. Стоимость по типу квартиры, расчёт онлайн.">
+<meta name="description" content="Меблировка квартиры для собственного проживания, с учётом ваших требований и задач. Стоимость — от 3 500 ₽/м².">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
@@ -335,220 +335,6 @@
     font-weight:500;
   }
 
-  /* ============ PRICE CARDS (room-type pricing) ============ */
-  .price-cards{
-    margin-top:36px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border:1px solid var(--line-strong);
-  }
-  .price-cell{
-    padding:32px 22px 28px;
-    text-align:center;
-    border-left:1px solid var(--line);
-    transition:background .35s var(--ease);
-  }
-  .price-cell:first-child{border-left:none;}
-  .price-cell .pc-room{
-    font-family:var(--body);
-    font-size:12px;
-    letter-spacing:.04em;
-    color:var(--stone);
-    min-height:36px;
-    line-height:1.4;
-  }
-  .price-cell .pc-price{
-    margin-top:16px;
-    font-family:var(--display);
-    font-size:28px;
-    color:var(--indigo);
-    transition:color .35s var(--ease);
-  }
-  .price-cell .pc-btn{
-    margin-top:22px;
-    display:block;
-    width:100%;
-    background:var(--ink);
-    color:var(--paper);
-    padding:14px 18px;
-    font-size:11px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    border:none;
-    cursor:pointer;
-    text-align:center;
-    transition:background .3s var(--ease);
-    font-family:var(--body);
-  }
-  .price-cell .pc-btn:hover{background:var(--indigo);}
-  .price-cell.selected{background:var(--indigo);}
-  .price-cell.selected .pc-room{color:rgba(253,252,250,.62);}
-  .price-cell.selected .pc-price{color:var(--champagne-soft);}
-  @media (max-width:880px){
-    .price-cards{grid-template-columns:1fr;}
-    .price-cell{border-left:none; border-top:1px solid var(--line);}
-    .price-cell:first-child{border-top:none;}
-  }
-
-  /* ============ MODERN CALCULATOR ============ */
-  .calc-modern{
-    margin-top:60px;
-    background:linear-gradient(135deg, var(--indigo) 0%, var(--indigo-soft) 100%);
-    border-radius:18px;
-    padding:46px 46px;
-    position:relative;
-    overflow:hidden;
-    color:var(--paper);
-  }
-  .calc-modern::before{
-    content:"";
-    position:absolute;
-    width:300px;height:300px;
-    background:radial-gradient(circle, rgba(201,169,107,.32), transparent 70%);
-    top:-110px; right:-90px;
-    border-radius:50%;
-    pointer-events:none;
-  }
-  .calc-modern::after{
-    content:"";
-    position:absolute;
-    width:220px;height:220px;
-    background:radial-gradient(circle, rgba(201,169,107,.14), transparent 70%);
-    bottom:-100px; left:-60px;
-    border-radius:50%;
-    pointer-events:none;
-  }
-  .calc-modern-head{
-    display:flex; align-items:center; gap:9px;
-    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--champagne-soft);
-    position:relative; z-index:2;
-  }
-  .calc-modern-head svg{width:15px;height:15px;}
-  .calc-modern h3{
-    margin-top:16px;
-    font-family:var(--display);
-    font-size:clamp(22px,2.6vw,28px);
-    font-weight:400;
-    color:var(--paper);
-    position:relative; z-index:2;
-    max-width:520px;
-  }
-  .calc-pills{
-    margin-top:30px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    position:relative; z-index:2;
-  }
-  .calc-pill{
-    font-family:var(--body);
-    font-size:13px;
-    color:rgba(253,252,250,.78);
-    background:rgba(253,252,250,.07);
-    border:1px solid rgba(253,252,250,.2);
-    padding:12px 20px;
-    border-radius:30px;
-    cursor:pointer;
-    transition:background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
-  }
-  .calc-pill.active{
-    background:var(--champagne-soft);
-    border-color:var(--champagne-soft);
-    color:var(--indigo);
-  }
-  .calc-pill:hover:not(.active){border-color:rgba(253,252,250,.45); color:var(--paper);}
-  .calc-readout{
-    margin-top:38px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:24px;
-    position:relative; z-index:2;
-    padding-top:30px;
-    border-top:1px solid rgba(253,252,250,.16);
-  }
-  .calc-readout .cr-label{
-    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(253,252,250,.55);
-  }
-  .calc-readout .cr-value{
-    margin-top:10px;
-    font-family:var(--display);
-    font-size:clamp(32px,4.2vw,46px);
-    color:var(--white);
-    line-height:1;
-    white-space:nowrap;
-  }
-  .calc-readout .cr-cta{
-    display:inline-flex; align-items:center; gap:9px;
-    background:var(--champagne-soft);
-    color:var(--indigo);
-    padding:17px 30px;
-    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-    border-radius:30px;
-    transition:background .3s var(--ease), gap .3s var(--ease);
-    flex-shrink:0;
-    text-decoration:none;
-  }
-  .calc-readout .cr-cta:hover{background:var(--white); gap:15px;}
-  .calc-readout .cr-cta svg{width:13px;height:13px;}
-  @media (max-width:600px){
-    .calc-modern{padding:34px 26px; border-radius:14px;}
-    .calc-readout .cr-cta{width:100%;justify-content:center;}
-  }
-
-  /* ---- slider + toggle, used in the area-based calculator ---- */
-  .calc-toggle-row{
-    margin-top:30px;
-    position:relative; z-index:2;
-  }
-  .calc-slider-row{
-    margin-top:30px;
-    position:relative; z-index:2;
-  }
-  .calc-slider-row .sl-label{
-    display:flex; justify-content:space-between; align-items:baseline;
-    font-size:12px; letter-spacing:.04em; color:rgba(253,252,250,.6);
-    margin-bottom:16px;
-  }
-  .calc-slider-row .sl-label b{
-    color:var(--champagne-soft);
-    font-family:var(--display);
-    font-size:19px;
-    font-weight:400;
-  }
-  input[type=range].calc-range{
-    width:100%;
-    -webkit-appearance:none;
-    appearance:none;
-    height:4px;
-    border-radius:4px;
-    background:rgba(253,252,250,.22);
-    outline:none;
-    cursor:pointer;
-  }
-  input[type=range].calc-range::-webkit-slider-thumb{
-    -webkit-appearance:none;
-    width:22px;height:22px;
-    border-radius:50%;
-    background:var(--champagne-soft);
-    cursor:pointer;
-    border:3px solid var(--indigo-soft);
-    box-shadow:0 2px 10px rgba(0,0,0,.35);
-    transition:transform .2s var(--ease);
-  }
-  input[type=range].calc-range::-webkit-slider-thumb:hover{transform:scale(1.18);}
-  input[type=range].calc-range::-moz-range-thumb{
-    width:22px;height:22px;border-radius:50%;background:var(--champagne-soft);cursor:pointer;border:3px solid var(--indigo-soft);
-  }
-  .calc-note{
-    margin-top:18px;
-    font-size:12px;
-    color:rgba(253,252,250,.5);
-    position:relative; z-index:2;
-  }
-
   /* ============ COMPARISON TABLE (packages) ============ */
   .compare-sec{padding:20px 0 10px;}
   .compare-table{
@@ -557,7 +343,7 @@
   }
   .cmp-row{
     display:grid;
-    grid-template-columns:1.7fr 1fr 1fr;
+    grid-template-columns:1fr 220px;
     border-bottom:1px solid var(--line);
   }
   .cmp-row:last-child{border-bottom:none;}
@@ -705,55 +491,55 @@
   </div>
 </section>
 
-<!-- ============ FORMAT / PRICE CARDS ============ -->
-<section class="format-sec section-pad">
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section class="compare-sec section-pad">
   <div class="container">
-    <h2 class="cond-heading reveal">Чистовая отделка</h2>
+    <h2 class="cond-heading reveal">Что входит в стоимость</h2>
 
-    <div class="price-cards reveal" id="priceCards">
-      <div class="price-cell" data-name="Студия" data-price="430000">
-        <div class="pc-room">Студия</div>
-        <div class="pc-price">430&nbsp;000&nbsp;₽</div>
-        <a href="index.html#contact" class="pc-btn">Заказать услугу</a>
-      </div>
-      <div class="price-cell" data-name="Кухня-гостиная + 1 комната" data-price="510000">
-        <div class="pc-room">Кухня-гостиная + 1 комната</div>
-        <div class="pc-price">510&nbsp;000&nbsp;₽</div>
-        <a href="index.html#contact" class="pc-btn">Заказать услугу</a>
-      </div>
-      <div class="price-cell" data-name="Кухня-гостиная + 2 комнаты" data-price="680000">
-        <div class="pc-room">Кухня-гостиная + 2 комнаты</div>
-        <div class="pc-price">680&nbsp;000&nbsp;₽</div>
-        <a href="index.html#contact" class="pc-btn">Заказать услугу</a>
-      </div>
-      <div class="price-cell" data-name="Кухня-гостиная + 3 комнаты" data-price="880000">
-        <div class="pc-room">Кухня-гостиная + 3 комнаты</div>
-        <div class="pc-price">880&nbsp;000&nbsp;₽</div>
-        <a href="index.html#contact" class="pc-btn">Заказать услугу</a>
-      </div>
-    </div>
-
-    <!-- ---- MODERN CALCULATOR ---- -->
-    <div class="calc-modern reveal" id="calcSelf">
-      <div class="calc-modern-head">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Калькулятор
-      </div>
-      <h3>Выберите тип квартиры — узнайте точную стоимость комплектации</h3>
-      <div class="calc-pills" id="selfPills">
-        <button class="calc-pill active" type="button" data-price="430000">Студия</button>
-        <button class="calc-pill" type="button" data-price="510000">Кухня-гостиная + 1 комната</button>
-        <button class="calc-pill" type="button" data-price="680000">Кухня-гостиная + 2 комнаты</button>
-        <button class="calc-pill" type="button" data-price="880000">Кухня-гостиная + 3 комнаты</button>
-      </div>
-      <div class="calc-readout">
-        <div>
-          <div class="cr-label">Итоговая стоимость</div>
-          <div class="cr-value" id="selfValue">430&nbsp;000&nbsp;₽</div>
+    <div class="compare-table reveal">
+      <div class="cmp-row head">
+        <div class="cmp-cell">Услуга</div>
+        <div class="cmp-cell">
+          <div class="pkg-rate">3&nbsp;500&nbsp;₽/м²</div>
         </div>
-        <a href="index.html#contact" class="cr-cta">Оставить заявку
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Встреча</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Обмерный план</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Планировочное решение</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Чертежи для строителей</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Развёртки</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Визуализация</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Подбор мебели, декора и освещения</div>
+        <div class="cmp-cell feature-val"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Выезд на объект</div>
+        <div class="cmp-cell feature-val">2 раза</div>
+      </div>
+
+      <div class="cmp-row action">
+        <div class="cmp-cell"></div>
+        <div class="cmp-cell"><a href="index.html#contact" class="cmp-btn">Заказать услугу</a></div>
       </div>
     </div>
   </div>
@@ -814,35 +600,6 @@
   }, {threshold:0.18});
   revealEls.forEach(el => io.observe(el));
   setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 4000);
-
-  // ---- animated number readout ----
-  const fmt = new Intl.NumberFormat('ru-RU');
-  function animateTo(el, target){
-    const current = parseInt((el.textContent || '0').replace(/[^\d]/g, ''), 10) || 0;
-    const dur = 650;
-    const start = performance.now();
-    function tick(now){
-      const p = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const val = Math.round(current + (target - current) * eased);
-      el.innerHTML = fmt.format(val) + '&nbsp;₽';
-      if(p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // ---- self calculator: pick a configuration, see the price ----
-  const selfPills = document.getElementById('selfPills');
-  const selfValue = document.getElementById('selfValue');
-  if(selfPills && selfValue){
-    selfPills.querySelectorAll('.calc-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        selfPills.querySelectorAll('.calc-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        animateTo(selfValue, parseInt(pill.dataset.price, 10));
-      });
-    });
-  }
 </script>
 
 </body>
