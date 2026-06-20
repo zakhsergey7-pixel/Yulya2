@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ru" class="no-js">
 <head>
@@ -24,7 +23,6 @@
     --indigo-soft:#2C3766;
     --white:#FDFCFA;
 
-    /* stone / concrete surface tones — used for card backgrounds and dividers */
     --concrete:#DAD5CB;
     --concrete-deep:#B6AFA1;
 
@@ -34,7 +32,6 @@
 
     --ease:cubic-bezier(.22,.61,.36,1);
 
-    /* soft, layered shadow standing in for diffuse cinematic light on a textured material */
     --shadow-stone:
       0 1px 1px rgba(27,25,22,.03),
       0 8px 24px rgba(27,25,22,.05),
@@ -58,7 +55,6 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* subtle paper/concrete grain texture, applied globally */
   body::before{
     content:"";
     position:fixed;
@@ -70,7 +66,6 @@
     background-image:var(--grain);
   }
 
-  /* reusable grain overlay for individual stone/concrete surfaces (cards, dark panels) */
   .grain-surface{position:relative;}
   .grain-surface::after{
     content:"";
@@ -118,7 +113,6 @@
     color:var(--ink);
   }
 
-  /* corner guide marks — quiet architectural-drawing register marks for key panels */
   .guide-marks{position:relative;}
   .guide-marks::before,
   .guide-marks::after{
@@ -139,7 +133,6 @@
     border-right:1px solid var(--champagne);
   }
 
-  /* ============ FOCUS / A11Y ============ */
   a:focus-visible, button:focus-visible{
     outline:2px solid var(--indigo);
     outline-offset:4px;
@@ -279,7 +272,7 @@
     display:flex;
     align-items:flex-end;
     overflow:hidden;
-    padding-top:150px; /* guaranteed clearance under the fixed header so hero text never overlaps the logo/nav on short viewports */
+    padding-top:150px;
   }
   .hero-bg{
     position:absolute;
@@ -304,7 +297,6 @@
     will-change:transform;
   }
   @keyframes cameraDrift{
-    /* long, irregular virtual-camera tour across the whole scene — no two consecutive legs use the same direction or scale, so the loop doesn't read as a back-and-forth repeat */
     0%{    transform:scale(1.05) translate(-4.5%, -3%)   rotate(-0.5deg); }
     9%{    transform:scale(1.12) translate(2%, -4%)       rotate(0.2deg); }
     18%{   transform:scale(1.20) translate(5%, 1%)        rotate(0.45deg); }
@@ -347,20 +339,13 @@
     text-align:center;
     color:var(--white);
   }
-  .hero-center .hero-eyebrow{justify-content:center;}
-  .hero-inner{
-    position:relative;
-    z-index:5;
-    width:100%;
-    padding:0 48px 90px;
-    color:var(--white);
-  }
   .hero-eyebrow{
     font-size:12px;
     letter-spacing:.4em;
     text-transform:uppercase;
     color:var(--champagne-soft);
     margin-bottom:22px;
+    justify-content:center;
   }
   .hero h1{
     color:var(--white);
@@ -558,7 +543,6 @@
     color:var(--champagne-soft);
   }
 
-  /* minimalist staggered reveal for the mission statement — each phrase drifts up softly in sequence */
   .mission-content h2 .mw{
     display:inline-block;
     opacity:0;
@@ -579,7 +563,7 @@
   }
   .no-js .mission-content h2 .mw{opacity:1; filter:none; transform:none;}
 
-  /* ============ TICKER (second running line) ============ */
+  /* ============ TICKER ============ */
   .ticker{
     background:var(--paper-2);
     border-top:1px solid var(--line);
@@ -643,7 +627,6 @@
     aspect-ratio:4/5.1;
     box-shadow:var(--shadow-stone-deep);
     width:100%;
-    max-width:100%;
     background:var(--concrete);
   }
   .about-photo-frame .ap-scene{
@@ -758,7 +741,6 @@
     transition:opacity .6s var(--ease);
   }
   .why-card::after{
-    /* soft diagonal light sweep, like a beam catching a stone surface */
     content:"";
     position:absolute;
     inset:-60% -20%;
@@ -789,8 +771,7 @@
     letter-spacing:.01em;
     line-height:1.35;
     color:var(--ink);
-    min-height:2.7em; /* reserves space for 2 lines so short one-line titles (e.g. "Сервис")
-                          don't let their description sit higher than the other cards' */
+    min-height:2.7em;
     display:flex;
     align-items:flex-start;
   }
@@ -871,49 +852,6 @@
     flex-wrap:wrap;
   }
   .services .section-head h2{font-size:clamp(26px,3.4vw,38px); margin-top:6px;}
-  .services-list{
-    border-top:1px solid var(--line);
-  }
-  .service-row{
-    display:grid;
-    grid-template-columns:2fr 3fr 1fr;
-    gap:48px;
-    align-items:center;
-    padding:50px 0;
-    border-bottom:1px solid var(--line);
-    transition:padding-left .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
-  }
-  .service-row:hover{
-    padding-left:22px;
-    background:rgba(201,169,107,.05);
-    box-shadow:inset 3px 0 0 var(--champagne);
-  }
-  .service-row h3{
-    font-size:25px;
-    font-weight:400;
-  }
-  .service-row .desc{
-    font-size:14.5px;
-    line-height:1.75;
-    color:var(--stone);
-    max-width:480px;
-  }
-  .service-row .price{
-    text-align:right;
-    font-family:var(--display);
-    font-size:24px;
-    color:var(--indigo);
-    white-space:nowrap;
-  }
-  .service-row .price small{
-    display:block;
-    font-family:var(--body);
-    font-size:11px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-top:6px;
-  }
   .services-more{
     display:flex;
     justify-content:center;
@@ -953,22 +891,8 @@
     transition:transform .35s var(--ease);
   }
   .services-more a:hover svg{transform:translateX(4px);}
-  @media (max-width:600px){
-    .services .container{flex-direction:column; align-items:center; text-align:center; gap:22px;}
-    .services-more a{padding:20px 34px; font-size:13px; width:100%; justify-content:center;}
 
-    /* mission phrase reveal: per-word blur/stagger is unreliable on phones (some mobile
-       browsers leave the last word stuck mid-blur). Disable it on small screens and let
-       the whole heading simply appear via the parent .reveal fade instead. */
-    .mission-content h2 .mw{
-      opacity:1;
-      filter:none;
-      transform:none;
-      animation:none !important;
-    }
-  }
-
-  /* ============ GUARANTEE STRIP ============ */
+  /* ============ GUARANTEE ============ */
   .guarantee{
     background:var(--indigo);
     color:var(--paper);
@@ -1019,13 +943,6 @@
     font-size:56px;
     color:var(--champagne-soft);
     line-height:1;
-  }
-  .gstat .gnum-quote{
-    /* a quote mark sits lighter than a digit at the same size, so scale up
-       and nudge for the two to read as the same visual weight in the row */
-    font-size:72px;
-    line-height:.7;
-    transform:translateX(-4px);
   }
   .gstat .glabel{
     margin-top:10px;
@@ -1214,7 +1131,6 @@
     opacity:1;
     transform:translateY(0);
   }
-  /* safety: if JS fails to run, content must still be visible */
   .no-js .reveal{opacity:1; transform:none;}
 
   /* ============ RESPONSIVE ============ */
@@ -1248,7 +1164,6 @@
       width:100% !important;
       height:100% !important;
       object-fit:cover;
-      min-height:100%;
     }
     .why-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr; grid-template-rows:280px 280px 280px;}
@@ -1311,7 +1226,7 @@
   </div>
 </section>
 
-<!-- ============ MARQUEE: эргономика / уют / эстетика ============ -->
+<!-- ============ MARQUEE ============ -->
 <div class="strip" aria-hidden="false">
   <div class="strip-track" id="stripTrack"></div>
 </div>
@@ -1330,7 +1245,7 @@
   </div>
 </section>
 
-<!-- ============ TICKER: забота / архитектура / преображение ============ -->
+<!-- ============ TICKER ============ -->
 <div class="ticker">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
@@ -1340,20 +1255,10 @@
   <div class="container about-grid">
     <div class="about-photo reveal">
       <div class="about-photo-frame" id="aboutPhotoFrame">
-
-        <div class="ap-scene active">
-          <img src="./about-1.jpg" alt="Юлия Фёдорова">
-        </div>
-        <div class="ap-scene">
-          <img src="./about-2.jpg" alt="Юлия Фёдорова">
-        </div>
-        <div class="ap-scene">
-          <img src="./about-3.jpg" alt="Юлия Фёдорова">
-        </div>
-        <div class="ap-scene">
-          <img src="./about-4.jpg" alt="Юлия Фёдорова">
-        </div>
-
+        <div class="ap-scene active"><img src="./about-1.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-2.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-3.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-4.jpg" alt="Юлия Фёдорова"></div>
       </div>
       <div class="about-photo-tag grain-surface guide-marks">
         <div class="num">05</div>
@@ -1370,7 +1275,7 @@
   </div>
 </section>
 
-<!-- ============ WHY CHOOSE ME (placeholder, empty by request) ============ -->
+<!-- ============ WHY CHOOSE ============ -->
 <section class="why section-pad" id="why">
   <div class="container">
     <div class="section-head reveal">
@@ -1519,7 +1424,6 @@
 <script>
   document.documentElement.classList.remove('no-js');
 
-  // ---- hero headline: typewriter effect ----
   function typeHeadline(){
     const el = document.getElementById('heroTitle');
     if(!el) return;
@@ -1573,11 +1477,10 @@
   }
   typeHeadline();
 
-  // ---- marquee content generation ----
   function fillMarquee(id, words){
     const el = document.getElementById(id);
     const block = words.map(w => `<span class="strip-item">${w}<span class="dot"></span></span>`).join('');
-    el.innerHTML = block + block; // duplicate for seamless loop
+    el.innerHTML = block + block;
   }
   fillMarquee('stripTrack', ['Эргономика','Уют','Эстетика']);
 
@@ -1588,13 +1491,11 @@
   }
   fillTicker('tickerTrack', ['Забота','Знание архитектуры','Преображение']);
 
-  // ---- header scroll state ----
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
   }, {passive:true});
 
-  // ---- mobile menu ----
   const burger = document.getElementById('burgerBtn');
   const overlay = document.getElementById('mobileOverlay');
   const menu = document.getElementById('mobileMenu');
@@ -1610,7 +1511,6 @@
   overlay.addEventListener('click', toggleMenu);
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
 
-  // ---- hero parallax / cinematic camera drift ----
   const heroBg = document.getElementById('heroBg');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
@@ -1620,7 +1520,6 @@
     }
   }, {passive:true});
 
-  // ---- mission background crossfade ----
   const missionImgs = document.querySelectorAll('#missionBg .scene');
   let missionIdx = 0;
   if(missionImgs.length){
@@ -1631,19 +1530,13 @@
     }, 4500);
   }
 
-  // ---- about-me photo crossfade (same technique as mission background) ----
-  // Enhanced for mobile: ensure all images are ready and cycle works reliably
   const aboutImgs = document.querySelectorAll('#aboutPhotoFrame .ap-scene');
   let aboutIdx = 0;
   if(aboutImgs.length){
-    // Preload images for better mobile performance
     aboutImgs.forEach(scene => {
       const img = scene.querySelector('img');
-      if(img && img.complete === false) {
-        img.loading = "eager";
-      }
+      if(img) img.loading = "eager";
     });
-    
     setInterval(() => {
       aboutImgs[aboutIdx].classList.remove('active');
       aboutIdx = (aboutIdx + 1) % aboutImgs.length;
@@ -1651,7 +1544,6 @@
     }, 3800);
   }
 
-  // ---- reveal on scroll ----
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1662,12 +1554,11 @@
     });
   }, {threshold:0.15});
   revealEls.forEach(el => io.observe(el));
-  // safety net: ensure nothing stays invisible if observer misses it
+
   setTimeout(() => {
     revealEls.forEach(el => el.classList.add('in'));
   }, 4000);
 
-  // ---- form submit (no backend — visual confirmation only) ----
   function handleSubmit(e){
     e.preventDefault();
     const success = document.getElementById('formSuccess');
@@ -1676,19 +1567,14 @@
     return false;
   }
 
-  // Additional mobile safety for about photos
   window.addEventListener('load', () => {
     const aboutFrame = document.getElementById('aboutPhotoFrame');
     if(aboutFrame && window.innerWidth <= 980) {
-      // Force initial active state and ensure visibility
       const activeScene = aboutFrame.querySelector('.ap-scene.active');
-      if(activeScene) {
-        activeScene.style.opacity = '1';
-      }
+      if(activeScene) activeScene.style.opacity = '1';
     }
   });
 </script>
 
 </body>
 </html>
-```
