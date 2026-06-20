@@ -666,8 +666,7 @@
 <!-- ============ INTRO TO SCHEDULE ============ -->
 <section class="spec-intro">
   <div class="container">
-    <h2 class="reveal">Стоимость <i>полного проекта</i></h2>
-    <p class="reveal">Итоговая сумма зависит от площади и сложности планировки. Цены ниже — стартовые, по базовой ставке за&nbsp;м² для каждого типа квартиры.</p>
+    <h2 class="reveal">Прайс на <i>прочие услуги</i></h2>
   </div>
 </section>
 
@@ -678,46 +677,62 @@
 
       <div class="sched-row reveal">
         <div class="sr-mark">01</div>
-        <div class="sr-name">Студия<small>25–30 м²</small></div>
-        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
-        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="87500">0&nbsp;₽</div></div>
+        <div class="sr-name">Консультация</div>
+        <div class="sr-rate"></div>
+        <div class="sr-price"><div class="sr-num" data-target="5000">0&nbsp;₽</div></div>
         <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
       <div class="sched-row reveal">
         <div class="sr-mark">02</div>
-        <div class="sr-name">1-комнатная квартира<small>35–45 м²</small></div>
-        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
-        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="122500">0&nbsp;₽</div></div>
+        <div class="sr-name">Выезды в магазины/на выкрас</div>
+        <div class="sr-rate"></div>
+        <div class="sr-price"><div class="sr-num" data-target="5000">0&nbsp;₽</div></div>
         <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
       <div class="sched-row reveal">
         <div class="sr-mark">03</div>
-        <div class="sr-name">2-комнатная квартира<small>60–75 м²</small></div>
-        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
-        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="175000">0&nbsp;₽</div></div>
+        <div class="sr-name">Срочный выезд в магазины/на выкрас<small>вызов день в день</small></div>
+        <div class="sr-rate"></div>
+        <div class="sr-price"><div class="sr-num" data-target="10000">0&nbsp;₽</div></div>
         <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
       <div class="sched-row reveal">
         <div class="sr-mark">04</div>
-        <div class="sr-name">3-комнатная квартира<small>95–120 м²</small></div>
-        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
-        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="210000">0&nbsp;₽</div></div>
+        <div class="sr-name">Планировочное решение</div>
+        <div class="sr-rate"><b>1&nbsp;500&nbsp;₽</b>/м²</div>
+        <div class="sr-price"><div class="sr-num" data-target="1500">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">05</div>
+        <div class="sr-name">Срочность проекта<small>сроки обсуждаемы</small></div>
+        <div class="sr-rate"></div>
+        <div class="sr-price"><div class="sr-num sr-static">+30%</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
+      </div>
+
+      <div class="sched-row reveal">
+        <div class="sr-mark">06</div>
+        <div class="sr-name">Стоимость правок</div>
+        <div class="sr-rate">за час работы</div>
+        <div class="sr-price"><div class="sr-num" data-target="1500">0&nbsp;₽</div></div>
         <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
       <div class="sched-row featured reveal">
-        <div class="sr-mark">05</div>
-        <div class="sr-name">Премиум сегмент<small>95–120 м²</small></div>
-        <div class="sr-rate"><b>6&nbsp;000&nbsp;₽</b>/м²<span>базовая ставка</span></div>
-        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="300000">0&nbsp;₽</div></div>
+        <div class="sr-mark">07</div>
+        <div class="sr-name">Внесение корректировок после согласования</div>
+        <div class="sr-rate"></div>
+        <div class="sr-price"><div class="sr-num" data-target="10000">0&nbsp;₽</div></div>
         <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
     </div>
-    <p class="sched-foot">* Стоимость — за разработку дизайн-проекта, без учёта ремонтных и строительных работ. Точная сумма рассчитывается после замера и обсуждения задач.</p>
+    <p class="sched-foot">* Стоимость дополнительных услуг указана отдельно от стоимости дизайн-проекта и рассчитывается по фактическому объёму работ.</p>
   </div>
 </section>
 
@@ -790,6 +805,7 @@
   // ---- price count-up, triggered per row as it scrolls in ----
   const fmt = new Intl.NumberFormat('ru-RU');
   function animateCount(el){
+    if(!el.hasAttribute('data-target')) return; // static value (e.g. "+30%") — leave as-is
     const target = parseInt(el.getAttribute('data-target'), 10);
     const dur = 1100;
     const start = performance.now();
