@@ -258,7 +258,7 @@
   .services-sec{padding:96px 0 40px;}
   .services-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:26px;
   }
   .svc-card{
@@ -319,50 +319,157 @@
     .svc-card{height:340px;}
   }
 
-  /* ---- static plate variant (no link / no page transition) ---- */
-  .svc-card.static{cursor:default;}
-  .svc-card.static .svc-price{
-    position:absolute; top:24px; right:24px;
-    z-index:2;
-    font-family:var(--display);
-    font-size:19px;
-    color:var(--champagne-soft);
-    background:rgba(253,252,250,.14);
-    backdrop-filter:blur(6px);
-    padding:9px 18px;
-    border-radius:30px;
-    white-space:nowrap;
-  }
-
 
   /* ============ DIVIDER NOTE ============ */
   .spec-intro{
     padding:120px 0 0;
   }
   .spec-intro .container{
-    display:grid;
-    grid-template-columns:1.1fr 1fr;
-    gap:60px;
-    align-items:end;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:18px;
   }
   .spec-intro h2{
-    font-size:clamp(32px,4.6vw,52px);
-    font-weight:300;
-    line-height:1.08;
+    font-family:var(--body);
+    font-size:17px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    line-height:1.4;
   }
   .spec-intro h2 i{font-style:normal;color:var(--champagne);}
   .spec-intro p{
     font-size:14px;
     line-height:1.85;
     color:var(--stone);
-    max-width:440px;
+    max-width:480px;
   }
   @media (max-width:880px){
-    .spec-intro .container{grid-template-columns:1fr;gap:24px;}
+    .spec-intro .container{gap:16px;}
   }
 
   /* ============ PRICE SCHEDULE (blueprint legend table) ============ */
   .schedule{padding:56px 0 150px;}
+  .sched-table{
+    border-top:1px solid var(--line-strong);
+  }
+  .sched-row{
+    display:grid;
+    grid-template-columns:64px 1.6fr 1fr 1.1fr auto;
+    align-items:center;
+    gap:24px;
+    padding:0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .sched-row .sr-mark{
+    font-family:var(--body);
+    font-size:11px;
+    color:var(--stone);
+    letter-spacing:.08em;
+    padding:30px 0;
+    position:relative;
+  }
+  .sched-row .sr-mark::after{
+    content:"";
+    position:absolute;
+    left:0; top:50%;
+    width:0; height:1px;
+    background:var(--champagne);
+    transition:width 1.1s var(--ease);
+  }
+  .sched-row.in .sr-mark::after{width:34px;}
+  .sched-row .sr-name{
+    font-family:var(--display);
+    font-size:25px;
+    font-weight:400;
+    color:var(--ink);
+  }
+  .sched-row .sr-name small{
+    display:block;
+    font-family:var(--body);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:5px;
+  }
+  .sched-row .sr-rate{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  .sched-row .sr-rate b{color:var(--indigo);font-weight:500;}
+  .sched-row .sr-rate span{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:3px;
+  }
+  .sched-row .sr-price{
+    text-align:right;
+  }
+  .sched-row .sr-price .sr-from{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .sched-row .sr-price .sr-num{
+    display:block;
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--indigo);
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  .sched-row .sr-cta{
+    justify-self:end;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    border:1px solid var(--line-strong);
+    padding:13px 22px;
+    white-space:nowrap;
+    transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+  }
+  .sched-row .sr-cta:hover{
+    background:var(--indigo);
+    color:var(--paper);
+    border-color:var(--indigo);
+  }
+  /* hover sweep — a thin champagne line draws under the active row, like a ruler measuring it */
+  .sched-row::before{
+    content:"";
+    position:absolute;
+    left:0; bottom:-1px;
+    width:0; height:2px;
+    background:var(--champagne);
+    transition:width .5s var(--ease);
+  }
+  .sched-row:hover::before{width:100%;}
+  .sched-row:hover{background:rgba(201,169,107,.05);}
+
+  .sched-row.featured{background:var(--indigo);border-bottom-color:rgba(253,252,250,.14);}
+  .sched-row.featured .sr-mark{color:rgba(253,252,250,.55);}
+  .sched-row.featured .sr-mark::after{background:var(--champagne-soft);}
+  .sched-row.featured .sr-name{color:var(--paper);}
+  .sched-row.featured .sr-name small{color:var(--champagne-soft);}
+  .sched-row.featured .sr-rate{color:rgba(253,252,250,.78);}
+  .sched-row.featured .sr-rate b{color:var(--champagne-soft);}
+  .sched-row.featured .sr-rate span{color:rgba(253,252,250,.5);}
+  .sched-row.featured .sr-price .sr-from{color:rgba(253,252,250,.55);}
+  .sched-row.featured .sr-price .sr-num{color:var(--champagne-soft);}
+  .sched-row.featured .sr-cta{color:var(--champagne-soft);border-color:rgba(253,252,250,.3);}
+  .sched-row.featured .sr-cta:hover{background:var(--champagne-soft);color:var(--indigo);border-color:var(--champagne-soft);}
+  .sched-row.featured:hover{background:var(--indigo-soft);}
 
   .sched-foot{
     margin-top:28px;
@@ -372,64 +479,15 @@
     max-width:640px;
   }
 
-  /* ============ OTHER SERVICES LIST ============ */
-  .other-table{
-    border-top:1px solid var(--line-strong);
-  }
-  .other-row{
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:center;
-    gap:24px;
-    padding:26px 0;
-    border-bottom:1px solid var(--line);
-    position:relative;
-    overflow:hidden;
-  }
-  .other-row .or-name{
-    font-family:var(--display);
-    font-size:22px;
-    font-weight:400;
-    color:var(--ink);
-  }
-  .other-row .or-name small{
-    display:block;
-    font-family:var(--body);
-    font-size:11.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-top:5px;
-  }
-  .other-row .or-price{
-    font-family:var(--display);
-    font-size:25px;
-    color:var(--indigo);
-    text-align:right;
-    white-space:nowrap;
-  }
-  .other-row .or-price span{
-    display:block;
-    font-family:var(--body);
-    font-size:10.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-top:3px;
-  }
-  .other-row::before{
-    content:"";
-    position:absolute;
-    left:0; bottom:-1px;
-    width:0; height:2px;
-    background:var(--champagne);
-    transition:width .5s var(--ease);
-  }
-  .other-row:hover::before{width:100%;}
-  .other-row:hover{background:rgba(201,169,107,.05);}
   @media (max-width:880px){
-    .other-row{grid-template-columns:1fr; gap:8px; padding:22px 0;}
-    .other-row .or-price{text-align:left;}
+    .sched-row{
+      grid-template-columns:1fr;
+      gap:10px;
+      padding:24px 0;
+    }
+    .sched-row .sr-mark{padding:0;}
+    .sched-row .sr-price{text-align:left;}
+    .sched-row .sr-cta{justify-self:start;margin-top:4px;}
   }
 
   /* ============ CTA STRIP ============ */
@@ -465,36 +523,6 @@
   }
   .cta-strip .cs-btn:hover{background:var(--ink);}
 
-  .cs-downloads{
-    margin-top:22px;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:14px;
-  }
-  .cs-downloads a{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    font-size:11.5px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    border:1px solid var(--line-strong);
-    padding:14px 24px;
-    transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
-  }
-  .cs-downloads a svg{width:13px;height:13px;flex-shrink:0;}
-  .cs-downloads a:hover{
-    background:var(--ink);
-    color:var(--paper);
-    border-color:var(--ink);
-  }
-  @media (max-width:600px){
-    .cs-downloads{flex-direction:column;}
-    .cs-downloads a{justify-content:center;}
-  }
-
   /* ============ FOOTER ============ */
   footer{
     border-top:1px solid var(--line);
@@ -508,7 +536,6 @@
     gap:14px;
   }
   .footer-logo{font-family:var(--display);font-size:18px;letter-spacing:.1em;}
-  .footer-hours{font-size:11.5px;letter-spacing:.04em;color:var(--stone);text-align:center;}
   .footer-meta{font-size:11.5px;letter-spacing:.06em;color:var(--stone);}
 
 </style>
@@ -547,7 +574,7 @@
   <div class="container">
     <div class="eyebrow reveal in">Услуги</div>
     <h1 class="reveal in">Наши <i>услуги</i></h1>
-    <p class="lede reveal in">Выберите формат работы, который подходит вашей задаче, и посмотрите подробные цены.</p>
+    <p class="lede reveal in">Три формата работы — выберите тот, что подходит вашей задаче, и посмотрите подробные цены.</p>
   </div>
 </section>
 
@@ -583,13 +610,6 @@
         <div class="svc-label">Онлайн проект</div>
       </a>
 
-      <div class="svc-card static reveal">
-        <img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?auto=format&fit=crop&w=900&q=70" alt="Авторский надзор">
-        <div class="svc-tag">Формат 04</div>
-        <div class="svc-price">35&nbsp;000&nbsp;₽</div>
-        <div class="svc-label">Авторский надзор</div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -597,52 +617,58 @@
 <!-- ============ INTRO TO SCHEDULE ============ -->
 <section class="spec-intro">
   <div class="container">
-    <h2 class="reveal">Прайс на <i>прочие услуги</i></h2>
-    <p class="reveal">Отдельные услуги, которые можно заказать дополнительно к основному проекту или самостоятельно.</p>
+    <h2 class="reveal">Стоимость <i>полного проекта</i></h2>
+    <p class="reveal">Итоговая сумма зависит от площади и сложности планировки. Цены ниже — стартовые, по базовой ставке за&nbsp;м² для каждого типа квартиры.</p>
   </div>
 </section>
 
-<!-- ============ OTHER SERVICES PRICE LIST ============ -->
+<!-- ============ PRICE SCHEDULE ============ -->
 <section class="schedule">
   <div class="container">
-    <div class="other-table" id="otherTable">
+    <div class="sched-table" id="schedTable">
 
-      <div class="other-row reveal">
-        <div class="or-name">Консультация</div>
-        <div class="or-price">5&nbsp;000&nbsp;₽</div>
+      <div class="sched-row reveal">
+        <div class="sr-mark">01</div>
+        <div class="sr-name">Студия<small>25–30 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="87500">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
-      <div class="other-row reveal">
-        <div class="or-name">Выезды в магазины/на выкрас</div>
-        <div class="or-price">5&nbsp;000&nbsp;₽</div>
+      <div class="sched-row reveal">
+        <div class="sr-mark">02</div>
+        <div class="sr-name">1-комнатная квартира<small>35–45 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="122500">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
-      <div class="other-row reveal">
-        <div class="or-name">Срочный выезд в магазины/на выкрас<small>вызов день в день</small></div>
-        <div class="or-price">10&nbsp;000&nbsp;₽</div>
+      <div class="sched-row reveal">
+        <div class="sr-mark">03</div>
+        <div class="sr-name">2-комнатная квартира<small>60–75 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="175000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
-      <div class="other-row reveal">
-        <div class="or-name">Планировочное решение</div>
-        <div class="or-price">1&nbsp;500&nbsp;₽<span>/м²</span></div>
+      <div class="sched-row reveal">
+        <div class="sr-mark">04</div>
+        <div class="sr-name">3-комнатная квартира<small>95–120 м²</small></div>
+        <div class="sr-rate"><b>3&nbsp;500&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="210000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
-      <div class="other-row reveal">
-        <div class="or-name">Срочность проекта<small>сроки обсуждаемы</small></div>
-        <div class="or-price">+30%<span>к стоимости</span></div>
-      </div>
-
-      <div class="other-row reveal">
-        <div class="or-name">Стоимость правок</div>
-        <div class="or-price">1&nbsp;500&nbsp;₽<span>за час работы</span></div>
-      </div>
-
-      <div class="other-row reveal">
-        <div class="or-name">Внесение корректировок после согласования</div>
-        <div class="or-price">10&nbsp;000&nbsp;₽</div>
+      <div class="sched-row featured reveal">
+        <div class="sr-mark">05</div>
+        <div class="sr-name">Премиум сегмент<small>95–120 м²</small></div>
+        <div class="sr-rate"><b>6&nbsp;000&nbsp;₽</b>/м²<span>базовая ставка</span></div>
+        <div class="sr-price"><div class="sr-from">от</div><div class="sr-num" data-target="300000">0&nbsp;₽</div></div>
+        <a href="index.html#contact" class="sr-cta">Заказать услугу</a>
       </div>
 
     </div>
+    <p class="sched-foot">* Стоимость — за разработку дизайн-проекта, без учёта ремонтных и строительных работ. Точная сумма рассчитывается после замера и обсуждения задач.</p>
   </div>
 </section>
 
@@ -653,16 +679,6 @@
       <h2>Обсудим <i>ваш проект?</i></h2>
       <p>Оставьте заявку — отвечу в течение дня и подскажу, с чего начать именно вашей квартире.</p>
       <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
-      <div class="cs-downloads">
-        <a href="Анкета.pdf" download>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-          Скачать анкету
-        </a>
-        <a href="Договор.pdf" download>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-          Скачать договор
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -670,7 +686,6 @@
 <footer>
   <div class="container footer-row">
     <div class="footer-logo">Юлия Фёдорова</div>
-    <div class="footer-hours">Рада ответить вам в рабочее время с 10:00–20:00, с понедельника по пятницу</div>
     <div class="footer-meta">Дизайн интерьера · © 2026</div>
   </div>
 </footer>
@@ -712,6 +727,32 @@
   }, {threshold:0.18});
   revealEls.forEach(el => io.observe(el));
   setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 4000);
+
+  // ---- price count-up, triggered per row as it scrolls in ----
+  const fmt = new Intl.NumberFormat('ru-RU');
+  function animateCount(el){
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const dur = 1100;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.innerHTML = fmt.format(val) + '&nbsp;₽';
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const numEl = entry.target.querySelector('.sr-num');
+        if(numEl) animateCount(numEl);
+        countIo.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  document.querySelectorAll('.sched-row').forEach(row => countIo.observe(row));
 </script>
 
 </body>
