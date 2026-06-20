@@ -729,7 +729,8 @@
     min-height:320px;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-start;
+    gap:26px;
     overflow:hidden;
     box-shadow:var(--shadow-stone-deep);
     transition:background .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
@@ -775,8 +776,12 @@
     font-size:21px;
     font-weight:500;
     letter-spacing:.01em;
+    line-height:1.35;
     color:var(--ink);
-    margin-top:26px;
+    min-height:2.7em; /* reserves space for 2 lines so short one-line titles (e.g. "Сервис")
+                          don't let their description sit higher than the other cards' */
+    display:flex;
+    align-items:flex-start;
   }
   .why-card .why-desc{
     position:relative;
@@ -845,7 +850,16 @@
   .pf-item:hover .pf-tag{opacity:1; transform:translateY(0);}
 
   /* ============ SERVICES ============ */
-  .services{background:var(--paper);}
+  .services{background:var(--paper); padding:48px 0;}
+  .services .section-head{margin-bottom:0;}
+  .services .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:32px;
+    flex-wrap:wrap;
+  }
+  .services .section-head h2{font-size:clamp(26px,3.4vw,38px); margin-top:6px;}
   .services-list{
     border-top:1px solid var(--line);
   }
@@ -892,6 +906,7 @@
   .services-more{
     display:flex;
     justify-content:center;
+    flex-shrink:0;
   }
   .services-more a{
     position:relative;
@@ -899,11 +914,11 @@
     align-items:center;
     gap:16px;
     font-family:var(--body);
-    font-size:14px;
+    font-size:13px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--indigo);
-    padding:24px 56px;
+    padding:18px 40px;
     border:1px solid var(--champagne);
     overflow:hidden;
     z-index:1;
@@ -928,7 +943,18 @@
   }
   .services-more a:hover svg{transform:translateX(4px);}
   @media (max-width:600px){
+    .services .container{flex-direction:column; align-items:center; text-align:center; gap:22px;}
     .services-more a{padding:20px 34px; font-size:13px; width:100%; justify-content:center;}
+
+    /* mission phrase reveal: per-word blur/stagger is unreliable on phones (some mobile
+       browsers leave the last word stuck mid-blur). Disable it on small screens and let
+       the whole heading simply appear via the parent .reveal fade instead. */
+    .mission-content h2 .mw{
+      opacity:1;
+      filter:none;
+      transform:none;
+      animation:none !important;
+    }
   }
 
   /* ============ GUARANTEE STRIP ============ */
@@ -1277,13 +1303,13 @@
   <div class="container about-grid">
     <div class="about-photo reveal">
       <div class="about-photo-frame" id="aboutPhotoFrame">
-        <div class="ap-scene active"><img src="https://sun9-32.userapi.com/s/v1/ig2/VnOiHKsVPzN0XDsWTAtArMR4RhXdHeJ7nUoKt13uBSTQeXjO0vWlR3fkR4GslDdd4yt6Azdq9vRnupen6r8NRzqW.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-28.userapi.com/s/v1/ig2/zbyKDDBuY4e5q4r4wtG9Z99cyjq1el0HEmpvX2h8MOAnyv4Zny9uv3Z21xBzeRtJP2ndUopVuhMIy41oFiGMXn4q.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-75.userapi.com/s/v1/ig2/ercn3--W-4gAZ8WysIfoK7wRhm7yK_TQEw1jgJQr7jEh4pi522oT7yazWQ-5QwMq2Z28ibLpuAh2pAcybq4oAc6o.jpg?quality=95&as=32x46,48x70,72x105,108x157,160x232,240x349,360x523,480x697,540x785,640x930,720x1046,881x1280&from=bu&cs=881x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-31.userapi.com/s/v1/ig2/qy7h2B85z7rZ4zmAh1-INw_5NiJXwmb-2FrejYbRwQ27VLZHcB4d3VAzOIf1K-KahuU52e00iGT2g-lz_7v4YXZ3.jpg?quality=95&as=32x48,48x73,72x109,108x163,160x242,240x363,360x544,480x725,540x816,640x967,720x1088,847x1280&from=bu&cs=847x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene active"><img src="img/about-1.jpg" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="img/about-2.jpg" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="img/about-3.jpg" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene"><img src="img/about-4.jpg" alt="Юлия Фёдорова, дизайнер интерьера"></div>
       </div>
       <div class="about-photo-tag grain-surface guide-marks">
-        <div class="num">05</div>
+        <div class="num">07</div>
         <div class="lbl">лет в&nbsp;проектировании жилых пространств</div>
       </div>
     </div>
@@ -1355,7 +1381,7 @@
 </section>
 
 <!-- ============ SERVICES ============ -->
-<section class="services section-pad" id="services">
+<section class="services" id="services">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">Услуги</div>
