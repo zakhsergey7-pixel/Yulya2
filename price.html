@@ -258,8 +258,8 @@
   .services-sec{padding:96px 0 40px;}
   .services-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:26px;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
   }
   .svc-card{
     position:relative;
@@ -314,6 +314,29 @@
   }
   .svc-card:hover .svc-arrow{opacity:1;transform:none;}
   .svc-card .svc-arrow svg{width:15px;height:15px;stroke:var(--white);}
+  /* ---- static info card (no link/transition), e.g. "Авторский надзор" ---- */
+  .svc-card.static{cursor:default;}
+  .svc-card .svc-price{
+    position:absolute;
+    top:50%; left:50%;
+    z-index:3;
+    transform:translate(-50%,-50%);
+    width:calc(100% - 36px);
+    text-align:center;
+    font-family:var(--display);
+    font-size:clamp(26px,2.6vw,32px);
+    font-weight:500;
+    color:var(--white);
+    letter-spacing:.01em;
+    background:rgba(12,11,10,.42);
+    backdrop-filter:blur(5px);
+    border:1px solid rgba(253,252,250,.26);
+    padding:18px 20px;
+    line-height:1.2;
+  }
+  @media (max-width:1180px){
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+  }
   @media (max-width:880px){
     .services-grid{grid-template-columns:1fr; gap:14px;}
     .svc-card{height:340px;}
@@ -510,18 +533,37 @@
     color:var(--stone);
     font-size:14px;
   }
-  .cta-strip .cs-btn{
-    display:inline-block;
+  .cta-strip .cs-buttons{
     margin-top:32px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+  }
+  .cta-strip .cs-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
     background:var(--indigo);
     color:var(--paper);
-    padding:17px 38px;
+    padding:17px 32px;
     font-size:12px;
     letter-spacing:.14em;
     text-transform:uppercase;
     transition:background .35s var(--ease);
   }
   .cta-strip .cs-btn:hover{background:var(--ink);}
+  .cta-strip .cs-btn.outline{
+    background:none;
+    color:var(--ink-soft);
+    border:1px solid var(--line-strong);
+  }
+  .cta-strip .cs-btn.outline:hover{background:var(--paper-2); color:var(--ink); border-color:var(--ink-soft);}
+  .cta-strip .cs-btn svg{width:14px;height:14px;flex-shrink:0;}
+  @media (max-width:600px){
+    .cta-strip .cs-buttons{flex-direction:column;}
+    .cta-strip .cs-btn{justify-content:center;width:100%;}
+  }
 
   /* ============ FOOTER ============ */
   footer{
@@ -610,6 +652,13 @@
         <div class="svc-label">Онлайн проект</div>
       </a>
 
+      <div class="svc-card static reveal">
+        <img src="https://images.unsplash.com/photo-1762146828422-50a8bd416d3c?auto=format&fit=crop&w=900&q=70" alt="Авторский надзор">
+        <div class="svc-tag">Доп.&nbsp;услуга</div>
+        <div class="svc-price">35&nbsp;000&nbsp;₽</div>
+        <div class="svc-label">Авторский надзор</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -678,7 +727,17 @@
     <div class="cs-card reveal">
       <h2>Обсудим <i>ваш проект?</i></h2>
       <p>Оставьте заявку — отвечу в течение дня и подскажу, с чего начать именно вашей квартире.</p>
-      <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
+      <div class="cs-buttons">
+        <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
+        <a href="Анкета.docx" download class="cs-btn outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 21h16"/></svg>
+          Скачать анкету
+        </a>
+        <a href="Договор.docx" download class="cs-btn outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 21h16"/></svg>
+          Скачать договор
+        </a>
+      </div>
     </div>
   </div>
 </section>
