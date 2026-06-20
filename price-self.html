@@ -601,6 +601,10 @@
     font-family:var(--body);
   }
   .cmp-btn:hover{background:var(--indigo);}
+
+  /* ---- single-package variant: 2 columns (feature + included/price) instead of 3 ---- */
+  .compare-table.single .cmp-row{grid-template-columns:1.7fr 1fr;}
+
   @media (max-width:760px){
     .cmp-row{grid-template-columns:1fr;}
     .cmp-row.head{grid-template-columns:1fr 1fr;}
@@ -620,6 +624,7 @@
     }
     .cmp-row.action{grid-template-columns:1fr 1fr;}
     .cmp-row.action .cmp-cell:first-child{display:none;}
+    .compare-table.single .cmp-row.head{grid-template-columns:1fr;}
   }
   /* ============ CTA STRIP ============ */
   .cta-strip{
@@ -725,6 +730,61 @@
     <div class="eyebrow reveal in">Услуги</div>
     <h1 class="reveal in">Комплектация для <i>себя</i></h1>
     <p class="lede reveal in">Рекомендуется для квартир, предназначенных для долгосрочного проживания собственников, разрабатывается с учётом ваших требований и задач.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section class="compare-sec section-pad" style="padding-bottom:0;">
+  <div class="container">
+    <h2 class="cond-heading reveal">Что входит в стоимость</h2>
+
+    <div class="compare-table single reveal">
+      <div class="cmp-row head">
+        <div class="cmp-cell">Этапы работы</div>
+        <div class="cmp-cell">
+          <div class="pkg-name">Стоимость</div>
+          <div class="pkg-rate">3&nbsp;500&nbsp;₽/м²</div>
+        </div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Встреча</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Обмерный план</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Планировочное решение</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Чертежи для строителей</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Развёртки</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Визуализация</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Подбор мебели, декора и освещения</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature-name">Выезд на объект (2 раза)</div>
+        <div class="cmp-cell feature-val" data-pkg="Включено"><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span></div>
+      </div>
+
+      <div class="cmp-row action">
+        <div class="cmp-cell"></div>
+        <div class="cmp-cell"><a href="index.html#contact" class="cmp-btn">Заказать услугу</a></div>
+      </div>
+    </div>
   </div>
 </section>
 
