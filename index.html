@@ -532,14 +532,25 @@
   .mission-content .eyebrow{
     justify-content:center;
     color:var(--champagne-soft);
+    font-size:20px;
+    letter-spacing:.1em;
+    font-weight:500;
+    text-transform:none;
   }
   .mission-content .eyebrow::before{display:none;}
+  .mission-content.in .eyebrow{
+    animation:missionWordIn 1.4s var(--ease) .1s both;
+  }
+  @keyframes missionWordIn{
+    0%{opacity:0; letter-spacing:-.02em; transform:translateY(8px);}
+    100%{opacity:1; letter-spacing:.1em; transform:translateY(0);}
+  }
   .mission-content h2{
     color:var(--white);
-    font-size:clamp(28px,4.4vw,46px);
-    line-height:1.32;
+    font-size:clamp(18px,2.4vw,26px);
+    line-height:1.5;
     font-weight:300;
-    margin-top:24px;
+    margin-top:22px;
   }
   .mission-content h2 b{
     font-weight:500;
@@ -653,6 +664,14 @@
     line-height:1.5;
   }
 
+  .about-text .eyebrow{
+    font-size:17px;
+    letter-spacing:.16em;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .about-text .eyebrow::before{background:var(--champagne);}
+
   .about-text p{
     font-size:17px;
     line-height:1.85;
@@ -661,10 +680,10 @@
     max-width:560px;
   }
   .about-text p:first-of-type{
-    font-family:var(--display);
-    font-size:24px;
-    line-height:1.5;
-    color:var(--ink);
+    font-family:var(--hand);
+    font-size:30px;
+    line-height:1.45;
+    color:var(--indigo);
   }
   .about-sign{
     margin-top:36px;
@@ -684,14 +703,14 @@
   }
   .why-card{
     position:relative;
-    background:var(--paper-2);
+    background:var(--paper);
     padding:64px 46px;
     min-height:320px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     overflow:hidden;
-    box-shadow:var(--shadow-stone);
+    box-shadow:var(--shadow-stone-deep);
     transition:background .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
   }
   .why-card::before{
@@ -702,7 +721,7 @@
     background-size:cover;
     background-position:center;
     filter:grayscale(1) contrast(1.05);
-    opacity:0;
+    opacity:.07;
     transition:opacity .6s var(--ease);
   }
   .why-card::after{
@@ -723,16 +742,18 @@
     position:relative;
     z-index:2;
     font-family:var(--display);
-    font-size:15px;
+    font-size:42px;
     color:var(--champagne);
-    letter-spacing:.1em;
+    letter-spacing:.03em;
+    line-height:1;
   }
   .why-card .why-title{
     position:relative;
     z-index:2;
-    font-family:var(--display);
-    font-size:24px;
-    font-weight:400;
+    font-family:var(--body);
+    font-size:21px;
+    font-weight:500;
+    letter-spacing:.01em;
     color:var(--ink);
     margin-top:26px;
   }
@@ -856,8 +877,10 @@
     display:inline-flex;
     align-items:center;
     gap:16px;
-    font-family:var(--display);
-    font-size:19px;
+    font-family:var(--body);
+    font-size:14px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
     color:var(--indigo);
     padding:24px 56px;
     border:1px solid var(--champagne);
@@ -869,7 +892,7 @@
     content:"";
     position:absolute;
     inset:0;
-    background:var(--champagne);
+    background:var(--concrete-deep);
     transform:scaleX(0);
     transform-origin:left;
     transition:transform .45s var(--ease);
@@ -884,7 +907,7 @@
   }
   .services-more a:hover svg{transform:translateX(4px);}
   @media (max-width:600px){
-    .services-more a{padding:20px 34px; font-size:17px; width:100%; justify-content:center;}
+    .services-more a{padding:20px 34px; font-size:13px; width:100%; justify-content:center;}
   }
 
   /* ============ GUARANTEE STRIP ============ */
@@ -935,20 +958,20 @@
   }
   .gstat .gnum{
     font-family:var(--display);
-    font-size:48px;
+    font-size:56px;
     color:var(--champagne-soft);
     line-height:1;
   }
   .gstat .gnum-quote{
     /* a quote mark sits lighter than a digit at the same size, so scale up
        and nudge for the two to read as the same visual weight in the row */
-    font-size:64px;
+    font-size:72px;
     line-height:.7;
     transform:translateX(-4px);
   }
   .gstat .glabel{
     margin-top:10px;
-    font-size:12.5px;
+    font-size:15px;
     line-height:1.6;
     color:rgba(253,252,250,.68);
     letter-spacing:.02em;
@@ -1007,6 +1030,28 @@
     color:rgba(253,252,250,.65);
   }
   .cta-contact a:hover{color:var(--champagne-soft);}
+  .cta-social{
+    display:flex;
+    gap:12px;
+    margin:2px 0 4px;
+  }
+  .cta-social a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;height:34px;
+    border:1px solid rgba(253,252,250,.22);
+    border-radius:50%;
+    color:rgba(253,252,250,.75);
+    transition:border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .cta-social a svg{width:15px;height:15px;}
+  .cta-social a:hover{border-color:var(--champagne-soft); color:var(--champagne-soft);}
+  .cta-hours{
+    font-size:13px;
+    line-height:1.6;
+    color:rgba(253,252,250,.55);
+  }
 
   .form-field{margin-bottom:22px;}
   .form-field label{
@@ -1225,7 +1270,7 @@
       <div class="eyebrow">Обо мне</div>
       <p style="margin-top:24px;">Я не рисую красивые картинки — я выстраиваю логику пространства, в котором вам будет легко дышать.</p>
       <p>Меня зовут Юлия Фёдорова. Я проектирую интерьеры так, чтобы дом работал на человека, а не наоборот: правильные маршруты движения, верный свет, продуманное хранение — всё то, что обычно замечают только тогда, когда этого <em>нет</em>.</p>
-      <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее и роднее.</p>
+      <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее.</p>
       <div class="about-sign">— с заботой, Юлия</div>
     </div>
   </div>
@@ -1256,8 +1301,8 @@
       <div class="why-card">
         <div class="why-num">03</div>
         <div>
-          <div class="why-title">Договор, а&nbsp;не&nbsp;обещания</div>
-          <p class="why-desc">Сроки, этапы и стоимость зафиксированы письменно до начала работ. Спокойствие в проекте должно начинаться раньше, чем первый рабочий на объекте.</p>
+          <div class="why-title">Сервис</div>
+          <p class="why-desc">Уделяю вашим проектам большое количество времени и&nbsp;внимания, учитывая ваш бюджет и&nbsp;вкусовые предпочтения.</p>
         </div>
       </div>
     </div>
@@ -1291,6 +1336,10 @@
 <!-- ============ SERVICES ============ -->
 <section class="services section-pad" id="services">
   <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Услуги</div>
+      <h2>Наши <i>услуги</i></h2>
+    </div>
     <div class="services-more reveal">
       <a href="https://zakhsergey7-pixel.github.io/Yulya2/price.html" target="_blank" rel="noopener">
         Все форматы услуг и подробные цены
@@ -1310,7 +1359,7 @@
     </div>
     <div class="guarantee-stats reveal">
       <div class="gstat"><div class="gnum">5</div><div class="glabel">лет практики в&nbsp;проектировании жилых интерьеров и&nbsp;глубокое понимание эргономики</div></div>
-      <div class="gstat"><div class="gnum gnum-quote">&laquo;</div><div class="glabel">выжать из&nbsp;бюджета «всё»</div></div>
+      <div class="gstat"><div class="gnum">100%</div><div class="glabel">умение выбрать лучшее из&nbsp;цена/качество</div></div>
       <div class="gstat"><div class="gnum">100%</div><div class="glabel">уютное пространство</div></div>
       <div class="gstat"><div class="gnum">3</div><div class="glabel">бесплатные правки на&nbsp;этапе концепции</div></div>
     </div>
@@ -1327,8 +1376,17 @@
           <h2>Оставить <i>заявку</i></h2>
           <p>Расскажите немного о вашем пространстве — отвечу лично в течение дня и предложу, с чего начать.</p>
           <div class="cta-contact">
-            <a href="tel:+79990000000">+7 999 000-00-00</a>
-            <a href="mailto:hello@yuliafedorova.studio">hello@yuliafedorova.studio</a>
+            <a href="tel:+79112877232">+7-911-287-7232</a>
+            <div class="cta-social">
+              <a href="https://t.me/+79112877232" target="_blank" rel="noopener" aria-label="Telegram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.6l5.8 2.1M21 4 14.7 20l-5.9-6.3M21 4 8.8 13.7"/></svg>
+              </a>
+              <a href="https://wa.me/79112877232" target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.6 13.8L3 21l4.4-1.3A9 9 0 1 0 12 3Z"/><path d="M8.7 9.4c.1-.5.5-.8 1-.8h.5c.3 0 .6.2.7.5l.6 1.5c.1.3 0 .6-.2.8l-.5.5c.5 1 1.4 1.9 2.4 2.4l.5-.5c.2-.2.5-.3.8-.2l1.5.6c.3.1.5.4.5.7v.5c0 .5-.3.9-.8 1-3.4.4-7-3.1-6.4-6.5Z"/></svg>
+              </a>
+            </div>
+            <a href="mailto:lubimayaa25@gmail.com">lubimayaa25@gmail.com</a>
+            <div class="cta-hours">Рада ответить вам в&nbsp;рабочее время с&nbsp;10:00–20:00, с&nbsp;понедельника по&nbsp;пятницу</div>
             <span>Москва · работаю по всей России</span>
           </div>
         </div>
