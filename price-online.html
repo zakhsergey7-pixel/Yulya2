@@ -330,9 +330,12 @@
   }
   .cond-heading{
     margin-top:84px;
-    font-family:var(--display);
-    font-size:clamp(26px,3.6vw,40px);
+    font-family:var(--body);
+    font-size:17px;
     font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    text-align:center;
   }
 
   /* ============ PRICE CARDS (room-type pricing) ============ */
@@ -573,10 +576,11 @@
   }
   .cmp-row.head{background:var(--paper-2);}
   .cmp-row.head .cmp-cell{display:block; padding:26px 22px;}
+  .cmp-row.head .cmp-cell:first-child{font-family:var(--display); font-size:22px; font-weight:500; color:var(--ink);}
   .cmp-row.head .pkg-name{font-family:var(--display); font-size:19px; color:var(--ink);}
-  .cmp-row.head .pkg-rate{margin-top:8px; font-family:var(--display); font-size:23px; color:var(--indigo);}
+  .cmp-row.head .pkg-rate{margin-top:8px; font-family:var(--body); font-weight:500; font-size:27px; color:var(--indigo);}
   .cmp-row.head .pkg-min{margin-top:5px; font-size:10.5px; color:var(--stone); text-transform:uppercase; letter-spacing:.05em;}
-  .cmp-cell.feature-name{font-size:14px; color:var(--ink-soft);}
+  .cmp-cell.feature-name{font-size:16.5px; color:var(--ink-soft);}
   .cmp-cell.feature-val{font-size:13.5px; color:var(--ink-soft); gap:8px;}
   .check-ico, .x-ico{
     width:21px;height:21px;border-radius:50%;
