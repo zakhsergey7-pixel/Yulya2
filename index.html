@@ -557,6 +557,27 @@
     color:var(--champagne-soft);
   }
 
+  /* minimalist staggered reveal for the mission statement — each phrase drifts up softly in sequence */
+  .mission-content h2 .mw{
+    display:inline-block;
+    opacity:0;
+    filter:blur(4px);
+    transform:translateY(14px);
+  }
+  .mission-content.in h2 .mw{
+    animation:missionPhraseIn 1.1s var(--ease) both;
+  }
+  .mission-content.in h2 .mw:nth-child(1){animation-delay:.45s;}
+  .mission-content.in h2 .mw:nth-child(2){animation-delay:.70s;}
+  .mission-content.in h2 .mw:nth-child(3){animation-delay:.95s;}
+  .mission-content.in h2 .mw:nth-child(4){animation-delay:1.20s;}
+  .mission-content.in h2 .mw:nth-child(5){animation-delay:1.45s;}
+  @keyframes missionPhraseIn{
+    0%{opacity:0; filter:blur(4px); transform:translateY(14px);}
+    100%{opacity:1; filter:blur(0); transform:translateY(0);}
+  }
+  .no-js .mission-content h2 .mw{opacity:1; filter:none; transform:none;}
+
   /* ============ TICKER (second running line) ============ */
   .ticker{
     background:var(--paper-2);
@@ -1193,7 +1214,7 @@
       <a href="#about">Обо мне</a>
       <a href="#why">Почему я</a>
       <a href="#portfolio">Портфолио</a>
-      <a href="#services">Услуги</a>
+      <a href="#services">Стоимость</a>
       <a href="#contact">Заявка</a>
     </nav>
     <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
@@ -1207,7 +1228,7 @@
   <a href="#about">Обо мне</a>
   <a href="#why">Почему я</a>
   <a href="#portfolio">Портфолио</a>
-  <a href="#services">Услуги</a>
+  <a href="#services">Стоимость</a>
   <a href="#contact">Заявка</a>
 </nav>
 
@@ -1242,7 +1263,7 @@
   </div>
   <div class="mission-content reveal">
     <div class="eyebrow">Миссия</div>
-    <h2>Помогать людям повышать ресурсное состояние для самореализации и счастья — через создание <b>домашнего индивидуального пространства</b>, отвечающего запросам, используя эффективно каждый рубль и каждый метр.</h2>
+    <h2><span class="mw">Помогать людям повышать ресурсное состояние для самореализации и счастья</span> <span class="mw">— через создание <b>домашнего индивидуального пространства</b>,</span> <span class="mw">отвечающего запросам,</span> <span class="mw">используя эффективно каждый рубль и каждый метр.</span></h2>
   </div>
 </section>
 
@@ -1338,7 +1359,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">Услуги</div>
-      <h2>Наши <i>услуги</i></h2>
+      <h2>Сто<i>имость</i></h2>
     </div>
     <div class="services-more reveal">
       <a href="https://zakhsergey7-pixel.github.io/Yulya2/price.html" target="_blank" rel="noopener">
@@ -1387,7 +1408,7 @@
             </div>
             <a href="mailto:lubimayaa25@gmail.com">lubimayaa25@gmail.com</a>
             <div class="cta-hours">Рада ответить вам в&nbsp;рабочее время с&nbsp;10:00–20:00, с&nbsp;понедельника по&nbsp;пятницу</div>
-            <span>Москва · работаю по всей России</span>
+            <span>Санкт-Петербург · работаю по всей России</span>
           </div>
         </div>
         <div class="cta-right">
