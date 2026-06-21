@@ -534,6 +534,32 @@
     color:var(--stone);
     font-size:14px;
   }
+  .cta-strip .cs-hours{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:22px;
+    padding:12px 22px;
+    background:var(--paper-2);
+    border:1px solid var(--champagne);
+    font-size:13px;
+    letter-spacing:.01em;
+    color:var(--ink);
+    font-weight:500;
+  }
+  .cta-strip .cs-hours-dot{
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--champagne);
+    flex-shrink:0;
+  }
+  @media (max-width:600px){
+    .cta-strip .cs-hours{
+      font-size:12.5px;
+      padding:11px 16px;
+      text-align:left;
+    }
+  }
   .cta-strip .cs-buttons{
     margin-top:32px;
     display:flex;
@@ -580,16 +606,6 @@
   }
   .footer-logo{font-family:var(--display);font-size:18px;letter-spacing:.1em;}
   .footer-meta{font-size:11.5px;letter-spacing:.06em;color:var(--stone);}
-  .footer-hours{
-    text-align:center;
-    font-size:11.5px;
-    letter-spacing:.04em;
-    color:var(--stone);
-    opacity:.75;
-    padding-top:18px;
-    margin-top:18px;
-    border-top:1px solid var(--line);
-  }
 
 </style>
 </head>
@@ -754,6 +770,10 @@
     <div class="cs-card reveal">
       <h2>Обсудим <i>ваш проект?</i></h2>
       <p>Оставьте заявку — отвечу в течение дня и подскажу, с чего начать именно вашей квартире.</p>
+      <div class="cs-hours">
+        <span class="cs-hours-dot"></span>
+        Рада ответить вам в рабочее время с 10:00 до 20:00, с понедельника по пятницу
+      </div>
       <div class="cs-buttons">
         <a href="index.html#contact" class="cs-btn">Оставить заявку</a>
         <a href="%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0.docx" download="Анкета.docx" class="cs-btn outline">
@@ -775,7 +795,6 @@
       <div class="footer-logo">Юлия Фёдорова</div>
       <div class="footer-meta">Дизайн интерьера · © 2026</div>
     </div>
-    <div class="footer-hours">Рада ответить вам в рабочее время с 10:00 до 20:00, с понедельника по пятницу</div>
   </div>
 </footer>
 
