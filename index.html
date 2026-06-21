@@ -1179,6 +1179,20 @@
     .cta-inner{grid-template-columns:1fr; gap:50px;}
     .section-pad{padding:100px 0;}
     .hero h1{font-size:clamp(42px,12vw,80px);}
+
+    /* mission phrases: drop blur-in animation on mobile — filter:blur
+       can get stuck mid-transition on mobile browsers, leaving text
+       permanently blurred. Keep a simple, reliable fade+rise instead. */
+    .mission-content h2 .mw{
+      filter:none;
+    }
+    .mission-content.in h2 .mw{
+      animation:missionPhraseInMobile .8s var(--ease) both;
+    }
+    @keyframes missionPhraseInMobile{
+      0%{opacity:0; transform:translateY(14px);}
+      100%{opacity:1; transform:translateY(0);}
+    }
   }
 </style>
 </head>
