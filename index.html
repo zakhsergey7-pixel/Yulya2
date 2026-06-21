@@ -23,7 +23,6 @@
     --indigo-soft:#2C3766;
     --white:#FDFCFA;
 
-    /* stone / concrete surface tones — used for card backgrounds and dividers */
     --concrete:#DAD5CB;
     --concrete-deep:#B6AFA1;
 
@@ -33,7 +32,6 @@
 
     --ease:cubic-bezier(.22,.61,.36,1);
 
-    /* soft, layered shadow standing in for diffuse cinematic light on a textured material */
     --shadow-stone:
       0 1px 1px rgba(27,25,22,.03),
       0 8px 24px rgba(27,25,22,.05),
@@ -57,7 +55,6 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* subtle paper/concrete grain texture, applied globally */
   body::before{
     content:"";
     position:fixed;
@@ -69,7 +66,6 @@
     background-image:var(--grain);
   }
 
-  /* reusable grain overlay for individual stone/concrete surfaces (cards, dark panels) */
   .grain-surface{position:relative;}
   .grain-surface::after{
     content:"";
@@ -117,7 +113,6 @@
     color:var(--ink);
   }
 
-  /* corner guide marks — quiet architectural-drawing register marks for key panels */
   .guide-marks{position:relative;}
   .guide-marks::before,
   .guide-marks::after{
@@ -138,7 +133,6 @@
     border-right:1px solid var(--champagne);
   }
 
-  /* ============ FOCUS / A11Y ============ */
   a:focus-visible, button:focus-visible{
     outline:2px solid var(--indigo);
     outline-offset:4px;
@@ -278,7 +272,7 @@
     display:flex;
     align-items:flex-end;
     overflow:hidden;
-    padding-top:150px; /* guaranteed clearance under the fixed header so hero text never overlaps the logo/nav on short viewports */
+    padding-top:150px;
   }
   .hero-bg{
     position:absolute;
@@ -303,7 +297,6 @@
     will-change:transform;
   }
   @keyframes cameraDrift{
-    /* long, irregular virtual-camera tour across the whole scene — no two consecutive legs use the same direction or scale, so the loop doesn't read as a back-and-forth repeat */
     0%{    transform:scale(1.05) translate(-4.5%, -3%)   rotate(-0.5deg); }
     9%{    transform:scale(1.12) translate(2%, -4%)       rotate(0.2deg); }
     18%{   transform:scale(1.20) translate(5%, 1%)        rotate(0.45deg); }
@@ -346,20 +339,13 @@
     text-align:center;
     color:var(--white);
   }
-  .hero-center .hero-eyebrow{justify-content:center;}
-  .hero-inner{
-    position:relative;
-    z-index:5;
-    width:100%;
-    padding:0 48px 90px;
-    color:var(--white);
-  }
   .hero-eyebrow{
     font-size:12px;
     letter-spacing:.4em;
     text-transform:uppercase;
     color:var(--champagne-soft);
     margin-bottom:22px;
+    justify-content:center;
   }
   .hero h1{
     color:var(--white);
@@ -532,21 +518,52 @@
   .mission-content .eyebrow{
     justify-content:center;
     color:var(--champagne-soft);
+    font-size:20px;
+    letter-spacing:.1em;
+    font-weight:500;
+    text-transform:uppercase;
   }
   .mission-content .eyebrow::before{display:none;}
+  .mission-content.in .eyebrow{
+    animation:missionWordIn 1.4s var(--ease) .1s both;
+  }
+  @keyframes missionWordIn{
+    0%{opacity:0; letter-spacing:-.02em; transform:translateY(8px);}
+    100%{opacity:1; letter-spacing:.1em; transform:translateY(0);}
+  }
   .mission-content h2{
     color:var(--white);
-    font-size:clamp(28px,4.4vw,46px);
-    line-height:1.32;
+    font-size:clamp(18px,2.4vw,26px);
+    line-height:1.5;
     font-weight:300;
-    margin-top:24px;
+    margin-top:22px;
   }
   .mission-content h2 b{
     font-weight:500;
     color:var(--champagne-soft);
   }
 
-  /* ============ TICKER (second running line) ============ */
+  .mission-content h2 .mw{
+    display:inline-block;
+    opacity:0;
+    filter:blur(4px);
+    transform:translateY(14px);
+  }
+  .mission-content.in h2 .mw{
+    animation:missionPhraseIn 1.1s var(--ease) both;
+  }
+  .mission-content.in h2 .mw:nth-child(1){animation-delay:.45s;}
+  .mission-content.in h2 .mw:nth-child(2){animation-delay:.70s;}
+  .mission-content.in h2 .mw:nth-child(3){animation-delay:.95s;}
+  .mission-content.in h2 .mw:nth-child(4){animation-delay:1.20s;}
+  .mission-content.in h2 .mw:nth-child(5){animation-delay:1.45s;}
+  @keyframes missionPhraseIn{
+    0%{opacity:0; filter:blur(4px); transform:translateY(14px);}
+    100%{opacity:1; filter:blur(0); transform:translateY(0);}
+  }
+  .no-js .mission-content h2 .mw{opacity:1; filter:none; transform:none;}
+
+  /* ============ TICKER ============ */
   .ticker{
     background:var(--paper-2);
     border-top:1px solid var(--line);
@@ -609,18 +626,25 @@
     overflow:hidden;
     aspect-ratio:4/5.1;
     box-shadow:var(--shadow-stone-deep);
+    width:100%;
+    background:var(--concrete);
   }
   .about-photo-frame .ap-scene{
     position:absolute; inset:0;
     opacity:0;
     transition:opacity 1.8s ease-in-out;
+    z-index:1;
   }
-  .about-photo-frame .ap-scene.active{opacity:1;}
+  .about-photo-frame .ap-scene.active{
+    opacity:1;
+    z-index:2;
+  }
   .about-photo-frame .ap-scene img{
     width:100%;height:100%;
     object-fit:cover;
     filter:grayscale(.08) contrast(1.03);
     transition:transform 1.2s var(--ease);
+    display:block;
   }
   .about-photo:hover .about-photo-frame .ap-scene.active img{transform:scale(1.04);}
   .about-photo-frame::after{
@@ -628,10 +652,12 @@
     position:absolute; inset:0;
     border:1px solid rgba(253,252,250,.0);
     box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+    z-index:3;
+    pointer-events:none;
   }
   .about-photo-tag{
     position:absolute;
-    bottom:28px; left:28px;
+    bottom:-28px; left:-28px;
     background:var(--indigo);
     color:var(--paper);
     padding:22px 26px;
@@ -653,6 +679,14 @@
     line-height:1.5;
   }
 
+  .about-text .eyebrow{
+    font-size:17px;
+    letter-spacing:.16em;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .about-text .eyebrow::before{background:var(--champagne);}
+
   .about-text p{
     font-size:17px;
     line-height:1.85;
@@ -661,10 +695,10 @@
     max-width:560px;
   }
   .about-text p:first-of-type{
-    font-family:var(--display);
-    font-size:24px;
-    line-height:1.5;
-    color:var(--ink);
+    font-family:var(--hand);
+    font-size:30px;
+    line-height:1.45;
+    color:var(--indigo);
   }
   .about-sign{
     margin-top:36px;
@@ -684,14 +718,15 @@
   }
   .why-card{
     position:relative;
-    background:var(--paper-2);
+    background:var(--paper);
     padding:64px 46px;
     min-height:320px;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-start;
+    gap:26px;
     overflow:hidden;
-    box-shadow:var(--shadow-stone);
+    box-shadow:var(--shadow-stone-deep);
     transition:background .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
   }
   .why-card::before{
@@ -702,11 +737,10 @@
     background-size:cover;
     background-position:center;
     filter:grayscale(1) contrast(1.05);
-    opacity:0;
+    opacity:.07;
     transition:opacity .6s var(--ease);
   }
   .why-card::after{
-    /* soft diagonal light sweep, like a beam catching a stone surface */
     content:"";
     position:absolute;
     inset:-60% -20%;
@@ -723,18 +757,23 @@
     position:relative;
     z-index:2;
     font-family:var(--display);
-    font-size:15px;
+    font-size:42px;
     color:var(--champagne);
-    letter-spacing:.1em;
+    letter-spacing:.03em;
+    line-height:1;
   }
   .why-card .why-title{
     position:relative;
     z-index:2;
-    font-family:var(--display);
-    font-size:24px;
-    font-weight:400;
+    font-family:var(--body);
+    font-size:21px;
+    font-weight:500;
+    letter-spacing:.01em;
+    line-height:1.35;
     color:var(--ink);
-    margin-top:26px;
+    min-height:2.7em;
+    display:flex;
+    align-items:flex-start;
   }
   .why-card .why-desc{
     position:relative;
@@ -803,63 +842,32 @@
   .pf-item:hover .pf-tag{opacity:1; transform:translateY(0);}
 
   /* ============ SERVICES ============ */
-  .services{background:var(--paper);}
-  .services-list{
-    border-top:1px solid var(--line);
-  }
-  .service-row{
-    display:grid;
-    grid-template-columns:2fr 3fr 1fr;
-    gap:48px;
+  .services{background:var(--paper); padding:48px 0;}
+  .services .section-head{margin-bottom:0;}
+  .services .container{
+    display:flex;
     align-items:center;
-    padding:50px 0;
-    border-bottom:1px solid var(--line);
-    transition:padding-left .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+    justify-content:space-between;
+    gap:32px;
+    flex-wrap:wrap;
   }
-  .service-row:hover{
-    padding-left:22px;
-    background:rgba(201,169,107,.05);
-    box-shadow:inset 3px 0 0 var(--champagne);
-  }
-  .service-row h3{
-    font-size:25px;
-    font-weight:400;
-  }
-  .service-row .desc{
-    font-size:14.5px;
-    line-height:1.75;
-    color:var(--stone);
-    max-width:480px;
-  }
-  .service-row .price{
-    text-align:right;
-    font-family:var(--display);
-    font-size:24px;
-    color:var(--indigo);
-    white-space:nowrap;
-  }
-  .service-row .price small{
-    display:block;
-    font-family:var(--body);
-    font-size:11px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-top:6px;
-  }
+  .services .section-head h2{font-size:clamp(26px,3.4vw,38px); margin-top:6px;}
   .services-more{
     display:flex;
     justify-content:center;
+    flex-shrink:0;
   }
   .services-more a{
     position:relative;
     display:inline-flex;
     align-items:center;
     gap:16px;
-    font-family:var(--display);
-    font-size:19px;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
     color:var(--indigo);
-    padding:24px 56px;
+    padding:18px 40px;
     border:1px solid var(--champagne);
     overflow:hidden;
     z-index:1;
@@ -869,7 +877,7 @@
     content:"";
     position:absolute;
     inset:0;
-    background:var(--champagne);
+    background:var(--concrete-deep);
     transform:scaleX(0);
     transform-origin:left;
     transition:transform .45s var(--ease);
@@ -883,11 +891,8 @@
     transition:transform .35s var(--ease);
   }
   .services-more a:hover svg{transform:translateX(4px);}
-  @media (max-width:600px){
-    .services-more a{padding:20px 34px; font-size:17px; width:100%; justify-content:center;}
-  }
 
-  /* ============ GUARANTEE STRIP ============ */
+  /* ============ GUARANTEE ============ */
   .guarantee{
     background:var(--indigo);
     color:var(--paper);
@@ -935,20 +940,13 @@
   }
   .gstat .gnum{
     font-family:var(--display);
-    font-size:48px;
+    font-size:56px;
     color:var(--champagne-soft);
     line-height:1;
   }
-  .gstat .gnum-quote{
-    /* a quote mark sits lighter than a digit at the same size, so scale up
-       and nudge for the two to read as the same visual weight in the row */
-    font-size:64px;
-    line-height:.7;
-    transform:translateX(-4px);
-  }
   .gstat .glabel{
     margin-top:10px;
-    font-size:12.5px;
+    font-size:15px;
     line-height:1.6;
     color:rgba(253,252,250,.68);
     letter-spacing:.02em;
@@ -1007,6 +1005,28 @@
     color:rgba(253,252,250,.65);
   }
   .cta-contact a:hover{color:var(--champagne-soft);}
+  .cta-social{
+    display:flex;
+    gap:12px;
+    margin:2px 0 4px;
+  }
+  .cta-social a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;height:34px;
+    border:1px solid rgba(253,252,250,.22);
+    border-radius:50%;
+    color:rgba(253,252,250,.75);
+    transition:border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .cta-social a svg{width:15px;height:15px;}
+  .cta-social a:hover{border-color:var(--champagne-soft); color:var(--champagne-soft);}
+  .cta-hours{
+    font-size:13px;
+    line-height:1.6;
+    color:rgba(253,252,250,.55);
+  }
 
   .form-field{margin-bottom:22px;}
   .form-field label{
@@ -1111,7 +1131,6 @@
     opacity:1;
     transform:translateY(0);
   }
-  /* safety: if JS fails to run, content must still be visible */
   .no-js .reveal{opacity:1; transform:none;}
 
   /* ============ RESPONSIVE ============ */
@@ -1120,7 +1139,32 @@
     .nav-links{display:none;}
     .burger{display:flex;}
     .about-grid{grid-template-columns:1fr; gap:60px;}
-    .about-photo{max-width:380px; margin:0 auto;}
+    .about-photo{
+      max-width:380px; 
+      margin:0 auto;
+      width:100%;
+    }
+    .about-photo-frame{
+      aspect-ratio:4/5.1;
+      width:100% !important;
+      max-width:100% !important;
+      min-height:420px;
+      height:auto;
+    }
+    .about-photo-frame .ap-scene{
+      position:absolute; 
+      inset:0;
+      opacity:0;
+      transition:opacity 1.8s ease-in-out;
+    }
+    .about-photo-frame .ap-scene.active{
+      opacity:1;
+    }
+    .about-photo-frame .ap-scene img{
+      width:100% !important;
+      height:100% !important;
+      object-fit:cover;
+    }
     .why-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr; grid-template-rows:280px 280px 280px;}
     .pf-item:nth-child(1){grid-column:1/2; grid-row:1/2;}
@@ -1135,6 +1179,20 @@
     .cta-inner{grid-template-columns:1fr; gap:50px;}
     .section-pad{padding:100px 0;}
     .hero h1{font-size:clamp(42px,12vw,80px);}
+
+    /* mission phrases: drop blur-in animation on mobile — filter:blur
+       can get stuck mid-transition on mobile browsers, leaving text
+       permanently blurred. Keep a simple, reliable fade+rise instead. */
+    .mission-content h2 .mw{
+      filter:none;
+    }
+    .mission-content.in h2 .mw{
+      animation:missionPhraseInMobile .8s var(--ease) both;
+    }
+    @keyframes missionPhraseInMobile{
+      0%{opacity:0; transform:translateY(14px);}
+      100%{opacity:1; transform:translateY(0);}
+    }
   }
 </style>
 </head>
@@ -1148,7 +1206,7 @@
       <a href="#about">Обо мне</a>
       <a href="#why">Почему я</a>
       <a href="#portfolio">Портфолио</a>
-      <a href="#services">Услуги</a>
+      <a href="#services">Стоимость</a>
       <a href="#contact">Заявка</a>
     </nav>
     <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
@@ -1162,7 +1220,7 @@
   <a href="#about">Обо мне</a>
   <a href="#why">Почему я</a>
   <a href="#portfolio">Портфолио</a>
-  <a href="#services">Услуги</a>
+  <a href="#services">Стоимость</a>
   <a href="#contact">Заявка</a>
 </nav>
 
@@ -1182,7 +1240,7 @@
   </div>
 </section>
 
-<!-- ============ MARQUEE: эргономика / уют / эстетика ============ -->
+<!-- ============ MARQUEE ============ -->
 <div class="strip" aria-hidden="false">
   <div class="strip-track" id="stripTrack"></div>
 </div>
@@ -1197,11 +1255,11 @@
   </div>
   <div class="mission-content reveal">
     <div class="eyebrow">Миссия</div>
-    <h2>Помогать людям повышать ресурсное состояние для самореализации и счастья — через создание <b>домашнего индивидуального пространства</b>, отвечающего запросам, используя эффективно каждый рубль и каждый метр.</h2>
+    <h2><span class="mw">Помогать людям повышать ресурсное состояние для самореализации и счастья</span> <span class="mw">— через создание <b>домашнего индивидуального пространства</b>,</span> <span class="mw">отвечающего запросам,</span> <span class="mw">используя эффективно каждый рубль и каждый метр.</span></h2>
   </div>
 </section>
 
-<!-- ============ TICKER: забота / архитектура / преображение ============ -->
+<!-- ============ TICKER ============ -->
 <div class="ticker">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
@@ -1211,10 +1269,10 @@
   <div class="container about-grid">
     <div class="about-photo reveal">
       <div class="about-photo-frame" id="aboutPhotoFrame">
-        <div class="ap-scene active"><img src="https://sun9-32.userapi.com/s/v1/ig2/VnOiHKsVPzN0XDsWTAtArMR4RhXdHeJ7nUoKt13uBSTQeXjO0vWlR3fkR4GslDdd4yt6Azdq9vRnupen6r8NRzqW.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-28.userapi.com/s/v1/ig2/zbyKDDBuY4e5q4r4wtG9Z99cyjq1el0HEmpvX2h8MOAnyv4Zny9uv3Z21xBzeRtJP2ndUopVuhMIy41oFiGMXn4q.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,853x1280&from=bu&cs=853x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-75.userapi.com/s/v1/ig2/ercn3--W-4gAZ8WysIfoK7wRhm7yK_TQEw1jgJQr7jEh4pi522oT7yazWQ-5QwMq2Z28ibLpuAh2pAcybq4oAc6o.jpg?quality=95&as=32x46,48x70,72x105,108x157,160x232,240x349,360x523,480x697,540x785,640x930,720x1046,881x1280&from=bu&cs=881x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
-        <div class="ap-scene"><img src="https://sun9-31.userapi.com/s/v1/ig2/qy7h2B85z7rZ4zmAh1-INw_5NiJXwmb-2FrejYbRwQ27VLZHcB4d3VAzOIf1K-KahuU52e00iGT2g-lz_7v4YXZ3.jpg?quality=95&as=32x48,48x73,72x109,108x163,160x242,240x363,360x544,480x725,540x816,640x967,720x1088,847x1280&from=bu&cs=847x0" alt="Юлия Фёдорова, дизайнер интерьера"></div>
+        <div class="ap-scene active"><img src="./about-1.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-2.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-3.jpg" alt="Юлия Фёдорова"></div>
+        <div class="ap-scene"><img src="./about-4.jpg" alt="Юлия Фёдорова"></div>
       </div>
       <div class="about-photo-tag grain-surface guide-marks">
         <div class="num">05</div>
@@ -1225,13 +1283,13 @@
       <div class="eyebrow">Обо мне</div>
       <p style="margin-top:24px;">Я не рисую красивые картинки — я выстраиваю логику пространства, в котором вам будет легко дышать.</p>
       <p>Меня зовут Юлия Фёдорова. Я проектирую интерьеры так, чтобы дом работал на человека, а не наоборот: правильные маршруты движения, верный свет, продуманное хранение — всё то, что обычно замечают только тогда, когда этого <em>нет</em>.</p>
-      <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее и роднее.</p>
+      <p>За architecture-логикой для меня всегда стоит история конкретной семьи: как они просыпаются, где встречают гостей, куда уходят, когда хотят побыть в тишине. Глубокое знание законов эргономики помогает мне не угадывать, а точно знать, что сделает вашу повседневность спокойнее.</p>
       <div class="about-sign">— с заботой, Юлия</div>
     </div>
   </div>
 </section>
 
-<!-- ============ WHY CHOOSE ME (placeholder, empty by request) ============ -->
+<!-- ============ WHY CHOOSE ============ -->
 <section class="why section-pad" id="why">
   <div class="container">
     <div class="section-head reveal">
@@ -1256,8 +1314,8 @@
       <div class="why-card">
         <div class="why-num">03</div>
         <div>
-          <div class="why-title">Договор, а&nbsp;не&nbsp;обещания</div>
-          <p class="why-desc">Сроки, этапы и стоимость зафиксированы письменно до начала работ. Спокойствие в проекте должно начинаться раньше, чем первый рабочий на объекте.</p>
+          <div class="why-title">Сервис</div>
+          <p class="why-desc">Уделяю вашим проектам большое количество времени и&nbsp;внимания, учитывая ваш бюджет и&nbsp;вкусовые предпочтения.</p>
         </div>
       </div>
     </div>
@@ -1289,8 +1347,12 @@
 </section>
 
 <!-- ============ SERVICES ============ -->
-<section class="services section-pad" id="services">
+<section class="services" id="services">
   <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Услуги</div>
+      <h2>Сто<i>имость</i></h2>
+    </div>
     <div class="services-more reveal">
       <a href="https://zakhsergey7-pixel.github.io/Yulya2/price.html" target="_blank" rel="noopener">
         Все форматы услуг и подробные цены
@@ -1310,7 +1372,7 @@
     </div>
     <div class="guarantee-stats reveal">
       <div class="gstat"><div class="gnum">5</div><div class="glabel">лет практики в&nbsp;проектировании жилых интерьеров и&nbsp;глубокое понимание эргономики</div></div>
-      <div class="gstat"><div class="gnum gnum-quote">&laquo;</div><div class="glabel">выжать из&nbsp;бюджета «всё»</div></div>
+      <div class="gstat"><div class="gnum">100%</div><div class="glabel">умение выбрать лучшее из&nbsp;цена/качество</div></div>
       <div class="gstat"><div class="gnum">100%</div><div class="glabel">уютное пространство</div></div>
       <div class="gstat"><div class="gnum">3</div><div class="glabel">бесплатные правки на&nbsp;этапе концепции</div></div>
     </div>
@@ -1327,9 +1389,18 @@
           <h2>Оставить <i>заявку</i></h2>
           <p>Расскажите немного о вашем пространстве — отвечу лично в течение дня и предложу, с чего начать.</p>
           <div class="cta-contact">
-            <a href="tel:+79990000000">+7 999 000-00-00</a>
-            <a href="mailto:hello@yuliafedorova.studio">hello@yuliafedorova.studio</a>
-            <span>Москва · работаю по всей России</span>
+            <a href="tel:+79112877232">+7-911-287-7232</a>
+            <div class="cta-social">
+              <a href="https://t.me/+79112877232" target="_blank" rel="noopener" aria-label="Telegram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.6l5.8 2.1M21 4 14.7 20l-5.9-6.3M21 4 8.8 13.7"/></svg>
+              </a>
+              <a href="https://wa.me/79112877232" target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.6 13.8L3 21l4.4-1.3A9 9 0 1 0 12 3Z"/><path d="M8.7 9.4c.1-.5.5-.8 1-.8h.5c.3 0 .6.2.7.5l.6 1.5c.1.3 0 .6-.2.8l-.5.5c.5 1 1.4 1.9 2.4 2.4l.5-.5c.2-.2.5-.3.8-.2l1.5.6c.3.1.5.4.5.7v.5c0 .5-.3.9-.8 1-3.4.4-7-3.1-6.4-6.5Z"/></svg>
+              </a>
+            </div>
+            <a href="mailto:lubimayaa25@gmail.com">lubimayaa25@gmail.com</a>
+            <div class="cta-hours">Рада ответить вам в&nbsp;рабочее время с&nbsp;10:00–20:00, с&nbsp;понедельника по&nbsp;пятницу</div>
+            <span>Санкт-Петербург · работаю по всей России</span>
           </div>
         </div>
         <div class="cta-right">
@@ -1367,7 +1438,6 @@
 <script>
   document.documentElement.classList.remove('no-js');
 
-  // ---- hero headline: typewriter effect ----
   function typeHeadline(){
     const el = document.getElementById('heroTitle');
     if(!el) return;
@@ -1421,11 +1491,10 @@
   }
   typeHeadline();
 
-  // ---- marquee content generation ----
   function fillMarquee(id, words){
     const el = document.getElementById(id);
     const block = words.map(w => `<span class="strip-item">${w}<span class="dot"></span></span>`).join('');
-    el.innerHTML = block + block; // duplicate for seamless loop
+    el.innerHTML = block + block;
   }
   fillMarquee('stripTrack', ['Эргономика','Уют','Эстетика']);
 
@@ -1436,13 +1505,11 @@
   }
   fillTicker('tickerTrack', ['Забота','Знание архитектуры','Преображение']);
 
-  // ---- header scroll state ----
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
   }, {passive:true});
 
-  // ---- mobile menu ----
   const burger = document.getElementById('burgerBtn');
   const overlay = document.getElementById('mobileOverlay');
   const menu = document.getElementById('mobileMenu');
@@ -1458,7 +1525,6 @@
   overlay.addEventListener('click', toggleMenu);
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
 
-  // ---- hero parallax / cinematic camera drift ----
   const heroBg = document.getElementById('heroBg');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
@@ -1468,7 +1534,6 @@
     }
   }, {passive:true});
 
-  // ---- mission background crossfade ----
   const missionImgs = document.querySelectorAll('#missionBg .scene');
   let missionIdx = 0;
   if(missionImgs.length){
@@ -1479,10 +1544,13 @@
     }, 4500);
   }
 
-  // ---- about-me photo crossfade (same technique as mission background) ----
   const aboutImgs = document.querySelectorAll('#aboutPhotoFrame .ap-scene');
   let aboutIdx = 0;
   if(aboutImgs.length){
+    aboutImgs.forEach(scene => {
+      const img = scene.querySelector('img');
+      if(img) img.loading = "eager";
+    });
     setInterval(() => {
       aboutImgs[aboutIdx].classList.remove('active');
       aboutIdx = (aboutIdx + 1) % aboutImgs.length;
@@ -1490,7 +1558,6 @@
     }, 3800);
   }
 
-  // ---- reveal on scroll ----
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1501,12 +1568,11 @@
     });
   }, {threshold:0.15});
   revealEls.forEach(el => io.observe(el));
-  // safety net: ensure nothing stays invisible if observer misses it
+
   setTimeout(() => {
     revealEls.forEach(el => el.classList.add('in'));
   }, 4000);
 
-  // ---- form submit (no backend — visual confirmation only) ----
   function handleSubmit(e){
     e.preventDefault();
     const success = document.getElementById('formSuccess');
@@ -1514,6 +1580,14 @@
     document.getElementById('leadForm').reset();
     return false;
   }
+
+  window.addEventListener('load', () => {
+    const aboutFrame = document.getElementById('aboutPhotoFrame');
+    if(aboutFrame && window.innerWidth <= 980) {
+      const activeScene = aboutFrame.querySelector('.ap-scene.active');
+      if(activeScene) activeScene.style.opacity = '1';
+    }
+  });
 </script>
 
 </body>
