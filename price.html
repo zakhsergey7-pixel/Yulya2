@@ -509,9 +509,29 @@
       gap:10px;
       padding:24px 0;
     }
-    .sched-row .sr-mark{padding:0; margin-bottom:14px;}
+    .sched-row .sr-mark{
+      padding:0 0 12px 0;
+      margin-bottom:14px;
+    }
+    .sched-row .sr-mark::after{bottom:0;}
     .sched-row .sr-price{text-align:left;}
     .sched-row .sr-cta{justify-self:start;margin-top:4px;}
+
+    /* featured rows (05, 07): bleed the dark background edge-to-edge
+       instead of stopping at the container's side padding — otherwise
+       it reads as an uneven dark box floating inside the row. */
+    .sched-row.featured{
+      padding-left:48px;
+      padding-right:48px;
+      margin-left:-48px;
+      margin-right:-48px;
+      width:calc(100% + 96px);
+    }
+
+    /* price numbers read too heavy/dark on small screens — soften weight */
+    .sched-row .sr-price .sr-num{
+      font-weight:400;
+    }
   }
 
   /* ============ CTA STRIP ============ */
