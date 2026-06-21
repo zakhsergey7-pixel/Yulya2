@@ -657,7 +657,8 @@
   }
   .about-photo-tag{
     position:absolute;
-    bottom:-28px; left:-28px;
+    bottom:28px; left:28px;
+    z-index:4;
     background:var(--indigo);
     color:var(--paper);
     padding:22px 26px;
@@ -1165,6 +1166,13 @@
       height:100% !important;
       object-fit:cover;
     }
+    .about-photo-tag{
+      bottom:16px; left:16px;
+      padding:16px 18px;
+      max-width:70%;
+    }
+    .about-photo-tag .num{font-size:24px;}
+    .about-photo-tag .lbl{font-size:10px;}
     .why-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr; grid-template-rows:280px 280px 280px;}
     .pf-item:nth-child(1){grid-column:1/2; grid-row:1/2;}
