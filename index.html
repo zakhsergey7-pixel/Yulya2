@@ -1583,6 +1583,26 @@
 
   function handleSubmit(e){
     e.preventDefault();
+
+    const targetEmail = 'lubimayaa25@gmail.com';
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const msg = document.getElementById('msg').value.trim();
+
+    const subject = 'Заявка с сайта от ' + name;
+    const bodyLines = [
+      'Имя: ' + name,
+      'Телефон или почта: ' + contact,
+      'О проекте: ' + (msg || '—')
+    ];
+    const body = bodyLines.join('\n');
+
+    const mailtoLink = 'mailto:' + targetEmail
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+
+    window.location.href = mailtoLink;
+
     const success = document.getElementById('formSuccess');
     success.classList.add('show');
     document.getElementById('leadForm').reset();
