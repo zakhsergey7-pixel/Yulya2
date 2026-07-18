@@ -347,6 +347,16 @@
     margin-bottom:22px;
     justify-content:center;
   }
+  .hero-eyebrow.corner{
+    justify-content:flex-start;
+    margin-bottom:12px;
+    font-size:11px;
+    letter-spacing:.28em;
+  }
+  .hero-corner{
+    display:flex;
+    flex-direction:column;
+  }
   .hero h1{
     color:var(--white);
     font-size:clamp(46px,7.2vw,108px);
@@ -1230,13 +1240,15 @@
 <section class="hero" id="top">
   <div class="hero-bg" id="heroBg"><div class="hero-bg-img"></div><div class="hbg-rays"></div><div class="hbg-floor"></div></div>
   <div class="hero-center">
-    <div class="hero-eyebrow">Дизайн интерьера · Юлия Фёдорова</div>
     <h1 id="heroTitle">Домашнее пространство,&nbsp;которое<br><em>чувствует</em> вас</h1>
     <p class="hero-sub" id="heroSub">Индивидуальные пространства на стыке эргономики, архитектуры и заботы о том, как вам в них живётся.</p>
   </div>
   <div class="hero-inner">
     <div class="hero-foot">
-      <div class="hero-sign">Юлия Фёдорова</div>
+      <div class="hero-corner">
+        <div class="hero-eyebrow corner">Дизайн интерьера · Юлия Фёдорова</div>
+        <div class="hero-sign">Юлия Фёдорова</div>
+      </div>
       <div class="scroll-cue"><span>Листайте</span><span class="line"></span></div>
     </div>
   </div>
@@ -1346,7 +1358,7 @@
       </div>
       <div class="pf-item">
         <img src="https://images.unsplash.com/photo-1758548157747-285c7012db5b?auto=format&fit=crop&w=1400&q=80" alt="Студия со свободной планировкой">
-        <div class="pf-overlay"><div class="pf-tag">Студия · свободная планировка</div><div class="pf-title">Воздух без&nbsp;границ</div></div>
+        <div class="pf-overlay"><div class="pf-tag">Студия · свободная планировка</div><div class="pf-title">Единое пространство</div></div>
       </div>
     </div>
   </div>
