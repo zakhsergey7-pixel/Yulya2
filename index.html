@@ -881,6 +881,28 @@
   }
   .pf-item:hover .pf-count{opacity:1; transform:none;}
 
+  .pf-open{
+    position:absolute;
+    bottom:20px; right:20px;
+    z-index:2;
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(10,9,8,.45);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.22);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0;
+    transform:scale(.7) rotate(-45deg);
+    transition:opacity .4s var(--ease), transform .4s var(--ease), background .3s;
+  }
+  .pf-open svg{width:15px; height:15px; stroke:var(--paper); stroke-width:1.6; fill:none;}
+  .pf-item:hover .pf-open{
+    opacity:1;
+    transform:scale(1) rotate(0deg);
+    background:var(--champagne);
+    border-color:transparent;
+  }
+
   /* ── Gallery overlay (opens on block click, reveals every photo) ── */
   .pf-gallery-overlay{
     position:fixed; inset:0; z-index:10000;
@@ -1493,26 +1515,30 @@
     <div class="portfolio-grid reveal">
 
       <div class="pf-item" data-pf="flat1" role="button" tabindex="0" aria-label="Открыть фотоальбом: однокомнатная квартира для сдачи">
-        <img src="images/1.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
+        <img src="1.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
         <span class="pf-count">5 фото</span>
+        <span class="pf-open"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
         <div class="pf-overlay"><div class="pf-tag">Сдача в аренду</div><div class="pf-title">Однокомнатная квартира</div></div>
       </div>
 
       <div class="pf-item" data-pf="staging" role="button" tabindex="0" aria-label="Открыть фотоальбом: хоумстейджинг">
-        <img src="images/9.jpg" alt="Хоумстейджинг" loading="lazy">
+        <img src="9.jpg" alt="Хоумстейджинг" loading="lazy">
         <span class="pf-count">3 фото</span>
+        <span class="pf-open"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
         <div class="pf-overlay"><div class="pf-tag">Home Staging</div><div class="pf-title">Хоумстейджинг</div></div>
       </div>
 
       <div class="pf-item" data-pf="flat2" role="button" tabindex="0" aria-label="Открыть фотоальбом: однокомнатная квартира для сдачи">
-        <img src="images/6.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
+        <img src="6.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
         <span class="pf-count">2 фото</span>
+        <span class="pf-open"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
         <div class="pf-overlay"><div class="pf-tag">Сдача в аренду</div><div class="pf-title">Однокомнатная квартира</div></div>
       </div>
 
       <div class="pf-item" data-pf="house" role="button" tabindex="0" aria-label="Открыть фотоальбом: дом">
-        <img src="images/8.jpg" alt="Дом" loading="lazy">
+        <img src="8.jpg" alt="Дом" loading="lazy">
         <span class="pf-count">1 фото</span>
+        <span class="pf-open"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
         <div class="pf-overlay"><div class="pf-tag">Частный дом</div><div class="pf-title">Дом</div></div>
       </div>
 
@@ -1557,35 +1583,35 @@
       title: 'Однокомнатная квартира',
       subtitle: 'Сдача в аренду',
       photos: [
-        { src: 'images/1.jpg', caption: 'Однокомнатная квартира для сдачи' },
-        { src: 'images/2.jpg', caption: 'Однокомнатная квартира для сдачи' },
-        { src: 'images/3.jpg', caption: 'Однокомнатная квартира для сдачи' },
-        { src: 'images/4.jpg', caption: 'Однокомнатная квартира для сдачи' },
-        { src: 'images/5.jpg', caption: 'Однокомнатная квартира для сдачи' }
+        { src: '1.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: '2.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: '3.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: '4.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: '5.jpg', caption: 'Однокомнатная квартира для сдачи' }
       ]
     },
     staging: {
       title: 'Хоумстейджинг',
       subtitle: 'Home Staging',
       photos: [
-        { src: 'images/9.jpg', caption: 'Хоумстейджинг' },
-        { src: 'images/10.jpg', caption: 'Хоумстейджинг' },
-        { src: 'images/11.jpg', caption: 'Хоумстейджинг' }
+        { src: '9.jpg', caption: 'Хоумстейджинг' },
+        { src: '10.jpg', caption: 'Хоумстейджинг' },
+        { src: '11.jpg', caption: 'Хоумстейджинг' }
       ]
     },
     flat2: {
       title: 'Однокомнатная квартира',
       subtitle: 'Сдача в аренду',
       photos: [
-        { src: 'images/6.jpg', caption: 'Однокомнатная квартира для сдачи' },
-        { src: 'images/7.jpg', caption: 'Однокомнатная квартира для сдачи' }
+        { src: '6.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: '7.jpg', caption: 'Однокомнатная квартира для сдачи' }
       ]
     },
     house: {
       title: 'Дом',
       subtitle: 'Частный дом',
       photos: [
-        { src: 'images/8.jpg', caption: 'Дом' }
+        { src: '8.jpg', caption: 'Дом' }
       ]
     }
   };
