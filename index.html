@@ -806,11 +806,13 @@
   .portfolio .section-head h2,
   .portfolio .eyebrow{color:var(--paper);}
   .portfolio .eyebrow{color:var(--champagne-soft);}
+
+  /* Bento-style 4-block grid: sized by how many photos each block holds */
   .portfolio-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    grid-template-rows:repeat(2,380px);
-    gap:28px;
+    grid-template-columns:1.3fr 1fr 1fr;
+    grid-template-rows:260px 260px;
+    gap:24px;
   }
   .pf-item{
     position:relative;
@@ -818,6 +820,11 @@
     cursor:pointer;
     box-shadow:var(--shadow-stone-deep);
   }
+  .pf-item:nth-child(1){grid-row:1 / 3; grid-column:1;}
+  .pf-item:nth-child(2){grid-row:1; grid-column:2;}
+  .pf-item:nth-child(3){grid-row:1; grid-column:3;}
+  .pf-item:nth-child(4){grid-row:2; grid-column:2 / 4;}
+
   .pf-item img{
     position:absolute; inset:0;
     width:100%;height:100%;
@@ -853,6 +860,137 @@
     color:var(--paper);
   }
   .pf-item:hover .pf-tag{opacity:1; transform:translateY(0);}
+
+  .pf-count{
+    position:absolute;
+    top:20px; right:20px;
+    z-index:2;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.75);
+    background:rgba(10,9,8,.45);
+    backdrop-filter:blur(6px);
+    padding:7px 14px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+    opacity:0;
+    transform:translateY(-6px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .pf-item:hover .pf-count{opacity:1; transform:none;}
+
+  /* ── Gallery overlay (opens on block click, reveals every photo) ── */
+  .pf-gallery-overlay{
+    position:fixed; inset:0; z-index:10000;
+    display:flex; flex-direction:column;
+    opacity:0; pointer-events:none;
+    transition:opacity .5s var(--ease);
+  }
+  .pf-gallery-overlay.open{opacity:1; pointer-events:all;}
+  .pf-gallery-bd{
+    position:absolute; inset:0;
+    background:rgba(15,13,10,.97);
+    backdrop-filter:blur(14px);
+  }
+  .pf-gallery-header{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:32px 56px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    flex-shrink:0;
+  }
+  .pf-gallery-info{display:flex; align-items:center; gap:18px;}
+  .pf-gallery-title{
+    font-family:var(--display);
+    font-size:26px;
+    color:var(--paper);
+  }
+  .pf-gallery-divider{width:1px; height:26px; background:rgba(255,255,255,.18);}
+  .pf-gallery-subtitle{
+    font-size:11px; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--champagne-soft);
+  }
+  .pf-gallery-close{
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .3s var(--ease); flex-shrink:0;
+  }
+  .pf-gallery-close:hover{background:rgba(201,169,107,.4); border-color:transparent;}
+  .pf-gallery-close svg{width:16px; height:16px; stroke:#fff; stroke-width:2; fill:none;}
+
+  .pf-gallery-body{
+    position:relative; z-index:2;
+    flex:1; overflow-y:auto;
+    padding:44px 56px 56px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--champagne) transparent;
+  }
+  .pf-gallery-body::-webkit-scrollbar{width:4px;}
+  .pf-gallery-body::-webkit-scrollbar-track{background:transparent;}
+  .pf-gallery-body::-webkit-scrollbar-thumb{background:var(--champagne); border-radius:4px;}
+
+  .pf-photos-grid{columns:3; column-gap:18px;}
+  .pf-photo-item{
+    break-inside:avoid;
+    margin-bottom:18px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(22px) scale(.97);
+    transition:opacity .5s var(--ease), transform .5s var(--ease);
+    box-shadow:var(--shadow-stone);
+  }
+  .pf-photo-item.reveal{opacity:1; transform:none;}
+  .pf-photo-item img{
+    width:100%; display:block; object-fit:cover;
+    transition:transform .6s var(--ease), filter .6s var(--ease);
+    filter:grayscale(.2) brightness(.9);
+  }
+  .pf-photo-item:hover img{transform:scale(1.04); filter:grayscale(0) brightness(1);}
+
+  /* Full-screen viewer */
+  .pf-viewer{
+    position:fixed; inset:0; z-index:10001;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity .4s var(--ease);
+  }
+  .pf-viewer.open{opacity:1; pointer-events:all;}
+  .pf-viewer-bd{position:absolute; inset:0; background:rgba(0,0,0,.93);}
+  .pf-viewer img{
+    position:relative; z-index:1;
+    max-width:92vw; max-height:88vh;
+    box-shadow:0 40px 120px rgba(0,0,0,.8);
+    object-fit:contain;
+    transform:scale(.92);
+    transition:transform .4s var(--ease);
+  }
+  .pf-viewer.open img{transform:scale(1);}
+  .pf-viewer-close{
+    position:absolute; top:28px; right:28px; z-index:2;
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .3s;
+  }
+  .pf-viewer-close:hover{background:rgba(201,169,107,.4);}
+  .pf-viewer-close svg{width:18px; height:18px; stroke:#fff; stroke-width:2; fill:none;}
+
+  @media(max-width:900px){
+    .pf-gallery-header{padding:22px 28px 16px;}
+    .pf-gallery-body{padding:28px 28px 40px;}
+    .pf-photos-grid{columns:2;}
+  }
+  @media(max-width:540px){
+    .pf-photos-grid{columns:1;}
+    .pf-gallery-title{font-size:20px;}
+  }
 
   /* ============ SERVICES ============ */
   .services{background:var(--paper); padding:48px 0;}
@@ -1187,6 +1325,10 @@
     .about-photo-tag .lbl{font-size:10px;}
     .why-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:1fr; grid-template-rows:280px 280px 280px 280px;}
+    .pf-item:nth-child(1),
+    .pf-item:nth-child(2),
+    .pf-item:nth-child(3),
+    .pf-item:nth-child(4){grid-row:auto; grid-column:auto;}
     .pf-overlay .pf-title{font-size:18px; line-height:1.25;}
     .pf-overlay{padding:18px;}
     .service-row{grid-template-columns:1fr; gap:10px;}
@@ -1349,25 +1491,178 @@
       <h2>Портфолио</h2>
     </div>
     <div class="portfolio-grid reveal">
-      <div class="pf-item">
-        <img src="https://images.unsplash.com/photo-1750764515068-80d222d974bb?auto=format&fit=crop&w=1400&q=80" alt="Интерьер однокомнатной квартиры">
-        <div class="pf-overlay"><div class="pf-tag">Однокомнатная квартира · 36 м²</div><div class="pf-title">Воздух и&nbsp;свет</div></div>
+
+      <div class="pf-item" data-pf="flat1" role="button" tabindex="0" aria-label="Открыть фотоальбом: однокомнатная квартира для сдачи">
+        <img src="images/1.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
+        <span class="pf-count">5 фото</span>
+        <div class="pf-overlay"><div class="pf-tag">Сдача в аренду</div><div class="pf-title">Однокомнатная квартира</div></div>
       </div>
-      <div class="pf-item">
-        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1400&q=80" alt="Интерьер двухкомнатной квартиры">
-        <div class="pf-overlay"><div class="pf-tag">Двухкомнатная квартира · 58 м²</div><div class="pf-title">Баланс и&nbsp;тепло</div></div>
+
+      <div class="pf-item" data-pf="staging" role="button" tabindex="0" aria-label="Открыть фотоальбом: хоумстейджинг">
+        <img src="images/9.jpg" alt="Хоумстейджинг" loading="lazy">
+        <span class="pf-count">3 фото</span>
+        <div class="pf-overlay"><div class="pf-tag">Home Staging</div><div class="pf-title">Хоумстейджинг</div></div>
       </div>
-      <div class="pf-item">
-        <img src="https://images.unsplash.com/photo-1633330977020-2bdfb8530cc2?auto=format&fit=crop&w=1400&q=80" alt="Интерьер трёхкомнатной квартиры">
-        <div class="pf-overlay"><div class="pf-tag">Трёхкомнатная квартира · 89 м²</div><div class="pf-title">Простор для&nbsp;семьи</div></div>
+
+      <div class="pf-item" data-pf="flat2" role="button" tabindex="0" aria-label="Открыть фотоальбом: однокомнатная квартира для сдачи">
+        <img src="images/6.jpg" alt="Однокомнатная квартира для сдачи" loading="lazy">
+        <span class="pf-count">2 фото</span>
+        <div class="pf-overlay"><div class="pf-tag">Сдача в аренду</div><div class="pf-title">Однокомнатная квартира</div></div>
       </div>
-      <div class="pf-item">
-        <img src="https://images.unsplash.com/photo-1758548157747-285c7012db5b?auto=format&fit=crop&w=1400&q=80" alt="Студия со свободной планировкой">
-        <div class="pf-overlay"><div class="pf-tag">Студия · свободная планировка</div><div class="pf-title">Единое пространство</div></div>
+
+      <div class="pf-item" data-pf="house" role="button" tabindex="0" aria-label="Открыть фотоальбом: дом">
+        <img src="images/8.jpg" alt="Дом" loading="lazy">
+        <span class="pf-count">1 фото</span>
+        <div class="pf-overlay"><div class="pf-tag">Частный дом</div><div class="pf-title">Дом</div></div>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- ── PORTFOLIO GALLERY OVERLAY ── -->
+<div class="pf-gallery-overlay" id="pfGallery" role="dialog" aria-modal="true" aria-label="Фотоальбом проекта">
+  <div class="pf-gallery-bd" id="pfGalleryBd"></div>
+  <div class="pf-gallery-header">
+    <div class="pf-gallery-info">
+      <span class="pf-gallery-title" id="pfGalleryTitle"></span>
+      <div class="pf-gallery-divider"></div>
+      <span class="pf-gallery-subtitle" id="pfGallerySubtitle"></span>
+    </div>
+    <div class="pf-gallery-close" id="pfGalleryClose" role="button" tabindex="0" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+  </div>
+  <div class="pf-gallery-body" id="pfGalleryBody">
+    <div class="pf-photos-grid" id="pfPhotosGrid"></div>
+  </div>
+</div>
+
+<!-- ── FULL-SCREEN PHOTO VIEWER ── -->
+<div class="pf-viewer" id="pfViewer">
+  <div class="pf-viewer-bd" id="pfViewerBd"></div>
+  <img id="pfViewerImg" src="" alt="">
+  <div class="pf-viewer-close" id="pfViewerClose" role="button" tabindex="0" aria-label="Закрыть">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════
+// PORTFOLIO — gallery data & logic
+// ══════════════════════════════════
+(function(){
+  const PF = {
+    flat1: {
+      title: 'Однокомнатная квартира',
+      subtitle: 'Сдача в аренду',
+      photos: [
+        { src: 'images/1.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: 'images/2.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: 'images/3.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: 'images/4.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: 'images/5.jpg', caption: 'Однокомнатная квартира для сдачи' }
+      ]
+    },
+    staging: {
+      title: 'Хоумстейджинг',
+      subtitle: 'Home Staging',
+      photos: [
+        { src: 'images/9.jpg', caption: 'Хоумстейджинг' },
+        { src: 'images/10.jpg', caption: 'Хоумстейджинг' },
+        { src: 'images/11.jpg', caption: 'Хоумстейджинг' }
+      ]
+    },
+    flat2: {
+      title: 'Однокомнатная квартира',
+      subtitle: 'Сдача в аренду',
+      photos: [
+        { src: 'images/6.jpg', caption: 'Однокомнатная квартира для сдачи' },
+        { src: 'images/7.jpg', caption: 'Однокомнатная квартира для сдачи' }
+      ]
+    },
+    house: {
+      title: 'Дом',
+      subtitle: 'Частный дом',
+      photos: [
+        { src: 'images/8.jpg', caption: 'Дом' }
+      ]
+    }
+  };
+
+  const overlay    = document.getElementById('pfGallery');
+  const galleryBd  = document.getElementById('pfGalleryBd');
+  const galleryClose = document.getElementById('pfGalleryClose');
+  const galleryTitle = document.getElementById('pfGalleryTitle');
+  const gallerySub   = document.getElementById('pfGallerySubtitle');
+  const photosGrid = document.getElementById('pfPhotosGrid');
+  const viewer     = document.getElementById('pfViewer');
+  const viewerImg  = document.getElementById('pfViewerImg');
+  const viewerBd   = document.getElementById('pfViewerBd');
+  const viewerClose= document.getElementById('pfViewerClose');
+
+  function openGallery(key){
+    const item = PF[key];
+    if (!item) return;
+
+    galleryTitle.textContent = item.title;
+    gallerySub.textContent = item.subtitle;
+
+    photosGrid.innerHTML = '';
+    item.photos.forEach((p, i) => {
+      const el = document.createElement('div');
+      el.className = 'pf-photo-item';
+      el.style.transitionDelay = (i * 0.08) + 's';
+      el.innerHTML = `<img src="${p.src}" alt="${p.caption}" loading="lazy">`;
+      el.addEventListener('click', () => openViewer(p.src));
+      photosGrid.appendChild(el);
+      setTimeout(() => el.classList.add('reveal'), 60 + i * 80);
+    });
+
+    document.getElementById('pfGalleryBody').scrollTop = 0;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      document.querySelectorAll('.pf-photo-item').forEach(el => el.classList.remove('reveal'));
+    }, 500);
+  }
+
+  function openViewer(src){
+    viewerImg.src = src;
+    viewer.classList.add('open');
+  }
+  function closeViewer(){
+    viewer.classList.remove('open');
+    setTimeout(() => { viewerImg.src = ''; }, 400);
+  }
+
+  document.querySelectorAll('.pf-item[data-pf]').forEach(card => {
+    card.addEventListener('click', () => openGallery(card.dataset.pf));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(card.dataset.pf); }
+    });
+  });
+
+  galleryClose.addEventListener('click', closeGallery);
+  galleryClose.addEventListener('keydown', e => { if (e.key === 'Enter') closeGallery(); });
+  galleryBd.addEventListener('click', closeGallery);
+
+  viewerClose.addEventListener('click', closeViewer);
+  viewerBd.addEventListener('click', closeViewer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (viewer.classList.contains('open')) closeViewer();
+      else if (overlay.classList.contains('open')) closeGallery();
+    }
+  });
+})();
+</script>
 
 <!-- ============ SERVICES ============ -->
 <section class="services" id="services">
